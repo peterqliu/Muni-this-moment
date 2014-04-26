@@ -1,6 +1,14 @@
 var buses = { };
 var map;
 
+function initialize() {
+  var mapOptions = {
+    center: new google.maps.LatLng(37.7789, -122.3917),
+    zoom: 15,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  };
+  map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+}
       
 var f = new Firebase("https://publicdata-transit.firebaseio.com/sf-muni/data");
 
@@ -27,7 +35,6 @@ f.on("child_changed", function(s) {
   }
   else {
     busMarker.animatedMoveTo(s.val().lat, s.val().lon);
-    console.log('current latitude '+s.val().lat)
   }
 });
 

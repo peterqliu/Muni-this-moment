@@ -10,8 +10,9 @@
 		</image>
 	</g>
 </g>
-	<g id='viewport' class='viewport'>
-		<g id="Layer_1">
+<g id="Layer_1">
+	<g id="viewport" transform="translate(0,0)">
+		<g id="Layer_1_1_">
 			<path fill="#DADADA" d="M1865.647,1539.1l1.135,2.36l-2.077,4.91l5.1,5.098l1.51-3.397l0.19-2.078l0.567-1.699l-1.133-4.436
 				l-1.699-1.04L1865.647,1539.1"/>
 			<path fill="#DADADA" d="M1965.08,1179.615l0.567,1.228l1.228,0.569l1.228-0.569l0.567-1.228l-0.567-1.32l-1.32-0.57l-1.225,0.57
@@ -13276,10 +13277,11 @@
 				l-8.88,5.572l-4.152,4.155l-5.005,2.172l-19.928-12.938L4586.76,3493.748"/>
 		</g>
 		<g id="busstops">
-			<g id="markers">
-			</g>
+		</g>
+		<g id="markers">
 		</g>
 		<g id="busstoplabels">
 		</g>
 	</g>
+</g>
 </svg>

@@ -5,46 +5,72 @@
 <body>
 
 
-<div id='scaler' style="">
-<div style=" -webkit-transform: rotateX(0deg);-webkit-transition:all 2s;">
-	<div id='svg'></div>
-</div>
-</div>
-<div style="position:absolute">
-</div>
+	<div id='svg' class=''></div>
+
+
+<div style="cursor:pointer; position:absolute;left:30px; top:30px; background:#999;color:white; width:80px;height:80px;text-align:center;border-radius:50%; opacity:0.5;" onclick='zoombackout()'><br>Zoom out</div>
+
+
 
 	<script src='jquery-1.9.1.min.js'></script>	
 	<script src='d3.v2.js'></script>	
 	<script src="geoPosition.js"></script>
+	<script src='jquery-svgpan.js'></script>	
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.pep/0.4.0/jquery.pep.min.js"></script>
+
 	   
     <script>
 
 
     	$('#svg').load('sfmap.svg');
-    	
 
-		  	
-    	//places dot given lat lon
-    	function current_location(lat,lon) {
-    		var x=(8823*lon)+1081060; 
-    		console.log('x is '+x);   	
-    		var y=422405-(11164.4*lat);
-    		d3.select('#markers')
-    		.append('circle')
-    		.attr('cx',x)
-    		.attr('cy',y)
-    		.attr('r',5)
-    		.attr('fill','#333333')
-    		.attr('id','iamhere');
-	    	
-	    	zoomer(x,y);
+				
+		//defines functionality of moving markers to the front when clicked
+		d3.selection.prototype.moveToFront = function() {
+		  return this.each(function(){
+		    this.parentNode.appendChild(this);
+		  });
+		};
+		
+			zoomto(900,450);
+		$('.zoomed').attr('class','');			  	
+    	// LAT-LON MASTER CONVERTERS
+    	function lonx(lon){
+    		return (8823*lon)+1081060-4;
     	}
-    	
-		function zoomer(x,y){
-			$('#scaler').attr('style','-webkit-transform-origin:'+x+','+y+';').addClass('zoomed')
-		}
+    	function laty(lat) {
+	    	return 422405-(11164.4*lat);
+    	}
+
+    	//places dot given lat-lon
+
+    	function current_location(lat,lon) {
+
+			if($('#iamhere').length==0){
+	    		d3.select('#markers')
+	    		.append('circle')
+	    		.attr('cx',lonx(lon))
+	    		.attr('cy',laty(lat))
+	    		.attr('r',3)
+	    		.attr('opacity',0.7)
+	    		.attr('fill','none')
+	    		.attr('stroke','purple')
+	    		.attr('stroke-width',4)
+	    		.attr('id','iamhere')
+	    		.on('mouseout',function(){removelabel()});				
+			}
+			
+			d3.select('#iamhere')
+	    		.attr('cx',lonx(lon))
+	    		.attr('cy',laty(lat))				
+	    		.on('mouseover',function(){makelabel(lonx(lon),laty(lat),"We're somewhere here",'purple',lat+', '+lon)})
+			
+	    	
+    	}
+
+		
 		//Contingencies    
-		function show_map_error() {}
+		function show_map_error() {};
 		function supports(bool, suffix) {
   var s = "Your browser ";
   if (bool) {
@@ -53,7 +79,7 @@
     s += "does not support " + suffix + ". :(";
   }
   return s;
-}        	
+};        	
  	
 		//detects whether geolocation is possible
 		$(function() {
@@ -62,13 +88,157 @@
 		  } 
 		  else {$("#live-geolocation").html(supports(false, "geolocation")); }
 		  		 });    	
+				
+		function zoomto(x,y) {
+			$('#dragger').attr('style','');
+			$('.foreshortening').attr('class','');
+			d3.select('.viewport')
+			.attr('style','-webkit-transform-origin:'+x+' '+(y)+'; -webkit-transform:rotateX(38deg) rotateZ(-15deg) scale(5)')
+			.attr('class','viewport zoomed');
+			
+		};
+
+		//Emerge stop markers when a bus is clicked
+		function showroutestops(route, routedir){
+		
+			//clears previous stop markers
+			$('.stopmarker').remove();
+			
+			d3.json('truncated_stops.json',function(json){
+			
+			window.data=json[fudge(routedir)]['Stops'];
+			
+			
+			d3.select('#busstops')
+				.selectAll("circle")
+				.data(data)
+				.enter()
+				.append("circle")
+				.attr("r", 0)
+
+				.attr('fill',function(){if (routedir.indexOf('OB')> -1) {return "#517D7C"} else {return "#CF4B62"}})
+				.attr('cx',function(d,i){return lonx(data[i]['Lon'])})
+				.attr('cy',function(d,i){return laty(data[i]['Lat'])})
+				.attr('stroke','white')
+				.attr('name',function(d,i){return data[i]['Intersection']})
+				.attr('class','stopmarker')
+
+				//.hover(function(){d3.select(this).attr('fill','orange')})
+				.on('mouseover',function(d,i){
+					d3.select(this)
+						.transition()
+						.duration(200)
+						.attr('fill','orange')
+						.attr('r',4);
+
+					var color=function(){if (routedir.indexOf('OB')> -1) {return "#517D7C"} else {return "#CF4B62"}};
+					var stopdirection=function(){if (routedir.indexOf('OB')> -1) {return "Outbound stop"} else {return "Inbound stop"}};
+					makelabel(lonx(data[i]['Lon']),laty(data[i]['Lat']),data[i]['Intersection'],color, stopdirection);
+					
+			
+				})
+				.on('mouseout', function (){
+					d3.select(this)
+						.transition()
+						.duration(200)
+						.attr('fill',function(){if (routedir.indexOf('OB')> -1) {return "#517D7C"} else {return "#CF4B62"}})
+						.attr('r',3);
+
+					removelabel();
+				})
+				.transition()
+				.delay(function(d,i){return 5*i})
+				.duration(500)
+				.attr("r", 3)
+			})
+			
+		}
+		
+		//When a bus is clicked, grey out all buses that aren't on the same line, reveal stops, and move relevant stops and buses to the top of the stack		
+		function showbusesonline(line) {
+			$('.busmarker:not([route="'+line+'"])').attr('class','busmarker unselected');
+			$('[route="'+line+'"]').attr('class','busmarker selected');
+			d3.select('#busstops').moveToFront();
+			d3.selectAll('.selected').moveToFront();
+		}
+		
+		//Restore view to full, remove all stop markers and restore all buses to full color
+		function zoombackout() {
+			$('#dragger').attr('style','');
+
+			d3.select('.viewport')
+			.attr('style','')
+			.attr('class','viewport');
+						
+			$('.busmarker').attr('class','busmarker');
+			$('.stopmarker').remove();
+
+
+		}
+		
+		//hack to fix erroneous routdirs
+		
+		function fudge(routedir){
+			var lastB= routedir.lastIndexOf('B');
+			return routedir.substr(0,lastB+1);
+			
+		}
+		
+		//make label
+		function makelabel(x,y,text,textcolor,subtext) {
+					d3.selectAll('#stoplabel').remove();
+					d3.select('#busstoplabels')
+						.attr('transform','translate('+(x+20)+' '+(y-25)+')')					
+						.append('text')
+						.attr('font-size',8)
+						.attr('fill',textcolor)
+						.text(text)						
+						.attr('id','stoplabel');
+
+					d3.select('#busstoplabels')
+						.append('text')
+						.attr('y',10)
+						.attr('font-size',6)
+						.text(subtext)						
+						.attr('id','stoplabel')
+						.attr('class','subtext');
+					
+					//create background rectangle for label
+					d3.select('#busstoplabels')
+						.insert('rect','text')
+						.attr('opacity',0.8)
+						.attr('fill','white')
+						.attr('x',-6)
+						.attr('y',-15)
+						.attr('width',function(){return Math.max($('#stoplabel')[0].getComputedTextLength(), $('.subtext')[0].getComputedTextLength())+12})	
+						.attr('height',32)
+						.attr('id','labelrect');
+						
+						console.log($('.subtext').length);							
+		}
+		
+		function removelabel() {
+					d3.selectAll('#stoplabel').remove();
+					d3.selectAll('#labelrect').remove();
+		}
+		
+		//Update user position		
+		setInterval(function(){
+			geoPosition.getCurrentPosition(get_latlon, show_map_error);
+			current_location(lat,lon)}, 10000);
+		
+		
+		//$("svg").on('mousemove',function(e){ 
+            //$("#busstoplabels").attr("transform", "translate(" + [e.pageX+335] + "," + [e.pageY+60] + ")"); 
+			//}); 
+
 		
 
-		console.log('lat is ');    
+
+
     </script>
 
     <script src="https://cdn.firebase.com/v0/firebase.js"></script>
-    <script src="marker.j"></script>
-    <script src="firebus-modified.j"></script>
+    <script src="firebus-modified.js"></script>
 
 </body></html>

@@ -1,0 +1,64 @@
+<html>
+<body>
+<div id='output'></div>
+	<script src='d3.v2.js'></script>	
+	<script src='jquery-1.9.1.min.js'></script>	
+
+	<script>
+		window.array={};
+		
+		function fudge(routedir){
+			var lastB= routedir.lastIndexOf('B');
+			return routedir.substr(0,lastB+1);
+			
+		}
+		$.getJSON('stops.json',function(json) {
+			
+			//go through all the route numbers
+			for(var i=0;i<json['route'].length; i++) {
+					window.name=json['route'][i]['-title'];
+				
+				//in each route number, go through all the headings
+				for(var j=0; j<json['route'][i]['direction'].length; j++){
+					window.routedir=fudge(json['route'][i]['direction'][j]['-tag']);
+					window.title=json['route'][i]['direction'][j]['-title'];
+					window.stops=json['route'][i]['direction'][j]['stop'];
+					
+					array[routedir]={"Title": title, "Name": name, "Stops":[]};
+					
+					//in each heading, go through all the stop tags
+					for (var k=0; k<stops.length; k++) {
+						array[routedir]["Stops"][k]= {"Tag": stops[k]['-tag']};	
+						
+						//find the corresponding tag in the 'stop' node to get lat, lon, and title
+						for (var l=0; l<json['route'][i]['stop'].length; l++){
+							window.stopindex;
+							//console.log(json['route'][i]['stop'][56]['-lat']);
+							if (json['route'][i]['stop'][l]['-tag']==stops[k]['-tag']) {
+								stopindex=l;
+								break;
+							}
+						}
+						
+						array[routedir]["Stops"][k]["Lat"]=json['route'][i]['stop'][stopindex]['-lat'];
+						array[routedir]["Stops"][k]["Lon"]=json['route'][i]['stop'][stopindex]['-lon'];
+						array[routedir]["Stops"][k]["Intersection"]=json['route'][i]['stop'][stopindex]['-title'];
+						
+					}
+					
+					
+					
+					//array.push(json['route'][i]['direction'][j]['-tag']+': {"Name":"Peter", "Age":"26", "Gender":"Male"}');			
+					
+					
+				}
+			}
+		$('#output').text(JSON.stringify(array));
+
+		console.log(array);
+		})	
+	
+	</script>
+</body>
+
+</html>

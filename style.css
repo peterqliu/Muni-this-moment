@@ -1,9 +1,135 @@
+body {
+	margin:0px;
+	-webkit-perspective:900px;
+	font-family:Verdana, sans-serif;
+	
+}
+.foreshortening {
+	-webkit-transform: rotatex(10deg) scale(1.5) translateY(200px);
+}
+#svg {
+	-webkit-transition:all 750ms cubic-bezier(0.19, 1, 0.22, 1);
+}
 #scaler {
 	-webkit-perspective:500;
-	-webkit-transition:all 2s;
+	-webkit-transition:all 1s;
 }
 
-.zoomed {
-	-webkit-transform: scale(5)
+#rotator {
+	-webkit-transition:all 1s;
+}
 
+
+svg {
+	-webkit-transition:all 1s;
+	width:100%;
+	height:100%;
+	-webkit-transform-style: preserve-3d;
+
+}
+
+.viewport {
+	transition: all 2s;
+	-webkit-transform-origin:50% 50%;
+}
+
+#viewport{
+	-webkit-perspective:900px;	
+}
+
+.busmarker {
+	-webkit-transition:-webkit-transform 8s;
+	cursor:hand;
+}
+
+
+.grower path {
+	opacity:0.8;
+}
+
+.busmarker:active .grower {
+	-webkit-transform:scale(1.2);
+	-webkit-transition:-webkit-transform 0.1s;
+}
+
+.busmarker:hover .grower path {
+	opacity:1;	
+}
+
+body{
+	width:100%;
+	height:100%;
+}
+
+#dragger {
+	cursor:-webkit-grab;
+  -webkit-user-select: none;  
+  -moz-user-select: none;    
+  -ms-user-select: none;      
+  user-select: none;	
+}
+
+#stoplabel{
+	background-color:black;
+	padding:10px;
+	margin:10px;
+}
+
+.zoomed .selected .grower path{
+	opacity:0.9;
+}
+
+
+.zoomed .busmarker:not(.selected) g path {
+	fill:#aaa;
+	opacity:.4;
+}
+
+.zoomed .busmarker:not(.selected):hover .grower path {
+	opacity:1
+}
+
+
+
+.busmarkertext {
+	opacity:1;
+}
+
+#viewport:not(.zoomed) .busmarkertext {
+	-webkit-transition:all 0.5s;
+	opacity:0;
+}
+
+/*Label styling */
+.subtext {
+	opacity:0.4;
+}
+
+/* Map features */
+
+.street {
+	fill:none;
+	stroke:#ccc;
+	stroke-width:0.75;
+}
+
+.thoroughfare {
+	fill:none;
+	stroke:#bbb;
+	stroke-width:2;
+}
+
+.sportsvenue {
+	fill:#4D4D4D;
+}
+
+.highway {
+	fill:none;
+	stroke:#abcdef;
+	stroke-width:2;
+}
+
+.park {
+	fill:#DADADA;
+	fill-opacity:0.6;
 }
