@@ -23,6 +23,7 @@
 
 
     	$('#svg').load('sfmap.svg');
+    	//$('#svg').append('sfmap.svg');
 
 				
 		//defines functionality of moving markers to the front when clicked
@@ -93,7 +94,7 @@
 			$('#dragger').attr('style','');
 			$('.foreshortening').attr('class','');
 			d3.select('.viewport')
-			.attr('style','-webkit-transform-origin:'+x+' '+(y)+'; -webkit-transform:rotateX(38deg) rotateZ(-15deg) scale(5)')
+			.attr('style','-webkit-transform-origin:'+x+' '+(y)+'; -webkit-transform:rotateX(38deg) rotateZ(-15deg) scale(15)')
 			.attr('class','viewport zoomed');
 			
 		};

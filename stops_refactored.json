@@ -1716,7 +1716,7 @@
             "Lon" : "-122.40964",
             "Tag" : "5683"
           },
-          { "Intersection" : "McAllister St. & Jones",
+          { "Intersection" : "McAllister St & Jones",
             "Lat" : "37.7811699",
             "Lon" : "-122.41219",
             "Tag" : "7563"
@@ -2092,7 +2092,7 @@
             "Lon" : "-122.40964",
             "Tag" : "5683"
           },
-          { "Intersection" : "McAllister St. & Jones",
+          { "Intersection" : "McAllister St & Jones",
             "Lat" : "37.7811699",
             "Lon" : "-122.41219",
             "Tag" : "7563"
@@ -2776,7 +2776,7 @@
         ],
       "Title" : "Outbound to the Sunset District"
     },
-  "08AX_IB" : { "Stops" : [ { "Intersection" : "Geneva St. & Schwerin St.",
+  "08AX_IB" : { "Stops" : [ { "Intersection" : "Geneva St & Schwerin St",
             "Lat" : "37.7062999",
             "Lon" : "-122.41308",
             "Tag" : "7522"
@@ -3024,7 +3024,7 @@
             "Lon" : "-122.40261",
             "Tag" : "3772"
           },
-          { "Intersection" : "Geneva St. & Schwerin St.",
+          { "Intersection" : "Geneva St & Schwerin St",
             "Lat" : "37.7062999",
             "Lon" : "-122.41308",
             "Tag" : "37522"
@@ -4946,7 +4946,7 @@
         ],
       "Title" : "Outbound to Visitacion Valley"
     },
-  "108_IB1" : { "Stops" : [ { "Intersection" : "Ave H & 13th St.",
+  "108_IB1" : { "Stops" : [ { "Intersection" : "Ave H & 13th St",
             "Lat" : "37.8283099",
             "Lon" : "-122.37196",
             "Tag" : "7558"
@@ -5059,7 +5059,7 @@
             "Lon" : "-122.3699099",
             "Tag" : "7557"
           },
-          { "Intersection" : "Ave H & 13th St.",
+          { "Intersection" : "Ave H & 13th St",
             "Lat" : "37.8283099",
             "Lon" : "-122.37196",
             "Tag" : "37558"
@@ -6116,7 +6116,7 @@
             "Lon" : "-122.4150899",
             "Tag" : "4672"
           },
-          { "Intersection" : "Folsom St & 20st.",
+          { "Intersection" : "Folsom St & 20St",
             "Lat" : "37.7587599",
             "Lon" : "-122.4147899",
             "Tag" : "7732"
@@ -13813,7 +13813,7 @@
             "Lon" : "-122.44351",
             "Tag" : "4430"
           },
-          { "Intersection" : "Divisadero St & Bay St.",
+          { "Intersection" : "Divisadero St & Bay St",
             "Lat" : "37.8019099",
             "Lon" : "-122.4433299",
             "Tag" : "7568"
@@ -15606,7 +15606,7 @@
             "Lon" : "-122.44647",
             "Tag" : "5428"
           },
-          { "Intersection" : "Foerster St. & Monterey Blvd",
+          { "Intersection" : "Foerster St & Monterey Blvd",
             "Lat" : "37.7316999",
             "Lon" : "-122.44875",
             "Tag" : "7528"
@@ -17065,7 +17065,7 @@
             "Lon" : "-122.3966999",
             "Tag" : "3089"
           },
-          { "Intersection" : "Bealemst & Howard St",
+          { "Intersection" : "Beale St & Howard St",
             "Lat" : "37.7896899",
             "Lon" : "-122.39404",
             "Tag" : "7619"
@@ -17396,7 +17396,7 @@
             "Lon" : "-122.3966999",
             "Tag" : "3089"
           },
-          { "Intersection" : "Bealemst & Howard St",
+          { "Intersection" : "Beale St & Howard St",
             "Lat" : "37.7896899",
             "Lon" : "-122.39404",
             "Tag" : "7619"
@@ -17609,7 +17609,7 @@
             "Lon" : "-122.3966999",
             "Tag" : "3089"
           },
-          { "Intersection" : "Bealemst & Howard St",
+          { "Intersection" : "Beale St & Howard St",
             "Lat" : "37.7896899",
             "Lon" : "-122.39404",
             "Tag" : "7619"
@@ -17827,7 +17827,7 @@
             "Lon" : "-122.3966999",
             "Tag" : "3089"
           },
-          { "Intersection" : "Bealemst & Howard St",
+          { "Intersection" : "Beale St & Howard St",
             "Lat" : "37.7896899",
             "Lon" : "-122.39404",
             "Tag" : "7619"
@@ -19721,7 +19721,7 @@
             "Lon" : "-122.46581",
             "Tag" : "3201"
           },
-          { "Intersection" : "Cabrillo & 7th Ave.",
+          { "Intersection" : "Cabrillo & 7th Ave",
             "Lat" : "37.77526",
             "Lon" : "-122.4650099",
             "Tag" : "7539"
@@ -19774,7 +19774,7 @@
             "Lon" : "-122.46409",
             "Tag" : "3178"
           },
-          { "Intersection" : "Cabrillo & 7th Ave.",
+          { "Intersection" : "Cabrillo & 7th Ave",
             "Lat" : "37.7753799",
             "Lon" : "-122.46483",
             "Tag" : "7538"
@@ -24147,7 +24147,7 @@
             "Tag" : "33860"
           }
         ],
-      "Title" : "Inbound to Market St."
+      "Title" : "Inbound to Market St"
     },
   "61_OB2" : { "Stops" : [ { "Intersection" : "California St & Drumm St",
             "Lat" : "37.7937099",
@@ -24410,7 +24410,7 @@
             "Lon" : "-122.4737",
             "Tag" : "3273"
           },
-          { "Intersection" : "16th Ave & Lawton St.",
+          { "Intersection" : "16th Ave & Lawton St",
             "Lat" : "37.75802",
             "Lon" : "-122.4737899",
             "Tag" : "7231"
@@ -24626,7 +24626,7 @@
             "Lon" : "-122.41833",
             "Tag" : "3476"
           },
-          { "Intersection" : "South Van Ness & 24st.",
+          { "Intersection" : "South Van Ness & 24St",
             "Lat" : "37.7522799",
             "Lon" : "-122.4161699",
             "Tag" : "7532"
@@ -25004,7 +25004,7 @@
             "Lon" : "-122.3967",
             "Tag" : "3089"
           },
-          { "Intersection" : "Bealemst & Howard St",
+          { "Intersection" : "Beale St & Howard St",
             "Lat" : "37.7896899",
             "Lon" : "-122.39404",
             "Tag" : "7619"
@@ -25565,7 +25565,7 @@
             "Lon" : "-122.3967",
             "Tag" : "3089"
           },
-          { "Intersection" : "Bealemst & Howard St",
+          { "Intersection" : "Beale St & Howard St",
             "Lat" : "37.7896899",
             "Lon" : "-122.39404",
             "Tag" : "7619"
@@ -26235,7 +26235,7 @@
             "Lon" : "-122.3967",
             "Tag" : "3089"
           },
-          { "Intersection" : "Bealemst & Howard St",
+          { "Intersection" : "Beale St & Howard St",
             "Lat" : "37.78969",
             "Lon" : "-122.39404",
             "Tag" : "7619"
@@ -26276,7 +26276,7 @@
             "Lon" : "-122.4146",
             "Tag" : "3209"
           },
-          { "Intersection" : "Brannan & 8 St.",
+          { "Intersection" : "Brannan & 8 St",
             "Lat" : "37.7713199",
             "Lon" : "-122.40524",
             "Tag" : "7684"
@@ -27076,7 +27076,7 @@
             "Lon" : "-122.39898",
             "Tag" : "3780"
           },
-          { "Intersection" : "Third Street & Le Conte Ave.",
+          { "Intersection" : "Third Street & Le Conte Ave",
             "Lat" : "37.71881",
             "Lon" : "-122.3974699",
             "Tag" : "7376"
@@ -27141,7 +27141,7 @@
             "Lon" : "-122.3869499",
             "Tag" : "4337"
           },
-          { "Intersection" : "Third Street & Marin St.",
+          { "Intersection" : "Third Street & Marin St",
             "Lat" : "37.7489499",
             "Lon" : "-122.3874199",
             "Tag" : "7377"
@@ -27156,7 +27156,7 @@
             "Lon" : "-122.38846",
             "Tag" : "3103"
           },
-          { "Intersection" : "Third Street & Mariposa St.",
+          { "Intersection" : "Third Street & Mariposa St",
             "Lat" : "37.7644299",
             "Lon" : "-122.3887599",
             "Tag" : "7381"
@@ -27166,7 +27166,7 @@
             "Lon" : "-122.3892999",
             "Tag" : "7321"
           },
-          { "Intersection" : "Third Street & Mission Rock St.",
+          { "Intersection" : "Third Street & Mission Rock St",
             "Lat" : "37.7729699",
             "Lon" : "-122.38969",
             "Tag" : "3153"
@@ -27437,7 +27437,7 @@
             "Tag" : "3356"
           }
         ],
-      "Title" : "Inbound to 19 th Ave. & Holloway"
+      "Title" : "Inbound to 19 th Ave & Holloway"
     },
   "91_OB2" : { "Stops" : [ { "Intersection" : "19th Ave & Holloway Ave",
             "Lat" : "37.7211899",
@@ -27729,7 +27729,7 @@
             "Lon" : "-122.3894399",
             "Tag" : "7324"
           },
-          { "Intersection" : "Third Street & Mariposa St.",
+          { "Intersection" : "Third Street & Mariposa St",
             "Lat" : "37.76418",
             "Lon" : "-122.38894",
             "Tag" : "7382"
@@ -28880,7 +28880,7 @@
         ],
       "Title" : "Inbound to Visitacion Valley via Downtown"
     },
-  "KT__OB1" : { "Stops" : [ { "Intersection" : "Bay Shore Blvd & Sunnydale Ave.",
+  "KT__OB1" : { "Stops" : [ { "Intersection" : "Bay Shore Blvd & Sunnydale Ave",
             "Lat" : "37.7089999",
             "Lon" : "-122.40502",
             "Tag" : "7398"
@@ -31217,7 +31217,7 @@
             "Tag" : "7631"
           }
         ],
-      "Title" : "Outbound to Judah & LaPlaya"
+      "Title" : "Outbound to Judah & La Playa"
     },
   "N__IB1" : { "Stops" : [ { "Intersection" : "Judah St & La Playa St",
             "Lat" : "37.7601699",
@@ -31791,7 +31791,7 @@
             "Tag" : "33164"
           }
         ],
-      "Title" : "Inbound to Townsend & 4th St."
+      "Title" : "Inbound to Townsend & 4th St"
     },
   "N__OWLIB3" : { "Stops" : [ { "Intersection" : "Judah St & La Playa St",
             "Lat" : "37.7601699",
@@ -32069,7 +32069,7 @@
             "Tag" : "33164"
           }
         ],
-      "Title" : "Inbound to Townsend & 4th St."
+      "Title" : "Inbound to Townsend & 4th St"
     },
   "N__OWLOB1" : { "Stops" : [ { "Intersection" : "4th St & Townsend St",
             "Lat" : "37.7768899",
@@ -32672,7 +32672,7 @@
             "Lon" : "-122.38944",
             "Tag" : "7324"
           },
-          { "Intersection" : "Third Street & Mariposa St.",
+          { "Intersection" : "Third Street & Mariposa St",
             "Lat" : "37.7641799",
             "Lon" : "-122.3889399",
             "Tag" : "7382"
@@ -32775,7 +32775,7 @@
             "Lon" : "-122.39898",
             "Tag" : "3780"
           },
-          { "Intersection" : "Third Street & Le Conte Ave.",
+          { "Intersection" : "Third Street & Le Conte Ave",
             "Lat" : "37.7188099",
             "Lon" : "-122.39747",
             "Tag" : "7376"
@@ -32820,7 +32820,7 @@
             "Lon" : "-122.38791",
             "Tag" : "3122"
           },
-          { "Intersection" : "Third Street & Marin St.",
+          { "Intersection" : "Third Street & Marin St",
             "Lat" : "37.7489499",
             "Lon" : "-122.3874199",
             "Tag" : "7377"
@@ -32835,7 +32835,7 @@
             "Lon" : "-122.38846",
             "Tag" : "3103"
           },
-          { "Intersection" : "Third Street & Mariposa St.",
+          { "Intersection" : "Third Street & Mariposa St",
             "Lat" : "37.7644299",
             "Lon" : "-122.3887599",
             "Tag" : "7381"
@@ -32845,7 +32845,7 @@
             "Lon" : "-122.3892999",
             "Tag" : "7321"
           },
-          { "Intersection" : "Third Street & Mission Rock St.",
+          { "Intersection" : "Third Street & Mission Rock St",
             "Lat" : "37.77297",
             "Lon" : "-122.38969",
             "Tag" : "3153"
