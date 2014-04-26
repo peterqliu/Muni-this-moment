@@ -1,0 +1,74 @@
+<html>
+<head>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+
+<div id='scaler' style="">
+<div style=" -webkit-transform: rotateX(0deg);-webkit-transition:all 2s;">
+	<div id='svg'></div>
+</div>
+</div>
+<div style="position:absolute">
+</div>
+
+	<script src='jquery-1.9.1.min.js'></script>	
+	<script src='d3.v2.js'></script>	
+	<script src="geoPosition.js"></script>
+	   
+    <script>
+
+
+    	$('#svg').load('sfmap.svg');
+    	
+
+		  	
+    	//places dot given lat lon
+    	function current_location(lat,lon) {
+    		var x=(8823*lon)+1081060; 
+    		console.log('x is '+x);   	
+    		var y=422405-(11164.4*lat);
+    		d3.select('#markers')
+    		.append('circle')
+    		.attr('cx',x)
+    		.attr('cy',y)
+    		.attr('r',5)
+    		.attr('fill','#333333')
+    		.attr('id','iamhere');
+	    	
+	    	zoomer(x,y);
+    	}
+    	
+		function zoomer(x,y){
+			$('#scaler').attr('style','-webkit-transform-origin:'+x+','+y+';').addClass('zoomed')
+		}
+		//Contingencies    
+		function show_map_error() {}
+		function supports(bool, suffix) {
+  var s = "Your browser ";
+  if (bool) {
+    s += "supports " + suffix + ".";
+  } else {
+    s += "does not support " + suffix + ". :(";
+  }
+  return s;
+}        	
+ 	
+		//detects whether geolocation is possible
+		$(function() {
+		  if (geoPosition.init()) {
+		    $("#live-geolocation").html(supports(true, "geolocation") + ' <a href="#" onclick="lookup_location();return false">Click to look up your location</a>.');
+		  } 
+		  else {$("#live-geolocation").html(supports(false, "geolocation")); }
+		  		 });    	
+		
+
+		console.log('lat is ');    
+    </script>
+
+    <script src="https://cdn.firebase.com/v0/firebase.js"></script>
+    <script src="marker.j"></script>
+    <script src="firebus-modified.j"></script>
+
+</body></html>
