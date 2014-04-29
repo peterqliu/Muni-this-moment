@@ -20,15 +20,23 @@ function newBus(bus, firebaseId) {
 	    newmarker.attr('style','-webkit-transform:translate('+xcoord+'px,'+ycoord+'px)')
 		.attr('class','busmarker '+'route'+bus.routeTag)
 		.attr('id','bus'+firebaseId)
-		.attr('xcoord',xcoord)
-		.attr('ycoord',ycoord)
+		.attr('xcoord',xcoord+20)
+		.attr('ycoord',ycoord-10)
 		.attr('route',bus.routeTag)
 		.attr('onclick','showroutestops("'+bus.routeTag+'", "'+bus.dirTag+'"), showbusesonline("'+bus.routeTag+'")')
-		.on('mouseenter',function() {
+		.on('mouseover',function() {
+
+			var xcoordforlabel=$(this).attr('xcoord')+500;
+			var ycoordforlabel=$(this).attr('ycoord');	
+
 			d3.json('truncated_stops.json',function(json){
 				window.busname=json[fudge(bus.dirTag)]['Name'];							
-				window.title=json[fudge(bus.dirTag)]['Title'];				
-				makelabel(xcoord,ycoord,busname,directionColor,title);
+				window.title=json[fudge(bus.dirTag)]['Title'];
+				var direction=bus.dirTag && bus.dirTag.indexOf('OB') > -1 ? "#517D7C" : "#CF4B62";	
+
+
+				makelabel(xcoordforlabel+'500',ycoordforlabel,busname,directionColor,title);			
+
 			})
 		})
 		.on('mouseleave',function(){removelabel()})
@@ -39,7 +47,10 @@ function newBus(bus, firebaseId) {
 			var ycoordforlabel=d3.select(this).attr('ycoord');
 			zoomto(xcoordforlabel,ycoordforlabel);
 			//console.log('xcoord of '+d3.select(this).attr('xcoord'));
-		})	
+		})
+		.attr('transform','scale3d(0,0,0)')
+
+
 		.append('g')
 		.attr('class','grower')    
 	    .append('path')
@@ -53,13 +64,10 @@ function newBus(bus, firebaseId) {
 	//Bus marker text	
     d3.select('#bus'+firebaseId+' .grower')
     	.append('text')
-		.attr('x',0)
 		.attr('y',5-(bus.routeTag.toString().length)) 
 		.attr('y',function(){if (bus.routeTag.toString().length<3){return 3} else{return 5-(bus.routeTag.toString().length)}})
 		
 		//fudge factor to position route number in the middle of the circle
-		.attr('text-anchor','middle')
-		.attr('fill','white')
 		.attr('font-size',function(){if (bus.routeTag.toString().length<3){return 8} else{return 10-(bus.routeTag.toString().length*1.5)}})
 		.attr('class','busmarkertext')
 		.text(bus.routeTag);
@@ -93,10 +101,12 @@ f.on("child_changed", function(s) {
   	var bus=s.val();
   	var xcoord=lonx(s.val().lon);
 	var ycoord=laty(s.val().lat);
+
 	 d3.select('#bus'+busMarker)
 	    .attr('style','-webkit-transform:translate('+xcoord+'px,'+ycoord+'px)')
-		.attr('xcoord',xcoord)
-		.attr('ycoord',ycoord)	    
+		.attr('xcoord',xcoord+20)
+		.attr('ycoord',ycoord-10)   
+		
 	    .select('path')
 	    .attr('transform','rotate('+s.val().heading+')')
 		.on('click',function(){
@@ -104,18 +114,9 @@ f.on("child_changed", function(s) {
 			var ycoordforlabel=d3.select(this).attr('ycoord');
 			zoomto(xcoordforlabel,ycoordforlabel);
 			//console.log('xcoord of '+d3.select(this).attr('xcoord'));
-		})
-		.on('mouseenter',function() {
-			d3.json('truncated_stops.json',function(json){
-				window.busname=json[fudge(bus.dirTag)]['Name'];							
-				window.title=json[fudge(bus.dirTag)]['Title'];				
-				makelabel(xcoord,ycoord,busname,directionColor,title);
-			})
 		})			
 	    
 	    ;
-	 
- 
   }
 });
 

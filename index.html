@@ -8,22 +8,21 @@
 	<div id='svg' class=''></div>
 
 
-<div style="cursor:pointer; position:absolute;left:30px; top:30px; background:#999;color:white; width:80px;height:80px;text-align:center;border-radius:50%; opacity:0.5;" onclick='zoombackout()'><br>Zoom out</div>
+<div style="opacity:0" onclick='zoombackout()' id='zoomout'><br>Zoom<br>out</div>
 
 
 
 	<script src='jquery-1.9.1.min.js'></script>	
-	<script src='d3.v2.js'></script>	
-	<script src="geoPosition.js"></script>
-	<script src='jquery-svgpan.js'></script>	
-	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.pep/0.4.0/jquery.pep.min.js"></script>
+	<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <script src="https://cdn.firebase.com/v0/firebase.js"></script>
+    <script src="firebus-modified.js"></script>
+
 
 	   
     <script>
 
 
     	$('#svg').load('sfmap.svg');
-    	//$('#svg').append('sfmap.svg');
 
 				
 		//defines functionality of moving markers to the front when clicked
@@ -33,7 +32,7 @@
 		  });
 		};
 		
-			zoomto(900,450);
+			//zoomto(900,450);
 		$('.zoomed').attr('class','');			  	
     	// LAT-LON MASTER CONVERTERS
     	function lonx(lon){
@@ -52,11 +51,6 @@
 	    		.append('circle')
 	    		.attr('cx',lonx(lon))
 	    		.attr('cy',laty(lat))
-	    		.attr('r',3)
-	    		.attr('opacity',0.7)
-	    		.attr('fill','none')
-	    		.attr('stroke','purple')
-	    		.attr('stroke-width',4)
 	    		.attr('id','iamhere')
 	    		.on('mouseout',function(){removelabel()});				
 			}
@@ -65,6 +59,15 @@
 	    		.attr('cx',lonx(lon))
 	    		.attr('cy',laty(lat))				
 	    		.on('mouseover',function(){makelabel(lonx(lon),laty(lat),"We're somewhere here",'purple',lat+', '+lon)})
+	    		.on('click', function(){
+	    			var myx= $(this)[0].getAttribute('cx');
+	    			var myy= $(this)[0].getAttribute('cy');
+
+	    			zoomto(myx,myy);
+	    			$('.busmarker').attr('class','busmarker selected');
+	    			$('.stopmarker').remove();
+
+	    		})
 			
 	    	
     	}
@@ -91,11 +94,18 @@
 		  		 });    	
 				
 		function zoomto(x,y) {
-			$('#dragger').attr('style','');
-			$('.foreshortening').attr('class','');
-			d3.select('.viewport')
-			.attr('style','-webkit-transform-origin:'+x+' '+(y)+'; -webkit-transform:rotateX(38deg) rotateZ(-15deg) scale(15)')
+
+			//d3.select('#markers').attr('display','none').transition().delay(2000).attr('display','block');
+			$('#dragger').pep({});
+			$.pep.toggleAll(true);
+
+			$('#zoomout').attr('style','');
+
+			d3.select('#viewport')
+			.attr('style','-webkit-transform-origin:'+x+' '+(y)+'; ')
 			.attr('class','viewport zoomed');
+			
+			removelabel();
 			
 		};
 
@@ -116,21 +126,21 @@
 				.enter()
 				.append("circle")
 				.attr("r", 0)
-
-				.attr('fill',function(){if (routedir.indexOf('OB')> -1) {return "#517D7C"} else {return "#CF4B62"}})
-				.attr('cx',function(d,i){return lonx(data[i]['Lon'])})
-				.attr('cy',function(d,i){return laty(data[i]['Lat'])})
-				.attr('stroke','white')
-				.attr('name',function(d,i){return data[i]['Intersection']})
 				.attr('class','stopmarker')
+				.attr('cx',function(d,i){return lonx(data[i]['Lon'])})
+				.attr('cy',function(d,i){return laty(data[i]['Lat'])})				
+				.attr('fill',function(d,i) {if (i!=0 && i!=data.length-1){if (routedir.indexOf('OB')> -1) {return "#517D7C"} else {return "#CF4B62"}} else {return 'white'}})
+				.attr('stroke',function(d,i) {if (i!=0 && i!=data.length-1) {return 'white'} 
+												else {if (routedir.indexOf('OB')> -1) {return "#517D7C"} 
+													else {return "#CF4B62"}}})
+				.attr('stroke-width',function(d,i) {if (i!=0 && i!=data.length-1){return 1} else {return 2.5}})
+				//.attr('name',function(d,i){return data[i]['Intersection']})
 
-				//.hover(function(){d3.select(this).attr('fill','orange')})
 				.on('mouseover',function(d,i){
 					d3.select(this)
 						.transition()
 						.duration(200)
-						.attr('fill','orange')
-						.attr('r',4);
+						.attr('r',function(){ return ($(this)[0].getAttribute('r'))*1.5});
 
 					var color=function(){if (routedir.indexOf('OB')> -1) {return "#517D7C"} else {return "#CF4B62"}};
 					var stopdirection=function(){if (routedir.indexOf('OB')> -1) {return "Outbound stop"} else {return "Inbound stop"}};
@@ -142,14 +152,14 @@
 					d3.select(this)
 						.transition()
 						.duration(200)
-						.attr('fill',function(){if (routedir.indexOf('OB')> -1) {return "#517D7C"} else {return "#CF4B62"}})
-						.attr('r',3);
+						.attr("r", 3);
 
 					removelabel();
 				})
 				.transition()
 				.delay(function(d,i){return 5*i})
 				.duration(500)
+				//.attr('size',function(d,i) {if (i!=0 && i!=data.length-1){return 3} else {return 5}})
 				.attr("r", 3)
 			})
 			
@@ -165,7 +175,9 @@
 		
 		//Restore view to full, remove all stop markers and restore all buses to full color
 		function zoombackout() {
-			$('#dragger').attr('style','');
+			$.pep.toggleAll(false);
+			$('#view').attr('class','');
+			$('#zoomout').attr('style','opacity:0');
 
 			d3.select('.viewport')
 			.attr('style','')
@@ -207,15 +219,12 @@
 					//create background rectangle for label
 					d3.select('#busstoplabels')
 						.insert('rect','text')
-						.attr('opacity',0.8)
-						.attr('fill','white')
 						.attr('x',-6)
 						.attr('y',-15)
 						.attr('width',function(){return Math.max($('#stoplabel')[0].getComputedTextLength(), $('.subtext')[0].getComputedTextLength())+12})	
 						.attr('height',32)
 						.attr('id','labelrect');
 						
-						console.log($('.subtext').length);							
 		}
 		
 		function removelabel() {
@@ -239,7 +248,8 @@
 
     </script>
 
-    <script src="https://cdn.firebase.com/v0/firebase.js"></script>
-    <script src="firebus-modified.js"></script>
+
+    	<script src="geoPosition.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.pep/0.4.0/jquery.pep.min.js"></script>
 
 </body></html>
