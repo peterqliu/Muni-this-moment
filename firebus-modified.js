@@ -30,12 +30,17 @@ function newBus(bus, firebaseId) {
 			var ycoordforlabel=$(this).attr('ycoord');	
 
 			d3.json('truncated_stops.json',function(json){
-				window.busname=json[fudge(bus.dirTag)]['Name'];							
-				window.title=json[fudge(bus.dirTag)]['Title'];
-				var direction=bus.dirTag && bus.dirTag.indexOf('OB') > -1 ? "#517D7C" : "#CF4B62";	
+				var busname=json[fudge(bus.dirTag)]['Name'];							
+				var destination= function() {
+					if ($('.zoomed').length==0)
+						{return 'Click to zoom here'}
+					else 
+						{return json[fudge(bus.dirTag)]['Title'];}
+					}
+				var directionColor=bus.dirTag && bus.dirTag.indexOf('OB') > -1 ? "#517D7C" : "#CF4B62";	
 
 
-				makelabel(xcoordforlabel+'500',ycoordforlabel,busname,directionColor,title);			
+				makelabel(xcoordforlabel+'500',ycoordforlabel,busname,directionColor,destination);			
 
 			})
 		})
