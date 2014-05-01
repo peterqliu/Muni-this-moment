@@ -1,0 +1,13 @@
+<svg xmlns:x="http://ns.adobe.com/Extensibility/1.0/" xmlns:i="http://ns.adobe.com/AdobeIllustrator/10.0/" xmlns:graph="http://ns.adobe.com/Graphs/1.0/" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1" x="0px" y="0px" width="100px" height="100px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
+<switch>
+	<foreignObject requiredExtensions="http://ns.adobe.com/AdobeIllustrator/10.0/" x="0" y="0" width="1" height="1">
+		</foreignObject>
+	<g i:extraneous="self">
+		<polygon points="38.175,39.398 45.241,32.332 43.337,27.919 24.207,8.784 14.591,18.402 33.721,37.534   "/>
+		<path d="M69.22,44.566L54.38,29.727c-1.103-1.103-2.907-1.103-4.009,0L35.533,44.566c-1.103,1.103-1.103,2.906,0,4.009    l14.838,14.838c1.102,1.103,2.906,1.103,4.009,0.001l14.84-14.839C70.322,47.472,70.322,45.668,69.22,44.566z"/>
+		<polygon points="71.039,55.613 66.585,53.749 59.519,60.815 61.423,65.228 80.553,84.362 90.169,74.746   "/>
+		<path d="M28.078,55.257l-6.055,0.594C23.113,68.132,32.778,77.936,45,79.225l0.591-6.048    C36.258,72.153,28.893,64.656,28.078,55.257z"/>
+		<path d="M15.883,56.541L9.831,57.13c1.667,18.059,16.031,32.43,34.084,34.086l0.591-6.043    C29.336,83.756,17.287,71.713,15.883,56.541z"/>
+	</g>
+</switch>
+</svg>

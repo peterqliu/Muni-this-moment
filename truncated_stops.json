@@ -1,4 +1,4 @@
-{ "01AX_IB" : { "Name" : "1AX-California A Express",
+{ "1AX_IB" : { "Name" : "1AX-California A Express",
       "Stops" : [ { "Intersection" : "33rd Ave & Geary Blvd",
             "Lat" : "37.7798199",
             "Lon" : "-122.49323",
@@ -92,7 +92,7 @@
         ],
       "Title" : "Inbound to Downtown"
     },
-  "01AX_OB" : { "Name" : "1AX-California A Express",
+  "1AX_OB" : { "Name" : "1AX-California A Express",
       "Stops" : [ { "Intersection" : "Pine St & Davis St",
             "Lat" : "37.7925399",
             "Lon" : "-122.39772",
@@ -176,7 +176,7 @@
         ],
       "Title" : "Outbound to the Richmond District"
     },
-  "01BX_IB" : { "Name" : "1BX-California B Express",
+  "1BX_IB" : { "Name" : "1BX-California B Express",
       "Stops" : [ { "Intersection" : "6th Ave & Cornwall St",
             "Lat" : "37.7846699",
             "Lon" : "-122.46448",
@@ -255,7 +255,7 @@
         ],
       "Title" : "Inbound to Downtown"
     },
-  "01BX_OB" : { "Name" : "1BX-California B Express",
+  "1BX_OB" : { "Name" : "1BX-California B Express",
       "Stops" : [ { "Intersection" : "Pine St & Davis St",
             "Lat" : "37.7925399",
             "Lon" : "-122.39772",
@@ -329,7 +329,7 @@
         ],
       "Title" : "Outbound to the Richmond District"
     },
-  "01_IB" : { "Name" : "1-California",
+  "1_IB" : { "Name" : "1-California",
       "Stops" : [ { "Intersection" : "Geary Blvd & 33rd Ave",
             "Lat" : "37.7797399",
             "Lon" : "-122.49323",
@@ -573,7 +573,7 @@
         ],
       "Title" : "Inbound to Downtown"
     },
-  "01_OB" : { "Name" : "1-California",
+  "1_OB" : { "Name" : "1-California",
       "Stops" : [ { "Intersection" : "Clay St & Drumm St",
             "Lat" : "37.7954199",
             "Lon" : "-122.397",
@@ -822,7 +822,7 @@
         ],
       "Title" : "Outbound to the Richmond District"
     },
-  "02_IB" : { "Name" : "2-Clement",
+  "2_IB" : { "Name" : "2-Clement",
       "Stops" : [ { "Intersection" : "Clement & 14 Ave",
             "Lat" : "37.7824999",
             "Lon" : "-122.47308",
@@ -1021,7 +1021,7 @@
         ],
       "Title" : "Inbound to Downtown"
     },
-  "02_OB" : { "Name" : "2-Clement",
+  "2_OB" : { "Name" : "2-Clement",
       "Stops" : [ { "Intersection" : "Market & Steuart",
             "Lat" : "37.7944499",
             "Lon" : "-122.39492",
@@ -1220,7 +1220,7 @@
         ],
       "Title" : "Outbound to the Richmond District"
     },
-  "03_IB" : { "Name" : "3-Jackson",
+  "3_IB" : { "Name" : "3-Jackson",
       "Stops" : [ { "Intersection" : "Presidio Ave & California St",
             "Lat" : "37.7873699",
             "Lon" : "-122.44688",
@@ -1384,7 +1384,7 @@
         ],
       "Title" : "Inbound to Downtown"
     },
-  "03_OB" : { "Name" : "3-Jackson",
+  "3_OB" : { "Name" : "3-Jackson",
       "Stops" : [ { "Intersection" : "Sutter St & Sansome St",
             "Lat" : "37.7902999",
             "Lon" : "-122.40067",
@@ -1523,7 +1523,7 @@
         ],
       "Title" : "Outbound to Pacific Heights"
     },
-  "05L_IB" : { "Name" : "5L-Fulton Limited",
+  "5L_IB" : { "Name" : "5L-Fulton Limited",
       "Stops" : [ { "Intersection" : "Cabrillo St & La Playa St",
             "Lat" : "37.7733199",
             "Lon" : "-122.50993",
@@ -1692,7 +1692,7 @@
         ],
       "Title" : "Inbound to Downtown"
     },
-  "05L_OB" : { "Name" : "5L-Fulton Limited",
+  "5L_OB" : { "Name" : "5L-Fulton Limited",
       "Stops" : [ { "Intersection" : "Howard St & Main St",
             "Lat" : "37.7904099",
             "Lon" : "-122.39352",
@@ -1861,7 +1861,7 @@
         ],
       "Title" : "Outbound to Ocean Beach"
     },
-  "05_IB" : { "Name" : "5-Fulton",
+  "5_IB" : { "Name" : "5-Fulton",
       "Stops" : [ { "Intersection" : "Cabrillo St & La Playa St",
             "Lat" : "37.7733199",
             "Lon" : "-122.50993",
@@ -2070,7 +2070,7 @@
         ],
       "Title" : "Inbound to Downtown"
     },
-  "05_OB" : { "Name" : "5-Fulton",
+  "5_OB" : { "Name" : "5-Fulton",
       "Stops" : [ { "Intersection" : "Howard St & Main St",
             "Lat" : "37.7904099",
             "Lon" : "-122.39352",
@@ -2279,7 +2279,7 @@
         ],
       "Title" : "Outbound to Ocean Beach"
     },
-  "06_IB" : { "Name" : "6-Parnassus",
+  "6_IB" : { "Name" : "6-Parnassus",
       "Stops" : [ { "Intersection" : "14th Ave & Quintara St",
             "Lat" : "37.7488699",
             "Lon" : "-122.47074",
@@ -2538,7 +2538,7 @@
         ],
       "Title" : "Inbound to Downtown"
     },
-  "06_OB" : { "Name" : "6-Parnassus",
+  "6_OB" : { "Name" : "6-Parnassus",
       "Stops" : [ { "Intersection" : "Steuart St & Mission St",
             "Lat" : "37.7933499",
             "Lon" : "-122.39323",
@@ -2792,7 +2792,7 @@
         ],
       "Title" : "Outbound to the Sunset District"
     },
-  "08AX_IB" : { "Name" : "8AX-Bayshore A Express",
+  "8AX_IB" : { "Name" : "8AX-Bayshore A Express",
       "Stops" : [ { "Intersection" : "Geneva St & Schwerin St",
             "Lat" : "37.7062999",
             "Lon" : "-122.41308",
@@ -2926,7 +2926,7 @@
         ],
       "Title" : "Inbound to Chinatown"
     },
-  "08AX_OB" : { "Name" : "8AX-Bayshore A Express",
+  "8AX_OB" : { "Name" : "8AX-Bayshore A Express",
       "Stops" : [ { "Intersection" : "Kearny St & Pacific Ave",
             "Lat" : "37.7973299",
             "Lon" : "-122.40527",
@@ -3050,7 +3050,7 @@
         ],
       "Title" : "Outbound to Visitacion Valley"
     },
-  "08BX_IB" : { "Name" : "8BX-Bayshore B Express",
+  "8BX_IB" : { "Name" : "8BX-Bayshore B Express",
       "Stops" : [ { "Intersection" : "Phelan Loop",
             "Lat" : "37.7234699",
             "Lon" : "-122.45265",
@@ -3289,7 +3289,7 @@
         ],
       "Title" : "Inbound to Fisherman's Wharf"
     },
-  "08BX_OB" : { "Name" : "8BX-Bayshore B Express",
+  "8BX_OB" : { "Name" : "8BX-Bayshore B Express",
       "Stops" : [ { "Intersection" : "Kearny St & North Point St",
             "Lat" : "37.8071799",
             "Lon" : "-122.40721",
@@ -3528,7 +3528,7 @@
         ],
       "Title" : "Outbound to City College"
     },
-  "08X__IB" : { "Name" : "8X-Bayshore Express",
+  "8X_IB" : { "Name" : "8X-Bayshore Express",
       "Stops" : [ { "Intersection" : "Phelan Loop",
             "Lat" : "37.7234699",
             "Lon" : "-122.45265",
@@ -3817,7 +3817,7 @@
         ],
       "Title" : "Inbound to Fisherman's Wharf"
     },
-  "08X___OB" : { "Name" : "8X-Bayshore Express",
+  "8X__OB" : { "Name" : "8X-Bayshore Express",
       "Stops" : [ { "Intersection" : "Kearny St & North Point St",
             "Lat" : "37.8071799",
             "Lon" : "-122.40721",
@@ -4101,7 +4101,7 @@
         ],
       "Title" : "Outbound to City College"
     },
-  "09L_IB" : { "Name" : "9L-San Bruno Limited",
+  "9L_IB" : { "Name" : "9L-San Bruno Limited",
       "Stops" : [ { "Intersection" : "San Bruno Ave & Arleta Ave",
             "Lat" : "37.7122899",
             "Lon" : "-122.40242",
@@ -4215,7 +4215,7 @@
         ],
       "Title" : "Inbound to Downtown"
     },
-  "09L_OB" : { "Name" : "9L-San Bruno Limited",
+  "9L_OB" : { "Name" : "9L-San Bruno Limited",
       "Stops" : [ { "Intersection" : "Main St & Mission St",
             "Lat" : "37.7919799",
             "Lon" : "-122.39496",
@@ -4319,7 +4319,7 @@
         ],
       "Title" : "Outbound to Visitacion Valley"
     },
-  "09_IB" : { "Name" : "9-San Bruno",
+  "9_IB" : { "Name" : "9-San Bruno",
       "Stops" : [ { "Intersection" : "McLaren School",
             "Lat" : "37.7135499",
             "Lon" : "-122.42222",
@@ -4623,7 +4623,7 @@
         ],
       "Title" : "Inbound to Downtown"
     },
-  "09_OB" : { "Name" : "9-San Bruno",
+  "9_OB" : { "Name" : "9-San Bruno",
       "Stops" : [ { "Intersection" : "Main St & Mission St",
             "Lat" : "37.7919799",
             "Lon" : "-122.39496",
@@ -14851,7 +14851,7 @@
         ],
       "Title" : "Outbound to Ocean Beach"
     },
-  "33__IB" : { "Name" : "33-Stanyan",
+  "33_IB" : { "Name" : "33-Stanyan",
       "Stops" : [ { "Intersection" : "25th St & Potrero Ave",
             "Lat" : "37.7514099",
             "Lon" : "-122.40668",
@@ -15085,7 +15085,7 @@
         ],
       "Title" : "Inbound to the Richmond District"
     },
-  "33__OB" : { "Name" : "33-Stanyan",
+  "33_OB" : { "Name" : "33-Stanyan",
       "Stops" : [ { "Intersection" : "Sacramento St & Cherry St",
             "Lat" : "37.7869099",
             "Lon" : "-122.45656",
@@ -23198,7 +23198,7 @@
         ],
       "Title" : "Outbound to San Bruno & Arleta"
     },
-  "59__IB" : { "Name" : "Powell/Mason Cable Car",
+  "59_IB" : { "Name" : "Powell/Mason Cable Car",
       "Stops" : [ { "Intersection" : "Taylor St & Bay St",
             "Lat" : "37.8052599",
             "Lon" : "-122.41531",
@@ -23317,7 +23317,7 @@
         ],
       "Title" : "Inbound to Powell & Market"
     },
-  "59__OB" : { "Name" : "Powell/Mason Cable Car",
+  "59_OB" : { "Name" : "Powell/Mason Cable Car",
       "Stops" : [ { "Intersection" : "Powell St & Market St",
             "Lat" : "37.7847999",
             "Lon" : "-122.40768",
@@ -23441,7 +23441,7 @@
         ],
       "Title" : "Outbound to Taylor & Bay"
     },
-  "60__IB" : { "Name" : "Powell/Hyde Cable Car",
+  "60_IB" : { "Name" : "Powell/Hyde Cable Car",
       "Stops" : [ { "Intersection" : "Hyde St & Beach St",
             "Lat" : "37.8068999",
             "Lon" : "-122.42111",
@@ -23585,7 +23585,7 @@
         ],
       "Title" : "Inbound to Powell & Market"
     },
-  "60__OB" : { "Name" : "Powell/Hyde Cable Car",
+  "60_OB" : { "Name" : "Powell/Hyde Cable Car",
       "Stops" : [ { "Intersection" : "Powell St & Market St",
             "Lat" : "37.7847999",
             "Lon" : "-122.40768",
@@ -27717,7 +27717,7 @@
         ],
       "Title" : "Outbound to West Portal Station"
     },
-  "F__IB" : { "Name" : "F-Market & Wharves",
+  "F_IB" : { "Name" : "F-Market & Wharves",
       "Stops" : [ { "Intersection" : "Market St & Church St",
             "Lat" : "37.7672599",
             "Lon" : "-122.42915",
@@ -27856,7 +27856,7 @@
         ],
       "Title" : "Inbound to Fisherman's Wharf via Downtown"
     },
-  "F__OB" : { "Name" : "F-Market & Wharves",
+  "F_OB" : { "Name" : "F-Market & Wharves",
       "Stops" : [ { "Intersection" : "Jones St & Beach St",
             "Lat" : "37.8072499",
             "Lon" : "-122.41737",
@@ -28005,7 +28005,7 @@
         ],
       "Title" : "Outbound to Castro Station via Downtown"
     },
-  "J__IB" : { "Name" : "J-Church",
+  "J_IB" : { "Name" : "J-Church",
       "Stops" : [ { "Intersection" : "Balboa Park Bart",
             "Lat" : "37.7208999",
             "Lon" : "-122.44666",
@@ -28134,7 +28134,7 @@
         ],
       "Title" : "Inbound to Downtown"
     },
-  "J__OB" : { "Name" : "J-Church",
+  "J_OB" : { "Name" : "J-Church",
       "Stops" : [ { "Intersection" : "Embarcadero Station Outbound",
             "Lat" : "37.7932299",
             "Lon" : "-122.39654",
@@ -28258,7 +28258,7 @@
         ],
       "Title" : "Outbound to Balboa Park Station"
     },
-  "KT__IB" : { "Name" : "KT-Ingleside/Third Street",
+  "KT_IB" : { "Name" : "KT-Ingleside/Third Street",
       "Stops" : [ { "Intersection" : "Metro Terminal",
             "Lat" : "37.7208799",
             "Lon" : "-122.44665",
@@ -28472,7 +28472,7 @@
         ],
       "Title" : "Inbound to Visitacion Valley via Downtown"
     },
-  "KT__OB" : { "Name" : "KT-Ingleside/Third Street",
+  "KT_OB" : { "Name" : "KT-Ingleside/Third Street",
       "Stops" : [ { "Intersection" : "Bay Shore Blvd & Sunnydale Ave",
             "Lat" : "37.7089999",
             "Lon" : "-122.40502",
@@ -28691,7 +28691,7 @@
         ],
       "Title" : "Outbound to Balboa Park Station via Downtown"
     },
-  "K__OWLIB" : { "Name" : "K-Owl",
+  "K_OWLIB" : { "Name" : "K-Owl",
       "Stops" : [ { "Intersection" : "Geneva Ave & San Jose Ave",
             "Lat" : "37.7206999",
             "Lon" : "-122.44676",
@@ -28905,7 +28905,7 @@
         ],
       "Title" : "Inbound to Embarcadero Station"
     },
-  "K__OWLOB" : { "Name" : "K-Owl",
+  "K_OWLOB" : { "Name" : "K-Owl",
       "Stops" : [ { "Intersection" : "Steuart St & Mission St",
             "Lat" : "37.7933499",
             "Lon" : "-122.39323",
@@ -29134,7 +29134,7 @@
         ],
       "Title" : "Outbound to Balboa Park Station"
     },
-  "L__OWLIB" : { "Name" : "L-Owl",
+  "L_OWLIB" : { "Name" : "L-Owl",
       "Stops" : [ { "Intersection" : "Wawona St & 46th Ave",
             "Lat" : "37.7361299",
             "Lon" : "-122.50435",
@@ -29383,7 +29383,7 @@
         ],
       "Title" : "Inbound to Embarcadero Station"
     },
-  "L__OWLOB" : { "Name" : "L-Owl",
+  "L_OWLOB" : { "Name" : "L-Owl",
       "Stops" : [ { "Intersection" : "Steuart St & Mission St",
             "Lat" : "37.7933499",
             "Lon" : "-122.39323",
@@ -29637,7 +29637,7 @@
         ],
       "Title" : "Outbound to Wawona & 46thAve"
     },
-  "L___IB" : { "Name" : "L-Taraval",
+  "L__IB" : { "Name" : "L-Taraval",
       "Stops" : [ { "Intersection" : "Wawona St & 46th Ave",
             "Lat" : "37.7361299",
             "Lon" : "-122.50435",
@@ -29786,7 +29786,7 @@
         ],
       "Title" : "Inbound to Downtown"
     },
-  "L___OB" : { "Name" : "L-Taraval",
+  "L__OB" : { "Name" : "L-Taraval",
       "Stops" : [ { "Intersection" : "Embarcadero Station Outbound",
             "Lat" : "37.7932299",
             "Lon" : "-122.39654",
@@ -29940,7 +29940,7 @@
         ],
       "Title" : "Outbound to San Francisco Zoo"
     },
-  "M__IB" : { "Name" : "M-Ocean View",
+  "M_IB" : { "Name" : "M-Ocean View",
       "Stops" : [ { "Intersection" : "San Jose Ave & Mt Vernon Ave",
             "Lat" : "37.7184699",
             "Lon" : "-122.44864",
@@ -30074,7 +30074,7 @@
         ],
       "Title" : "Inbound to Downtown"
     },
-  "M__OB" : { "Name" : "M-Ocean View",
+  "M_OB" : { "Name" : "M-Ocean View",
       "Stops" : [ { "Intersection" : "Embarcadero Station Outbound",
             "Lat" : "37.7932299",
             "Lon" : "-122.39654",
@@ -30218,7 +30218,7 @@
         ],
       "Title" : "Outbound to Balboa Park Station"
     },
-  "M__OWLIB" : { "Name" : "M-Owl",
+  "M_OWLIB" : { "Name" : "M-Owl",
       "Stops" : [ { "Intersection" : "Geneva Ave & San Jose Ave",
             "Lat" : "37.7206999",
             "Lon" : "-122.44676",
@@ -30447,7 +30447,7 @@
         ],
       "Title" : "Inbound to Embarcadero Station"
     },
-  "M__OWLOB" : { "Name" : "M-Owl",
+  "M_OWLOB" : { "Name" : "M-Owl",
       "Stops" : [ { "Intersection" : "Steuart St & Mission St",
             "Lat" : "37.7933499",
             "Lon" : "-122.39323",
@@ -30824,7 +30824,7 @@
         ],
       "Title" : "Outbound to Judah & La Playa"
     },
-  "N__IB" : { "Name" : "N-Judah",
+  "N_IB" : { "Name" : "N-Judah",
       "Stops" : [ { "Intersection" : "Judah St & La Playa St",
             "Lat" : "37.7601699",
             "Lon" : "-122.50878",
@@ -30993,7 +30993,7 @@
         ],
       "Title" : "Inbound to Caltrain via Downtown"
     },
-  "N__OB" : { "Name" : "N-Judah",
+  "N_OB" : { "Name" : "N-Judah",
       "Stops" : [ { "Intersection" : "King St & 4th St",
             "Lat" : "37.7760599",
             "Lon" : "-122.39436",
@@ -31167,7 +31167,7 @@
         ],
       "Title" : "Outbound to Ocean Beach via Downtown"
     },
-  "N__OWLIB" : { "Name" : "N-Owl",
+  "N_OWLIB" : { "Name" : "N-Owl",
       "Stops" : [ { "Intersection" : "Judah St & La Playa St",
             "Lat" : "37.7601699",
             "Lon" : "-122.50878",
@@ -31446,7 +31446,7 @@
         ],
       "Title" : "Inbound to Townsend & 4th St"
     },
-  "N__OWLOB" : { "Name" : "N-Owl",
+  "N_OWLOB" : { "Name" : "N-Owl",
       "Stops" : [ { "Intersection" : "4th St & Townsend St",
             "Lat" : "37.7768899",
             "Lon" : "-122.39489",
@@ -31685,7 +31685,7 @@
         ],
       "Title" : "Outbound to La Playa & Judah"
     },
-  "T__OWLIB" : { "Name" : "T-Owl",
+  "T_OWLIB" : { "Name" : "T-Owl",
       "Stops" : [ { "Intersection" : "Market St & South Van Ness Ave",
             "Lat" : "37.7750599",
             "Lon" : "-122.41932",
@@ -31864,7 +31864,7 @@
         ],
       "Title" : "Inbound to Visitacion Valley"
     },
-  "T__OWLOB" : { "Name" : "T-Owl",
+  "T_OWLOB" : { "Name" : "T-Owl",
       "Stops" : [ { "Intersection" : "Bayshore & Sunnydale",
             "Lat" : "37.7088399",
             "Lon" : "-122.40507",

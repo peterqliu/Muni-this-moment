@@ -10,8 +10,8 @@ function newBus(bus, firebaseId) {
     //var busLatLng = console.log('Bus #'+firebaseId+ ' ('+bus.id+') is at lat '+bus.lat+' and lon '+bus.lon);
 
 	//determine bus direction for marker color
-    window.directionColor = bus.dirTag && bus.dirTag.indexOf('OB') > -1 ? "#517D7C" : "#CF4B62";
-
+    var direction= bus.dirTag && bus.dirTag.indexOf('OB') > -1 ? "_OB" : "_IB";
+    var directionColor = direction.indexOf('OB') > -1 ? "#517D7C" : "#CF4B62";
     //Creates a new bus marker
     var newmarker=d3.select('#markers').append('g');
 		
@@ -22,20 +22,22 @@ function newBus(bus, firebaseId) {
 		.attr('id','bus'+firebaseId)
 		.attr('xcoord',xcoord+20)
 		.attr('ycoord',ycoord-10)
+		.attr('type',bus.vtype)
 		.attr('route',bus.routeTag)
-		.attr('onclick','showroutestops("'+bus.routeTag+'", "'+bus.dirTag+'"), showbusesonline("'+bus.routeTag+'")')
+		.attr('direction', direction)
+		.attr('onclick','showroutestops("'+bus.routeTag+direction+'"), showbusesonline("'+bus.routeTag+'")')
 		.on('mouseover',function() {
 
 			var xcoordforlabel=$(this).attr('xcoord')+500;
 			var ycoordforlabel=$(this).attr('ycoord');	
 
 			d3.json('truncated_stops.json',function(json){
-				var busname=json[fudge(bus.dirTag)]['Name'];							
+				var busname=json[bus.routeTag+direction]['Name'];							
 				var destination= function() {
 					if ($('.zoomed').length==0)
 						{return 'Click to zoom here'}
 					else 
-						{return json[fudge(bus.dirTag)]['Title'];}
+						{return json[fudge(bus.routeTag+direction)]['Title'];}
 					}
 				var directionColor=bus.dirTag && bus.dirTag.indexOf('OB') > -1 ? "#517D7C" : "#CF4B62";	
 
@@ -86,15 +88,22 @@ function newBus(bus, firebaseId) {
 
 //On page load, create all new bus markers
 f.once("value", function(s) {
+
   s.forEach(function(b) {
     newBus(b.val(), b.name());
   });
+
+  countbuses();
+  $('#loader').fadeOut(500);
+
+
 });
 
 //Whenever a child has changed, either make a new marker (if not on list) or move it (if it is on the list)
 f.on("child_changed", function(s) {
+	console.log('update');
 
-  var busMarker = buses[s.name()];
+	var busMarker = buses[s.name()];
 
 	//new bus  
   if(typeof busMarker === 'undefined') {
@@ -120,8 +129,9 @@ f.on("child_changed", function(s) {
 			zoomto(xcoordforlabel,ycoordforlabel);
 			//console.log('xcoord of '+d3.select(this).attr('xcoord'));
 		})			
-	    
-	    ;
+	
+	countbuses();
+
   }
 });
 

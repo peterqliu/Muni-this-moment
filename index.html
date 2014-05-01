@@ -3,14 +3,46 @@
 	<link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-
+		<img src='satellite.svg' id='satellite' style='display:none'>
+	<div id='loader'>Fetching buses</div>
 	<div id='svg' class=''></div>
+	<div style="opacity:0" onclick='zoombackout()' id='zoomout'><br>Zoom<br>out</div>
+	<div id='maindialog' >
+		<h3>Muni, this moment</h3>
+		<span id='busquant'></span> buses, <span id='trainquant'></span> trains
+		<p>
+		This is a live map of the Muni system, as reported by NextBus. Click to inspect any line.
+	</p>
+	<div id='findme' onclick='gps()'>Look nearby</div>
+
+		<div class='switch' style='display:none'>
+			<div class='half'>
+				Outbound
+			</div>			
+			<div class='half'>
+				Inbound
+			</div></div>
+		<input type='text'  width='80px' placeholder='Route number' id='routenumber'onkeydown="if (event.keyCode == 13) {lookup()}"/>
 
 
-<div style="opacity:0" onclick='zoombackout()' id='zoomout'><br>Zoom<br>out</div>
 
+		<div class='flipper' id='routedirection' onclick='$(this).toggleClass("flipped")' direction='_OB'>
+			<div class='side' id='out' onclick="$('.flipper').attr('direction','_IB')">
+				Outbound &#x25BC;
+			</div>
+			<div class='side' id='in' onclick="$('.flipper').attr('direction','_OB')">
+				Inbound &#x25BC;
+			</div>			
+		</div>
 
+		<form action="" style='display:none'>
+			<select name="cars">
+			<option value="_IB">Inbound</option>
+			<option value="_OB">Outbound</option>
+			</select>
+		</form>
+		<button onclick='lookup()'>Search</button>
+	</div>
 
 	<script src='jquery-1.9.1.min.js'></script>	
 	<script src="d3.v3.min.js" charset="utf-8"></script>
@@ -51,11 +83,18 @@
 	    		.attr('cy',laty(lat))
 	    		.attr('id','iamhere')
 	    		.on('mouseout',function(){removelabel()});				
-			}
+
+	    		d3.select('#findme')
+	    		//.on('click',function(){zoomto(lonx(lon),laty(lat));
+	    		$('.busmarker').attr('class','busmarker selected');
+				};
+
+			
 			
 			d3.select('#iamhere')
 	    		.attr('cx',lonx(lon))
-	    		.attr('cy',laty(lat))				
+	    		.attr('cy',laty(lat))			
+	    		.attr('r',3)	
 	    		.on('mouseover',function(){makelabel(lonx(lon),laty(lat),"We're somewhere here",'purple',lat+', '+lon)})
 	    		.on('click', function(){
 	    			var myx= $(this)[0].getAttribute('cx');
@@ -102,34 +141,44 @@
 				var transx= transxy.substring(0, transxy.indexOf('px, '));
 				var transy= transxy.substring(transxy.indexOf('px, ')+4, transxy.indexOf('px)'));
 
-				console.log(transx+', '+transy);
+				//console.log(transx+', '+transy);
 				}
 
 			//d3.select('#markers').attr('display','none').transition().delay(2000).attr('display','block');
 			$('#dragger').pep({});
 
 			$('#zoomout').attr('style','');
-			if ($('.zoomed').length==0){
+			
 				d3.select('#viewport')
-				.attr('style','-webkit-transform-origin:'+(x)+' '+(y)+'; ')
+				.attr('style','-webkit-transform-origin:'+(x)+' '+(y+220)+'; ')
 				.attr('class','viewport zoomed');
-			}
+			$('#dragger').attr('style','-webkit-transform:translate(0,0); -webkit-transition:all 2s');
 			
 			//$('#dragger').attr('style','-webkit-transform:translate('+(x)+','+(y)+')');
 
-			removelabel();
-			
-		};
+			removelabel();};
+
+		function lookup() {
+			var number=$('#routenumber').val();
+			var direction=$('#routedirection').attr('direction');
+
+			var horiz= $('g[route='+number+'][direction="'+direction+'"]')[0].getAttribute('xcoord');
+			var vert= $('g[route='+number+'][direction="'+direction+'"]')[0].getAttribute('ycoord');
+			zoomto(horiz, vert);
+			showbusesonline(number,direction);
+			showroutestops(number+direction);
+			console.log(number+direction);
+		}
 
 		//Emerge stop markers when a bus is clicked
-		function showroutestops(route, routedir){
+		function showroutestops(routedir){
 		
 			//clears previous stop markers
 			$('.stopmarker').remove();
 			
 			d3.json('truncated_stops.json',function(json){
 			
-			window.data=json[fudge(routedir)]['Stops'];
+			window.data=json[routedir]['Stops'];
 			
 			
 			d3.select('#busstops')
@@ -181,9 +230,17 @@
 		}
 		
 		//When a bus is clicked, grey out all buses that aren't on the same line, reveal stops, and move relevant stops and buses to the top of the stack		
-		function showbusesonline(line) {
-			$('.busmarker:not([route="'+line+'"])').attr('class','busmarker unselected');
-			$('[route="'+line+'"]').attr('class','busmarker selected');
+		function showbusesonline(line,direction) {
+
+			if (direction!=null) {
+				$('.busmarker:not([route="' +line+ '"][direction="'+direction+'"])').attr('class','busmarker unselected');
+				$('.busmarker[route="' +line+ '"][direction="'+direction+'"]').attr('class','busmarker selected');				
+			}
+			else {
+				$('.busmarker:not([route="'+line+'"])').attr('class','busmarker unselected');
+				$('[route="'+line+'"]').attr('class','busmarker selected');
+			}
+
 			d3.select('#busstops').moveToFront();
 			d3.selectAll('.selected').moveToFront();
 		}
@@ -219,7 +276,7 @@
 		function makelabel(x,y,text,textcolor,subtext) {
 					
 					if ($('.zoomed').length==0) {
-						labelscalefactor=' scale(1.5)';
+						labelscalefactor=' scale(2)';
 					}
 					else {labelscalefactor=' scale(1)'}
 					d3.selectAll('#stoplabel').remove();
@@ -256,11 +313,30 @@
 					d3.selectAll('#labelrect').remove();
 		}
 		
+
+		function countbuses() {
+			  //count buses and trains
+			  var busquant=$('[type="bus"]').length;
+			  var trainquant=$('[type="train"]').length;
+
+			  $('#busquant').text(busquant);
+			  $('#trainquant').text(trainquant);
+		}		
 		//Update user position		
-		setInterval(function(){
-			geoPosition.getCurrentPosition(get_latlon, show_map_error);
-			current_location(lat,lon)}, 10000);
-		
+
+		function gps(){
+		window.finding=setInterval(function() {
+			$('#satellite').show();
+			if ($('#iamhere').length==0) {
+				geoPosition.getCurrentPosition(get_latlon, show_map_error);
+				current_location(lat,lon); console.log('poll'); 
+			}
+			if ($('#iamhere').length!=0) {clearInterval(finding); 
+										zoomto(lonx(lon),laty(lat));
+										$('#satellite').hide();
+			}
+		}, 10);
+		}
 		
 		//$("svg").on('mousemove',function(e){ 
             //$("#busstoplabels").attr("transform", "translate(" + [e.pageX+335] + "," + [e.pageY+60] + ")"); 
