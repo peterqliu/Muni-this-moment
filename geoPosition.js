@@ -62,7 +62,7 @@ function handleBlackBerryLocation()
 
 var geoPosition=function() {
 
-        var pub = {};
+        window.pub = {};
         var provider=null;
 		var u="undefined";
         var ipGeolocationSrv = 'http://freegeoip.net/json/?callback=JSONPCallback';
@@ -95,6 +95,7 @@ var geoPosition=function() {
         pub.confirmation = function()
         {
             return confirm('This Webpage wants to track your physical location.\nDo you allow it?');
+
         };
 
         pub.init = function()
@@ -194,7 +195,7 @@ var geoPosition=function() {
                                                     }
                                                 });
                                     },
-                                    onFailure: function( e ){
+                                    onFailure: function( e ){ console.log('failed');
                                                         if (e.errorCode==1) {
                                                             error({ code:       3,
                                                                     message:    "Timeout"
@@ -239,7 +240,7 @@ var geoPosition=function() {
                         //make the call
                         provider.ILocation.GetLocation(criteria,callback);
                         }
-                } else  {                            
+                } else  {
                         pub.getCurrentPosition = function(success, error, opts) {
                                 pub.jsonp.fetch(ipGeolocationSrv, 
                                         function( p ){ success( { timestamp: p.timestamp, 
@@ -269,6 +270,3 @@ var geoPosition=function() {
 			window.lon=loc.coords.longitude;
 		}  
 		function show_map_error() {}
-
-//fires it off on pageload
-    	geoPosition.getCurrentPosition(get_latlon, show_map_error);

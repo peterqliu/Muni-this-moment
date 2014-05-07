@@ -1,32 +1,67 @@
 <html>
 <head>
+    <meta charset="utf-8">	
+	<meta property="og:type" content="website" />
+<meta property="og:url" content="http://www.peterma.de/munithismoment" />
+<meta property="og:title" content="Muni, this moment" />
+<meta property="og:image" content="http://peterma.de/allthebuses/teaser.png" />
+
+
+
 	<link rel="stylesheet" href="style.css">
+	<title>Muni, this moment</title>
 </head>
 <body>
-		<img src='satellite.svg' id='satellite' style='display:none'>
-	<div id='loader'>Fetching buses</div>
-	<div id='svg' class=''></div>
+	<div style='display:none'>
+		<img src='teaser.png'>
+		<img src='teaser2.png'>
+		<img src='teaser3.png'>
+		<img src='teaser4.png'>		
+	</div>
 	<div style="opacity:0" onclick='zoombackout()' id='zoomout'><br>Zoom<br>out</div>
+	<div id='satellite' style='display:none'>Finding your location...</div>
+	<div id='loader'>
+		<svg width='200px' height='200px' style='margin-top:200px'>
+			<g transform='scale(3) translate(30, 40)'>
+				<path  id='spinner' d="M-5.392-5.018c-2.977,2.979-2.977,7.807,0,10.783c2.978,2.979,7.805,2.979,10.783,0c2.979-2.977,2.979-7.805,0-10.783l-5.392-5.391L-5.392-5.018z"; fill='#CF4B62' transform='' style='-webkit-transform-origin:50%'/>
+			</g>
+		</svg>
+		<p id='loadermessage'>
+		Fetching buses...</p>
+	</div>
+	<div id='svg' class='blurred'></div>
 	<div id='maindialog' >
 		<h3>Muni, this moment</h3>
-		<span id='busquant'></span> buses, <span id='trainquant'></span> trains
+		<span id='busquant'></span> buses, <span id='trainquant'></span> trains active
 		<p>
-		This is a live map of the Muni system, as reported by NextBus. Click to inspect any line.
+		This is a live map of San Francisco's Muni system, as reported by NextBus. Click to inspect any line.
 	</p>
-	<div id='findme' onclick='gps()'>Look nearby</div>
 
-		<div class='switch' style='display:none'>
-			<div class='half'>
-				Outbound
-			</div>			
-			<div class='half'>
-				Inbound
-			</div></div>
-		<input type='text'  width='80px' placeholder='Route number' id='routenumber'onkeydown="if (event.keyCode == 13) {lookup()}"/>
+	<p class='subhead'>Find a specific line</p>
+	<div class='inputbubble'id='routedirection' val='_OB'>
+		<div class="onoffswitch">
+		    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch">
+		    <label class="onoffswitch-label" for="myonoffswitch">
+		        <div class="onoffswitch-inner">
+		        	<span id='IB' onclick='$("#routedirection").attr("val","_OB");lookup()'>Inbound</span>
+		        	<span id='OB' onclick='$("#routedirection").attr("val","_IB");lookup()'>Outbound</span>		        	
+
+		        </div>
+		        <div class="onoffswitch-switch" ></div>
+		    </label>
+		</div>
+			<input type='text' placeholder='Line #' id='routenumber' onkeydown="$('#searchreply').html(''); if (event.keyCode == 13) {lookup()}"/>
+			<span id='searchreply' style='float:right;margin: 6px; opacity: 0.8;'></span>
+	</div>
+
+	<p class='subhead'>Look nearby</p><div id='findme' onclick='gps()'>Zoom to me</div>
+
+
+	
 
 
 
-		<div class='flipper' id='routedirection' onclick='$(this).toggleClass("flipped")' direction='_OB'>
+		<div class='flipper' style='display:none' onclick='$(this).toggleClass("flipped")' direction='_IB'>
 			<div class='side' id='out' onclick="$('.flipper').attr('direction','_IB')">
 				Outbound &#x25BC;
 			</div>
@@ -35,26 +70,23 @@
 			</div>			
 		</div>
 
-		<form action="" style='display:none'>
-			<select name="cars">
-			<option value="_IB">Inbound</option>
-			<option value="_OB">Outbound</option>
-			</select>
-		</form>
-		<button onclick='lookup()'>Search</button>
+
 	</div>
 
 	<script src='jquery-1.9.1.min.js'></script>	
 	<script src="d3.v3.min.js" charset="utf-8"></script>
     <script src="firebase.js"></script>
     <script src="firebus-modified.js"></script>
+	<script src="pep.edited.min.js"></script>
 
 
 	   
     <script>
 
+		window.dragreset='no';
 
     	$('#svg').load('sfmap.svg');
+		$('#dragger').pep({});
 
 				
 		//defines functionality of moving markers to the front when clicked
@@ -94,8 +126,10 @@
 			d3.select('#iamhere')
 	    		.attr('cx',lonx(lon))
 	    		.attr('cy',laty(lat))			
-	    		.attr('r',3)	
-	    		.on('mouseover',function(){makelabel(lonx(lon),laty(lat),"We're somewhere here",'purple',lat+', '+lon)})
+	    		.attr('r',4)	
+	    		.on('mouseover',function(){
+	    			var position= Math.round(lat*1000)/1000+' latitude, '+Math.round(lon*1000)/1000+' longitude';
+	    			makelabel(lonx(lon),laty(lat),"That's you!",'orange','(Location based on IP address)')})
 	    		.on('click', function(){
 	    			var myx= $(this)[0].getAttribute('cx');
 	    			var myy= $(this)[0].getAttribute('cy');
@@ -126,48 +160,50 @@
 		$(function() {
 		  if (geoPosition.init()) {
 		    $("#live-geolocation").html(supports(true, "geolocation") + ' <a href="#" onclick="lookup_location();return false">Click to look up your location</a>.');
-		  } 
-		  else {$("#live-geolocation").html(supports(false, "geolocation")); }
-		  		 });    	
+			} 
+		  else {$("#live-geolocation").html(supports(false, "geolocation")); 
+		  		$('#findme').remove();
+				}
+		});    	
 				
 		function zoomto(x,y) {
-			window.draggerstyle=$('#dragger')[0].getAttribute('style');
-			if (draggerstyle)
-				{
-				var transbegin= draggerstyle.indexOf('-webkit-transform: translate(')+29;
-				var transend=draggerstyle.indexOf('; -webkit-perspective:');
-				var transxy=draggerstyle.substring(transbegin,transend);
-
-				var transx= transxy.substring(0, transxy.indexOf('px, '));
-				var transy= transxy.substring(transxy.indexOf('px, ')+4, transxy.indexOf('px)'));
-
-				//console.log(transx+', '+transy);
-				}
-
+			if($('.zoomed').length!=0){
+				dragreset='yes';
+			}
 			//d3.select('#markers').attr('display','none').transition().delay(2000).attr('display','block');
-			$('#dragger').pep({});
-
+			//$.pep.toggleAll(false);
+			$('#dragger').pep({cssEaseString:''});
+			//$('#dragger').unbind( $pep ); 
 			$('#zoomout').attr('style','');
 			
 				d3.select('#viewport')
-				.attr('style','-webkit-transform-origin:'+(x)+' '+(y+220)+'; ')
+				.attr('style','-webkit-transform-origin:'+(1.5*x-600)+' '+(1.5*y-200)+'; ')
 				.attr('class','viewport zoomed');
 			$('#dragger').attr('style','-webkit-transform:translate(0,0); -webkit-transition:all 2s');
-			
-			//$('#dragger').attr('style','-webkit-transform:translate('+(x)+','+(y)+')');
 
-			removelabel();};
+			removelabel();
+		};
 
 		function lookup() {
-			var number=$('#routenumber').val();
-			var direction=$('#routedirection').attr('direction');
+			var number=$('#routenumber').val().toUpperCase();
+			var direction=$('#routedirection').attr('val');
+			var targetbuses=$('g[route='+number+'][direction="'+direction+'"]');
 
-			var horiz= $('g[route='+number+'][direction="'+direction+'"]')[0].getAttribute('xcoord');
-			var vert= $('g[route='+number+'][direction="'+direction+'"]')[0].getAttribute('ycoord');
-			zoomto(horiz, vert);
-			showbusesonline(number,direction);
-			showroutestops(number+direction);
-			console.log(number+direction);
+			if (number.length!=0){
+				if (targetbuses.length==0) {$('#searchreply').html('No results')}
+
+				else {
+					var horiz= targetbuses[0].getAttribute('xcoord');
+					var vert= targetbuses[0].getAttribute('ycoord');
+
+					$('#searchreply').html(targetbuses.length+' found')
+					zoomto(horiz, vert);
+					showbusesonline(number,direction);
+					showroutestops(number+direction);
+					$('input').blur();
+					//console.log(number+direction);
+				}
+			}
 		}
 
 		//Emerge stop markers when a bus is clicked
@@ -247,9 +283,8 @@
 		
 		//Restore view to full, remove all stop markers and restore all buses to full color
 		function zoombackout() {
-
+			dragreset='yes';
 			$('#dragger').attr('style','-webkit-transform:translate(0,0); -webkit-transition:all 2s');
-			//$.pep.toggleAll(false);
 			$('#view').attr('class','');
 			$('#zoomout').attr('style','opacity:0');
 
@@ -259,6 +294,7 @@
 						
 			$('.busmarker').attr('class','busmarker');
 			$('.stopmarker').remove();
+			removelabel();
 
 
 		}
@@ -326,14 +362,23 @@
 
 		function gps(){
 		window.finding=setInterval(function() {
-			$('#satellite').show();
 			if ($('#iamhere').length==0) {
+				$('#loadermessage').html('Finding your position...');
+				$('#svg').addClass('blurred');
+				$('#loader').show();
+
 				geoPosition.getCurrentPosition(get_latlon, show_map_error);
 				current_location(lat,lon); console.log('poll'); 
+
 			}
-			if ($('#iamhere').length!=0) {clearInterval(finding); 
-										zoomto(lonx(lon),laty(lat));
-										$('#satellite').hide();
+			if ($('#iamhere').length!=0) {
+				clearInterval(finding); 
+				$('#loader').hide();
+				$('#svg').removeClass('blurred');
+				if((lon>= -122.516613) && (lon<=-122.358685) && (lat<=37.841898) && (lat>=37.702273))
+					{zoomto(lonx(lon),laty(lat));}
+				else 
+					{alert("Whoops, it doesn't look like you're in the area")};
 			}
 		}, 10);
 		}
@@ -350,6 +395,4 @@
 
 
     	<script src="geoPosition.js"></script>
-	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.pep/0.4.0/jquery.pep.min.js"></script>
-
 </body></html>

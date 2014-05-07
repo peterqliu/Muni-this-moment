@@ -25,9 +25,10 @@ function newBus(bus, firebaseId) {
 		.attr('type',bus.vtype)
 		.attr('route',bus.routeTag)
 		.attr('direction', direction)
-		.attr('onclick','showroutestops("'+bus.routeTag+direction+'"), showbusesonline("'+bus.routeTag+'")')
+		//.attr('onclick','showroutestops("'+bus.routeTag+direction+'"), showbusesonline("'+bus.routeTag+'")')
 		.on('mouseover',function() {
-
+			showroutestops(bus.routeTag+direction);
+			showbusesonline(bus.routeTag);
 			var xcoordforlabel=$(this).attr('xcoord')+500;
 			var ycoordforlabel=$(this).attr('ycoord');	
 
@@ -46,7 +47,7 @@ function newBus(bus, firebaseId) {
 
 			})
 		})
-		.on('mouseleave',function(){removelabel()})
+		.on('mouseleave',function(){removelabel(), showroutestops()})
 		//.on('mouseout',function(){removelabel()})
 
 		.on('click',function(){
@@ -89,12 +90,14 @@ function newBus(bus, firebaseId) {
 //On page load, create all new bus markers
 f.once("value", function(s) {
 
+while ($('.busmarker').length==0){
   s.forEach(function(b) {
     newBus(b.val(), b.name());
   });
-
+}
   countbuses();
-  $('#loader').fadeOut(500);
+  $('#loader').fadeOut(600);
+  $('.blurred').attr('class','')
 
 
 });

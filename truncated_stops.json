@@ -3817,7 +3817,7 @@
         ],
       "Title" : "Inbound to Fisherman's Wharf"
     },
-  "8X__OB" : { "Name" : "8X-Bayshore Express",
+  "8X_OB" : { "Name" : "8X-Bayshore Express",
       "Stops" : [ { "Intersection" : "Kearny St & North Point St",
             "Lat" : "37.8071799",
             "Lon" : "-122.40721",
@@ -12061,12 +12061,12 @@
             "Lon" : "-122.47253",
             "Tag" : "5949"
           },
-          { "Intersection" : "Golden Gate Br. Parking Lot",
+          { "Intersection" : "Golden Gate Bridge Parking Lot",
             "Lat" : "37.8075599",
             "Lon" : "-122.47502",
             "Tag" : "14773"
           },
-          { "Intersection" : "Merchant Rd & Golden Gate Br.",
+          { "Intersection" : "Merchant Rd & Golden Gate Bridge",
             "Lat" : "37.8066699",
             "Lon" : "-122.47587",
             "Tag" : "14776"
@@ -12145,12 +12145,12 @@
             "Lon" : "-122.44695",
             "Tag" : "6182"
           },
-          { "Intersection" : "Golden Gate Br. Parking Lot",
+          { "Intersection" : "Golden Gate Bridge Parking Lot",
             "Lat" : "37.80756",
             "Lon" : "-122.4750199",
             "Tag" : "4773"
           },
-          { "Intersection" : "Merchant Rd & Golden Gate Br.",
+          { "Intersection" : "Merchant Rd & Golden Gate Bridge",
             "Lat" : "37.8066699",
             "Lon" : "-122.47587",
             "Tag" : "4776"
@@ -19100,7 +19100,7 @@
             "Lon" : "-122.3845099",
             "Tag" : "4553"
           },
-          { "Intersection" : "Us Post Office",
+          { "Intersection" : "US Post Office",
             "Lat" : "37.7397199",
             "Lon" : "-122.3828099",
             "Tag" : "4564"
@@ -27469,7 +27469,7 @@
             "Lon" : "-122.38393",
             "Tag" : "5508"
           },
-          { "Intersection" : "Us Post Office",
+          { "Intersection" : "US Post Office",
             "Lat" : "37.7411299",
             "Lon" : "-122.38464",
             "Tag" : "5510"
@@ -28691,7 +28691,7 @@
         ],
       "Title" : "Outbound to Balboa Park Station via Downtown"
     },
-  "K_OWLIB" : { "Name" : "K-Owl",
+  "K_OWL_IB" : { "Name" : "K-Owl",
       "Stops" : [ { "Intersection" : "Geneva Ave & San Jose Ave",
             "Lat" : "37.7206999",
             "Lon" : "-122.44676",
@@ -28905,7 +28905,7 @@
         ],
       "Title" : "Inbound to Embarcadero Station"
     },
-  "K_OWLOB" : { "Name" : "K-Owl",
+  "K_OWL_OB" : { "Name" : "K-Owl",
       "Stops" : [ { "Intersection" : "Steuart St & Mission St",
             "Lat" : "37.7933499",
             "Lon" : "-122.39323",
@@ -29134,7 +29134,7 @@
         ],
       "Title" : "Outbound to Balboa Park Station"
     },
-  "L_OWLIB" : { "Name" : "L-Owl",
+  "L_OWL_IB" : { "Name" : "L-Owl",
       "Stops" : [ { "Intersection" : "Wawona St & 46th Ave",
             "Lat" : "37.7361299",
             "Lon" : "-122.50435",
@@ -29383,7 +29383,7 @@
         ],
       "Title" : "Inbound to Embarcadero Station"
     },
-  "L_OWLOB" : { "Name" : "L-Owl",
+  "L_OWL_OB" : { "Name" : "L-Owl",
       "Stops" : [ { "Intersection" : "Steuart St & Mission St",
             "Lat" : "37.7933499",
             "Lon" : "-122.39323",
@@ -29637,7 +29637,7 @@
         ],
       "Title" : "Outbound to Wawona & 46thAve"
     },
-  "L__IB" : { "Name" : "L-Taraval",
+  "L_IB" : { "Name" : "L-Taraval",
       "Stops" : [ { "Intersection" : "Wawona St & 46th Ave",
             "Lat" : "37.7361299",
             "Lon" : "-122.50435",
@@ -29786,7 +29786,7 @@
         ],
       "Title" : "Inbound to Downtown"
     },
-  "L__OB" : { "Name" : "L-Taraval",
+  "L_OB" : { "Name" : "L-Taraval",
       "Stops" : [ { "Intersection" : "Embarcadero Station Outbound",
             "Lat" : "37.7932299",
             "Lon" : "-122.39654",
@@ -30218,7 +30218,7 @@
         ],
       "Title" : "Outbound to Balboa Park Station"
     },
-  "M_OWLIB" : { "Name" : "M-Owl",
+  "M_OWL_IB" : { "Name" : "M-Owl",
       "Stops" : [ { "Intersection" : "Geneva Ave & San Jose Ave",
             "Lat" : "37.7206999",
             "Lon" : "-122.44676",
@@ -30447,7 +30447,7 @@
         ],
       "Title" : "Inbound to Embarcadero Station"
     },
-  "M_OWLOB" : { "Name" : "M-Owl",
+  "M_OWL_OB" : { "Name" : "M-Owl",
       "Stops" : [ { "Intersection" : "Steuart St & Mission St",
             "Lat" : "37.7933499",
             "Lon" : "-122.39323",
@@ -31167,7 +31167,7 @@
         ],
       "Title" : "Outbound to Ocean Beach via Downtown"
     },
-  "N_OWLIB" : { "Name" : "N-Owl",
+  "N_OWL_IB" : { "Name" : "N-Owl",
       "Stops" : [ { "Intersection" : "Judah St & La Playa St",
             "Lat" : "37.7601699",
             "Lon" : "-122.50878",
@@ -31446,7 +31446,7 @@
         ],
       "Title" : "Inbound to Townsend & 4th St"
     },
-  "N_OWLOB" : { "Name" : "N-Owl",
+  "N_OWL_OB" : { "Name" : "N-Owl",
       "Stops" : [ { "Intersection" : "4th St & Townsend St",
             "Lat" : "37.7768899",
             "Lon" : "-122.39489",
@@ -31685,7 +31685,7 @@
         ],
       "Title" : "Outbound to La Playa & Judah"
     },
-  "T_OWLIB" : { "Name" : "T-Owl",
+  "T_OWL_IB" : { "Name" : "T-Owl",
       "Stops" : [ { "Intersection" : "Market St & South Van Ness Ave",
             "Lat" : "37.7750599",
             "Lon" : "-122.41932",
@@ -31864,7 +31864,7 @@
         ],
       "Title" : "Inbound to Visitacion Valley"
     },
-  "T_OWLOB" : { "Name" : "T-Owl",
+  "T_OWL_OB" : { "Name" : "T-Owl",
       "Stops" : [ { "Intersection" : "Bayshore & Sunnydale",
             "Lat" : "37.7088399",
             "Lon" : "-122.40507",
