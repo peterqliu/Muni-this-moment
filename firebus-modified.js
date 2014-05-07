@@ -1,7 +1,9 @@
 var buses = { };
 var map;
 
-      
+window.inboundcolor='#517D7C';
+window.outboundcolor='#CF4B62';
+
 var f = new Firebase("https://publicdata-transit.firebaseio.com/sf-muni/data");
 
 function newBus(bus, firebaseId) {
@@ -11,14 +13,14 @@ function newBus(bus, firebaseId) {
 
 	//determine bus direction for marker color
     var direction= bus.dirTag && bus.dirTag.indexOf('OB') > -1 ? "_OB" : "_IB";
-    var directionColor = direction.indexOf('OB') > -1 ? "#517D7C" : "#CF4B62";
+    var directionColor = direction.indexOf('OB') > -1 ? inboundcolor : outboundcolor;
     //Creates a new bus marker
     var newmarker=d3.select('#markers').append('g');
 		
 			var xcoord=lonx(bus.lon);
 			var ycoord=laty(bus.lat);
 	    newmarker.attr('style','-webkit-transform:translate('+xcoord+'px,'+ycoord+'px)')
-		.attr('class','busmarker '+'route'+bus.routeTag)
+		.attr('class','busmarker selected ')
 		.attr('id','bus'+firebaseId)
 		.attr('xcoord',xcoord+20)
 		.attr('ycoord',ycoord-10)
@@ -27,8 +29,9 @@ function newBus(bus, firebaseId) {
 		.attr('direction', direction)
 		//.attr('onclick','showroutestops("'+bus.routeTag+direction+'"), showbusesonline("'+bus.routeTag+'")')
 		.on('mouseover',function() {
+			$('.viewport').attr('class','viewport highlighting');
 			showroutestops(bus.routeTag+direction);
-			showbusesonline(bus.routeTag);
+			//showbusesonline(bus.routeTag);
 			var xcoordforlabel=$(this).attr('xcoord')+500;
 			var ycoordforlabel=$(this).attr('ycoord');	
 
@@ -40,15 +43,17 @@ function newBus(bus, firebaseId) {
 					else 
 						{return json[fudge(bus.routeTag+direction)]['Title'];}
 					}
-				var directionColor=bus.dirTag && bus.dirTag.indexOf('OB') > -1 ? "#517D7C" : "#CF4B62";	
+				var directionColor=bus.dirTag && bus.dirTag.indexOf('OB') > -1 ? inboundcolor : outboundcolor;	
 
 
-				makelabel(xcoordforlabel+'500',ycoordforlabel,busname,directionColor,destination);			
-
-			})
+				makelabel(xcoordforlabel+'500',ycoordforlabel,busname,directionColor,destination);			})
 		})
-		.on('mouseleave',function(){removelabel(), showroutestops()})
-		//.on('mouseout',function(){removelabel()})
+		.on('mouseleave',function(){removelabel();			
+			$('.viewport').attr('class','viewport');
+}
+ 			
+			)
+		//.on('mouseout',function(){$('.viewport').toggleClass('highlighting')})
 
 		.on('click',function(){
 			var xcoordforlabel=d3.select(this).attr('xcoord');
@@ -87,6 +92,12 @@ function newBus(bus, firebaseId) {
 
 }
 
+
+//Automatically reload page if no bus markers in 4 seconds
+	setTimeout(function () {console.log('pinging');
+		if($('.busmarker').length==0) {location.reload(true)}; 
+		console.log('pinging')}, 4000);	
+
 //On page load, create all new bus markers
 f.once("value", function(s) {
 
@@ -94,13 +105,18 @@ while ($('.busmarker').length==0){
   s.forEach(function(b) {
     newBus(b.val(), b.name());
   });
-}
+
+  //generate bus count
   countbuses();
+
+  //fade out the loader
   $('#loader').fadeOut(600);
   $('.blurred').attr('class','')
+}});
 
 
-});
+
+
 
 //Whenever a child has changed, either make a new marker (if not on list) or move it (if it is on the list)
 f.on("child_changed", function(s) {
@@ -130,7 +146,6 @@ f.on("child_changed", function(s) {
 			var xcoordforlabel=d3.select(this).attr('xcoord');
 			var ycoordforlabel=d3.select(this).attr('ycoord');
 			zoomto(xcoordforlabel,ycoordforlabel);
-			//console.log('xcoord of '+d3.select(this).attr('xcoord'));
 		})			
 	
 	countbuses();

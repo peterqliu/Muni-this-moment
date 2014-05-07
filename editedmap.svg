@@ -14993,5 +14993,7 @@
 	<text transform="matrix(0.0755 0.9971 -0.9971 0.0755 984.5767 760.1587)" font-family="'Verdana'" font-size="4">Folsom</text>
 	<text transform="matrix(0.0755 0.9971 -0.9971 0.0755 1004.5767 759.1587)" font-family="'Verdana'" font-size="4">Harrison</text>
 	<text transform="matrix(0.0755 0.9971 -0.9971 0.0755 887.5767 768.1587)" font-family="'Verdana'" font-size="4">Dolores</text>
+	<ellipse opacity="0.8" fill="#41A6B2" cx="763.393" cy="-289.819" rx="58.5" ry="56"/>
+	<ellipse opacity="0.8" fill="#942A34" cx="790.893" cy="-183.569" rx="68" ry="65.75"/>
 </g>
 </svg>

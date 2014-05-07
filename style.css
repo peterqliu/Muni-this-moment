@@ -329,17 +329,18 @@ body{
 	margin:10px;
 }
 
-.zoomed .selected .grower path{
+.selected .grower path{
 	fill-opacity:0.8;
 
 }
+/* Grey out unhovered markers*/
 
-.zoomed .busmarker:not(.selected):not(:hover) g path {
+.highlighting .busmarker:not(:hover) g path{
 	fill:#BAB49D;
 	fill-opacity:.4;
 }
 
-.zoomed .busmarker:not(.selected):hover .grower path {
+.busmarker:not(.selected):hover .grower path {
 	fill-opacity:0.8;
 	-webkit-transition: all 0.2s;
 }

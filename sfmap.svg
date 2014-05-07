@@ -6,6 +6,7 @@
 			fill:none;
 			stroke:white;
 			stroke-opacity:0.8;
+			stroke-width:0.75;
 		}
 
 		.thoroughfare {

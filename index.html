@@ -4,7 +4,7 @@
 	<meta property="og:type" content="website" />
 <meta property="og:url" content="http://www.peterma.de/munithismoment" />
 <meta property="og:title" content="Muni, this moment" />
-<meta property="og:image" content="http://peterma.de/allthebuses/teaser.png" />
+<meta property="og:image" content="http://peterma.de/munithismoment/teaser.png" />
 
 
 
@@ -222,7 +222,7 @@
 				.data(data)
 				.enter()
 				.append("circle")
-				.attr("r", 0)
+				.attr("r", 3)
 				.attr('class','stopmarker')
 				.attr('cx',function(d,i){return lonx(data[i]['Lon'])})
 				.attr('cy',function(d,i){return laty(data[i]['Lat'])})				
@@ -256,11 +256,10 @@
 
 					removelabel();
 				})
-				.transition()
-				.delay(function(d,i){return 5*i})
-				.duration(500)
-				//.attr('size',function(d,i) {if (i!=0 && i!=data.length-1){return 3} else {return 5}})
-				.attr("r", 3)
+				//.transition()
+				//.delay(function(d,i){return 5*i})
+				//.duration(500)
+				//.attr("r", 3)
 			})
 			
 		}
