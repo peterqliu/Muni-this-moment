@@ -335,7 +335,7 @@ body{
 }
 /* Grey out unhovered markers*/
 
-.highlighting .busmarker:not(:hover) g path{
+g[highlighting='yes'] .busmarker:not(:hover) g path{
 	fill:#BAB49D;
 	fill-opacity:.4;
 }

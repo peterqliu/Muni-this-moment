@@ -19,22 +19,26 @@ function newBus(bus, firebaseId) {
 		
 			var xcoord=lonx(bus.lon);
 			var ycoord=laty(bus.lat);
-	    newmarker.attr('style','-webkit-transform:translate('+xcoord+'px,'+ycoord+'px)')
-		.attr('class','busmarker selected ')
+	    newmarker.attr('style','scale3d(0,0,0); -webkit-transform:translate('+xcoord+'px,'+ycoord+'px)')
+		.attr('class','busmarker')
 		.attr('id','bus'+firebaseId)
 		.attr('xcoord',xcoord+20)
 		.attr('ycoord',ycoord-10)
 		.attr('type',bus.vtype)
 		.attr('route',bus.routeTag)
 		.attr('direction', direction)
+		.attr('transform','translate3d(0,0,0)')
 		//.attr('onclick','showroutestops("'+bus.routeTag+direction+'"), showbusesonline("'+bus.routeTag+'")')
 		.on('mouseover',function() {
-			$('.viewport').attr('class','viewport highlighting');
+			$('.viewport').attr('highlighting','yes');
 			showroutestops(bus.routeTag+direction);
+			d3.select('#busstops').moveToFront();
+			//d3.select('g:hover').moveToFront();
 			//showbusesonline(bus.routeTag);
 			var xcoordforlabel=$(this).attr('xcoord')+500;
 			var ycoordforlabel=$(this).attr('ycoord');	
 
+			//generate label
 			d3.json('truncated_stops.json',function(json){
 				var busname=json[bus.routeTag+direction]['Name'];							
 				var destination= function() {
@@ -49,7 +53,7 @@ function newBus(bus, firebaseId) {
 				makelabel(xcoordforlabel+'500',ycoordforlabel,busname,directionColor,destination);			})
 		})
 		.on('mouseleave',function(){removelabel();			
-			$('.viewport').attr('class','viewport');
+			$('.viewport').attr('highlighting','no');
 }
  			
 			)
@@ -61,7 +65,6 @@ function newBus(bus, firebaseId) {
 			zoomto(xcoordforlabel,ycoordforlabel);
 			//console.log('xcoord of '+d3.select(this).attr('xcoord'));
 		})
-		.attr('transform','scale3d(0,0,0)')
 
 
 		.append('g')

@@ -2,41 +2,8 @@
 '>
 	<style>
 
-		.street {
-			fill:none;
-			stroke:white;
-			stroke-opacity:0.8;
-			stroke-width:0.75;
-		}
-
-		.thoroughfare {
-			fill:none;
-			stroke:white;
-			stroke-width:2;
-			stroke-opacity:0.8;			
-		}
-
-		.sportsvenue {
-			fill:#aaa;
-		}
-
-		.highway {
-			fill:none;
-			stroke:#A09C84;
-			stroke-width:2;
-		}
-
-		.park {
-			fill:#D2E5D1;
-		}
-
-		.feature {
-			fill:#C3D3C2;
-		}
-
-		.water {
-			fill:#B8C8D3;
-		}</style>
+.street { fill:none; stroke:#ddd; stroke-width:0.75; } .thoroughfare { fill:none; stroke:#bbb; stroke-width:2; } .sportsvenue { fill:#ccc; } .highway { fill:none; stroke:#A09C84; stroke-width:2; } .park { fill:#f0f0f0; } .feature { fill:#ccc; opacity:0.5; } .water { fill:#B8C8D3; }
+	</style>
 	<g id='viewport' class='viewport' style='-webkit-transform-origin: 50% 50%;' transform="rotate(0)">
 		<g id='dragger'>
 			<g id="Layer_1">
@@ -77,7 +44,7 @@
 			c0.94,0.68,0.06,6.81,8.56,2.5l5.75-1.38C17.56,29.56,21,28.5,14.25,23.88z"/>
 	</g>
 </g>
-				<path id="Coast" fill="#EDE5D9" d="
+				<path id="Coast" fill="white" d="
 				M832.27,296.26l2.49-0.42l2.34,14.68l0.68,0.49l4.87-0.79l0.45-0.64l-3.06-18.68l0.15-0.42l0.38-0.19l2.6-0.49l0.27,0.11
 				l0.26,0.19l3.02,18.88l0.57,0.49l4.87-0.8l0.49-0.68l-2.95-18.68l0.12-0.34l0.3-0.23l3.81-0.57l0.3,0.15l0.19,0.27l2.46,15.29
 				l4.75-0.79l0.23-0.84l0.3-0.45l0.53-0.04l0.72,0.23l0.45,0.23l0.41-0.08l2.19-1.39l1.89-1.06l1.81-0.6l1.59-0.68l0.68,0.04
