@@ -45,7 +45,7 @@ body {
   -webkit-animation-iteration-count: infinite;
   -webkit-transform-origin:50%;
 
-  opacity:0.8;
+  fill-opacity:0.8;
 }
 #viewport{
 	-webkit-perspective:900px;
