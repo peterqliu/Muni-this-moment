@@ -1,7 +1,7 @@
 <html>
 <body>
 <div id='output'></div>
-	<script src='d3.v2.js'></script>	
+	<script src='d3.v3.js'></script>	
 	<script src='jquery-1.9.1.min.js'></script>	
 
 	<script>
@@ -46,16 +46,24 @@
 						
 					}
 					
-					
-					
-					//array.push(json['route'][i]['direction'][j]['-tag']+': {"Name":"Peter", "Age":"26", "Gender":"Male"}');			
+		
 					
 					
 				}
 			}
-		$('#output').text(JSON.stringify(array));
+		//text replaces
+		var outputtext=JSON.stringify(array);
+		var edited= outputtext
+					.replace(/Ave./g,'Ave ')
+					.replace(/ th /g,'th ')
+					.replace(/___/g, '_')
+					.replace(/__/g, '_')
+					.replace(/Us Post/g, 'US Post')
+					.replace(/St. /g, 'St ')
+					.replace(/St." /g, 'St" ')
+					.replace(/"0/g,'"');			
+		$('#output').text(edited);
 
-		console.log(array);
 		})	
 	
 	</script>

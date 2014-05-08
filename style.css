@@ -188,11 +188,11 @@ h3 {
 }
 #IB {
 	padding-left: 10px;
-	background: #CF4B62;
+	background: #942A34;
 }
 #OB {
 	padding-right: 10px;
-	background: #517D7C;
+	background: #41A6B2;
 	text-align: right;
 }
 .onoffswitch-switch {
@@ -227,10 +227,10 @@ h3 {
 	overflow:hidden;
 }
 div[val='_IB']{
-	border:1px solid #CF4B62;
+	border:1px solid #942A34;
 }
 div[val='_OB']{
-	border:1px solid #517D7C;
+	border:1px solid #41A6B2;
 }
 #routenumber {
 	width:70px;

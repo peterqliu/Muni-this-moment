@@ -1,7 +1,14 @@
+//Automatically reload page if no bus markers in 4 seconds
+	setTimeout(function () {console.log('pinging');
+		if($('.busmarker').length==0) {location.reload(true)}; 
+		console.log('pinging')}, 4000);	
+
+
 var buses = { };
 var map;
 
-      
+window.outboundcolor='#41A6B2';
+window.inboundcolor='#942A34';      
 var f = new Firebase("https://publicdata-transit.firebaseio.com/sf-muni/data");
 
 function newBus(bus, firebaseId) {
@@ -11,7 +18,7 @@ function newBus(bus, firebaseId) {
 
 	//determine bus direction for marker color
     var direction= bus.dirTag && bus.dirTag.indexOf('OB') > -1 ? "_OB" : "_IB";
-    var directionColor = direction.indexOf('OB') > -1 ? "#517D7C" : "#CF4B62";
+    var directionColor = direction.indexOf('OB') > -1 ? outboundcolor : inboundcolor;
     //Creates a new bus marker
     var newmarker=d3.select('#markers').append('g');
 		
@@ -25,14 +32,14 @@ function newBus(bus, firebaseId) {
 		.attr('type',bus.vtype)
 		.attr('route',bus.routeTag)
 		.attr('direction', direction)
-		//.attr('onclick','showroutestops("'+bus.routeTag+direction+'"), showbusesonline("'+bus.routeTag+'")')
+		.attr('onclick','showroutestops("'+bus.routeTag+direction+'"), showbusesonline("'+bus.routeTag+'")')
 		.on('mouseover',function() {
-			showroutestops(bus.routeTag+direction);
-			showbusesonline(bus.routeTag);
+			//showroutestops(bus.routeTag+direction);
+			//showbusesonline(bus.routeTag);
 			var xcoordforlabel=$(this).attr('xcoord')+500;
 			var ycoordforlabel=$(this).attr('ycoord');	
 
-			d3.json('truncated_stops.json',function(json){
+			d3.json('stops.refactored.v3.json',function(json){
 				var busname=json[bus.routeTag+direction]['Name'];							
 				var destination= function() {
 					if ($('.zoomed').length==0)
@@ -40,14 +47,14 @@ function newBus(bus, firebaseId) {
 					else 
 						{return json[fudge(bus.routeTag+direction)]['Title'];}
 					}
-				var directionColor=bus.dirTag && bus.dirTag.indexOf('OB') > -1 ? "#517D7C" : "#CF4B62";	
+				var directionColor=bus.dirTag && bus.dirTag.indexOf('OB') > -1 ? outboundcolor : inboundcolor;	
 
 
 				makelabel(xcoordforlabel+'500',ycoordforlabel,busname,directionColor,destination);			
 
 			})
 		})
-		.on('mouseleave',function(){removelabel(), showroutestops()})
+		.on('mouseleave',function(){removelabel()})
 		//.on('mouseout',function(){removelabel()})
 
 		.on('click',function(){

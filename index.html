@@ -226,10 +226,10 @@
 				.attr('class','stopmarker')
 				.attr('cx',function(d,i){return lonx(data[i]['Lon'])})
 				.attr('cy',function(d,i){return laty(data[i]['Lat'])})				
-				.attr('fill',function(d,i) {if (i!=0 && i!=data.length-1){if (routedir.indexOf('OB')> -1) {return "#517D7C"} else {return "#CF4B62"}} else {return 'white'}})
+				.attr('fill',function(d,i) {if (i!=0 && i!=data.length-1){if (routedir.indexOf('OB')> -1) {return outboundcolor} else {return inboundcolor}} else {return 'white'}})
 				.attr('stroke',function(d,i) {if (i!=0 && i!=data.length-1) {return 'white'} 
-												else {if (routedir.indexOf('OB')> -1) {return "#517D7C"} 
-													else {return "#CF4B62"}}})
+												else {if (routedir.indexOf('OB')> -1) {return outboundcolor} 
+													else {return inboundcolor}}})
 				.attr('stroke-width',function(d,i) {if (i!=0 && i!=data.length-1){return 1} else {return 2.5}})
 				//.attr('name',function(d,i){return data[i]['Intersection']})
 
@@ -239,7 +239,7 @@
 						.duration(200)
 						.attr('r',function(){ return ($(this)[0].getAttribute('r'))*1.5});
 
-					var color= function(){if (routedir.indexOf('OB')> -1) {return "#517D7C"} else {return "#CF4B62"}};
+					var color= function(){if (routedir.indexOf('OB')> -1) {return outboundcolor} else {return inboundcolor}};
 					var stopdirection= function() {if (routedir.indexOf('OB')> -1) {if (i==0) {return 'Outbound line departs here'}  if (i==data.length-1){return 'Outbound line ends here'} else {return ' Outbound stop'}} 
 													else {if (i==0) {return 'Inbound line departs here'}  if (i==data.length-1){return 'Inbound line ends here'} else {return 'Inbound stop'}}};
 
