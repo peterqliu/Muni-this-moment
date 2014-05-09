@@ -2,16 +2,16 @@ body {
 	margin:0px;
 	-webkit-perspective:900px;
 	font-family:Verdana, sans-serif;	
+	-webkit-user-select: none;  
+	-moz-user-select: none;    
+	-ms-user-select: none;      
+	user-select: none;		
 }
 
 #svg {
 	-webkit-transition:all 0.5s;
 	-webkit-transform-style: preserve-3d;
 	-webkit-transform:scale(1);
-	-webkit-user-select: none;  
-	-moz-user-select: none;    
-	-ms-user-select: none;      
-	user-select: none;	
 }
 
 .blurred {
@@ -26,6 +26,10 @@ body {
 	z-index: 1;
 	font-size:1em;
 	color:#999;
+}
+
+#loadermessage {
+	fill:#999;
 }
 /*Loading spinner */
 @-webkit-keyframes spinner {
@@ -316,7 +320,6 @@ body{
 }
 
 #dragger {
-	cursor:-webkit-grab;	
 }
 
 #dragger:active {
@@ -360,6 +363,21 @@ body{
 	transform:scale(4,4);
 }
 
+
+.routepaths {
+	stroke-dasharray: 1000;
+	stroke-dashoffset: -1000;
+	animation: dash 5s linear forwards;
+}
+
+@keyframes dash {
+  from {
+    stroke-dashoffset: -1000;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
 /*Label styling */
 .subtext {
 	fill:#aaa;

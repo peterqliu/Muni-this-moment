@@ -1,7 +1,7 @@
 <html>
 <body>
 <div id='output'></div>
-	<script src='d3.v3.js'></script>	
+	<script src='d3.v3.min.js'></script>	
 	<script src='jquery-1.9.1.min.js'></script>	
 
 	<script>
@@ -10,10 +10,20 @@
 		function fudge(routedir){
 			var lastB= routedir.lastIndexOf('B');
 			return routedir.substr(0,lastB+1);
-			
 		}
+
+
+    	// LAT-LON MASTER CONVERTERS
+    	function lonx(lon){
+    		return (8823*lon)+1081060-4;
+    	}
+    	function laty(lat) {
+	    	return 422405-(11164.4*lat);
+    	}
+
+
 		$.getJSON('stops.json',function(json) {
-			
+			//console.log(json);
 			//go through all the route numbers
 			for(var i=0;i<json['route'].length; i++) {
 					window.name=json['route'][i]['-title'];
@@ -33,17 +43,18 @@
 						//find the corresponding tag in the 'stop' node to get lat, lon, and title
 						for (var l=0; l<json['route'][i]['stop'].length; l++){
 							window.stopindex;
-							//console.log(json['route'][i]['stop'][56]['-lat']);
 							if (json['route'][i]['stop'][l]['-tag']==stops[k]['-tag']) {
 								stopindex=l;
 								break;
 							}
 						}
 						
-						array[routedir]["Stops"][k]["Lat"]=json['route'][i]['stop'][stopindex]['-lat'];
-						array[routedir]["Stops"][k]["Lon"]=json['route'][i]['stop'][stopindex]['-lon'];
+						//array[routedir]["Stops"][k]["Lat"]=json['route'][i]['stop'][stopindex]['-lat'];
+						//array[routedir]["Stops"][k]["Lon"]=json['route'][i]['stop'][stopindex]['-lon'];
+						array[routedir]["Stops"][k]["xpos"]=lonx(json['route'][i]['stop'][stopindex]['-lon']);		
+						array[routedir]["Stops"][k]["ypos"]=laty(json['route'][i]['stop'][stopindex]['-lat']);						
+		
 						array[routedir]["Stops"][k]["Intersection"]=json['route'][i]['stop'][stopindex]['-title'];
-						
 					}
 					
 		
@@ -51,10 +62,40 @@
 					
 				}
 			}
+
+			//create branch for route paths
+			array["RoutePaths"]={};
+			
+			for(var i=0;i<json['route'].length; i++) {
+						var line=json['route'][i]['-tag'];
+						//array["RoutePaths"][i]=line;
+						array['RoutePaths'][line]={"Subsegments":[]};
+
+						//within "path," iterate through all the segments and provide a variable to store the path data
+						for(var j=0;j<json['route'][i]['path'].length;j++) {
+							var segment=json['route'][i]['path'][j]["point"];
+							var pathdata;
+							
+							//within each segment, iterate through all the lat-lon pairs, convert to x-y, and construct a string with them
+							for(var k=0;k<segment.length;k++){
+
+								if(k==0){
+									pathdata='M';
+								}
+
+								else	{pathdata+=' L'}
+								pathdata+=lonx(segment[k]['-lon']);
+								pathdata+=' ';
+								pathdata+=laty(segment[k]['-lat']);
+							}
+							array['RoutePaths'][line]['Subsegments'][j]=pathdata;
+						}
+			}
+
 		//text replaces
 		var outputtext=JSON.stringify(array);
 		var edited= outputtext
-					.replace(/Ave./g,'Ave ')
+					//.replace(/Ave./g,'Ave')
 					.replace(/ th /g,'th ')
 					.replace(/___/g, '_')
 					.replace(/__/g, '_')

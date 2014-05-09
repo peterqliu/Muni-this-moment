@@ -48,6 +48,7 @@
 	<div id='svg' class='blurred'></div>
 	<div id='maindialog' >
 		<h3>Muni, this moment</h3>
+		<button onclick='drawroute("18")'>drawroute</button>
 		<span id='busquant'></span> buses, <span id='trainquant'></span> trains active
 		<p>
 		This is a live map of San Francisco's Muni system, as reported by NextBus. Click to inspect any line.
@@ -219,15 +220,35 @@
 			}
 		}
 
+
+		//draw the overall route path
+		function drawroute(line,color){
+			d3.json('stops.refactored.v3.json',function(json){
+				//alert('sdfsd');
+				var data=json['RoutePaths'][line]['Subsegments'];
+				//alert(data);
+				d3.select('#busstops')
+					.selectAll('path')
+					.data(data)
+					.enter()
+					.append("path")
+					.attr('d',function(d,i){return data[i]})
+					.attr('stroke-width', 0.5)
+					.attr('class','routepath')
+					.attr('fill','none')
+					.attr('stroke','purple');
+
+			})
+		}
 		//Emerge stop markers when a bus is clicked
 		function showroutestops(routedir){
 		
 			//clears previous stop markers
 			$('.stopmarker').remove();
 			
-			d3.json('truncated_stops.json',function(json){
+			d3.json('stops.refactored.v3.json',function(json){
 			
-			window.data=json[routedir]['Stops'];
+			var data=json[routedir]['Stops'];
 			
 			
 			d3.select('#busstops')
@@ -237,8 +258,8 @@
 				.append("circle")
 				.attr("r", 0)
 				.attr('class','stopmarker')
-				.attr('cx',function(d,i){return lonx(data[i]['Lon'])})
-				.attr('cy',function(d,i){return laty(data[i]['Lat'])})				
+				.attr('cx',function(d,i){return data[i]['xpos']})
+				.attr('cy',function(d,i){return data[i]['ypos']})				
 				.attr('fill',function(d,i) {if (i!=0 && i!=data.length-1){if (routedir.indexOf('OB')> -1) {return outboundcolor} else {return inboundcolor}} else {return 'white'}})
 				.attr('stroke',function(d,i) {if (i!=0 && i!=data.length-1) {return 'white'} 
 												else {if (routedir.indexOf('OB')> -1) {return outboundcolor} 
@@ -323,13 +344,14 @@
 
 		//make label
 		function makelabel(x,y,text,textcolor,subtext) {
-					
+					removelabel();
 					if ($('.zoomed').length==0) {
 						labelscalefactor=' scale(2)';
 					}
 					else {labelscalefactor=' scale(1)'}
 					d3.selectAll('#stoplabel').remove();
-					console.log($('body:active').length);
+
+					//Make label only when the mouse isn't already held down (i.e. dragging)
 					if ($('body:active').length==0){
 						d3.select('#busstoplabels')
 							.attr('transform','translate('+(x+26)+' '+(y-10)+') '+labelscalefactor)					
@@ -379,7 +401,7 @@
 		function gps(){
 		window.finding=setInterval(function() {
 			if ($('#iamhere').length==0) {
-				$('#loadermessage').html('Finding your position...');
+				$('#loadermessage').text('Finding your position...');
 				$('#svg').addClass('blurred');
 				$('#loader').show();
 
@@ -399,16 +421,9 @@
 		}, 10);
 		}
 		
-		//$("svg").on('mousemove',function(e){ 
-            //$("#busstoplabels").attr("transform", "translate(" + [e.pageX+335] + "," + [e.pageY+60] + ")"); 
-			//}); 
-
-		
-
-
 
     </script>
 
 
-    	<script src="geoPosition.js"></script>
+    <script src="geoPosition.js"></script>
 </body></html>
