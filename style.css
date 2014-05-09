@@ -87,7 +87,7 @@ body {
 	display: inline;
 	float: right;
 	padding: 7px;
-	border-radius: 5px;	
+	border-radius: 3px;	
 	margin-top:-35px;
 }
 
@@ -223,7 +223,7 @@ h3 {
 
 .inputbubble {
 	height:30px;
-	border-radius:5px;
+	border-radius:3px;
 	overflow:hidden;
 }
 div[val='_IB']{
@@ -353,7 +353,7 @@ body{
 }
 
 #viewport:not(.zoomed) .busmarkertext {
-	display:none;
+	display:block;
 }
 
 #busstoplabels {

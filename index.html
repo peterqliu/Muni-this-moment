@@ -21,13 +21,29 @@
 	<div style="opacity:0" onclick='zoombackout()' id='zoomout'><br>Zoom<br>out</div>
 	<div id='satellite' style='display:none'>Finding your location...</div>
 	<div id='loader'>
-		<svg width='200px' height='200px' style='margin-top:200px'>
-			<g transform='scale(3) translate(30, 40)'>
-				<path  id='spinner' d="M-5.392-5.018c-2.977,2.979-2.977,7.807,0,10.783c2.978,2.979,7.805,2.979,10.783,0c2.979-2.977,2.979-7.805,0-10.783l-5.392-5.391L-5.392-5.018z"; fill='#CF4B62' transform='' style='-webkit-transform-origin:50%'/>
-			</g>
-		</svg>
-		<p id='loadermessage'>
-		Fetching buses...</p>
+
+
+<svg  width="300px" height="300px" style='margin-top:200px'>
+
+	
+		<radialGradient id="SVGID_1_" cx="141.2695" cy="142.6191" r="136.5" gradientTransform="matrix(1.0989 0 0 1.0989 -5.2419 -6.7253)" gradientUnits="userSpaceOnUse">
+		<stop  offset="0" style="stop-color:#FFFFFF"/>
+		<stop  offset="1" style="stop-color:#FFFFFF;stop-opacity:0"/>
+	</radialGradient>
+	<circle fill="url(#SVGID_1_)" cx="150" cy="150" r="150"/>
+
+			<g transform='scale(3) translate(50, 40)'>
+				<path  id='spinner' d="M-5.392-5.018c-2.977,2.979-2.977,7.807,0,10.783c2.978,2.979,7.805,2.979,10.783,0c2.979-2.977,2.979-7.805,0-10.783l-5.392-5.391L-5.392-5.018z"; fill='#41A6B2' transform='' style='-webkit-transform-origin:50%'/>
+			</g>	
+	<text x='150' y='210' text-anchor='middle' id='loadermessage'>Fetching buses...</text>
+
+</svg>
+
+
+
+
+
+
 	</div>
 	<div id='svg' class='blurred'></div>
 	<div id='maindialog' >
@@ -36,6 +52,7 @@
 		<p>
 		This is a live map of San Francisco's Muni system, as reported by NextBus. Click to inspect any line.
 	</p>
+	<p class='subhead'>Look nearby (SF only)</p><div id='findme' onclick='gps()'>Find me</div>
 
 	<p class='subhead'>Find a specific line</p>
 	<div class='inputbubble'id='routedirection' val='_OB'>
@@ -54,7 +71,6 @@
 			<span id='searchreply' style='float:right;margin: 6px; opacity: 0.8;'></span>
 	</div>
 
-	<p class='subhead'>Look nearby</p><div id='findme' onclick='gps()'>Zoom to me</div>
 
 
 	
@@ -73,7 +89,7 @@
 
 	</div>
 
-	<script src='jquery-1.9.1.min.js'></script>	
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<script src="d3.v3.min.js" charset="utf-8"></script>
     <script src="firebase.js"></script>
     <script src="firebus-modified.js"></script>
@@ -88,7 +104,7 @@
     	$('#svg').load('sfmap.svg');
 		$('#dragger').pep({});
 
-				
+
 		//defines functionality of moving markers to the front when clicked
 		d3.selection.prototype.moveToFront = function() {
 		  return this.each(function(){
@@ -170,14 +186,11 @@
 			if($('.zoomed').length!=0){
 				dragreset='yes';
 			}
-			//d3.select('#markers').attr('display','none').transition().delay(2000).attr('display','block');
-			//$.pep.toggleAll(false);
 			$('#dragger').pep({cssEaseString:''});
-			//$('#dragger').unbind( $pep ); 
 			$('#zoomout').attr('style','');
 			
 				d3.select('#viewport')
-				.attr('style','-webkit-transform-origin:'+(1.5*x-600)+' '+(1.5*y-200)+'; ')
+				.attr('style','-webkit-transform-origin:'+(1.6*x-600)+' '+(1.4*y-400)+'; ')
 				.attr('class','viewport zoomed');
 			$('#dragger').attr('style','-webkit-transform:translate(0,0); -webkit-transition:all 2s');
 
@@ -316,31 +329,34 @@
 					}
 					else {labelscalefactor=' scale(1)'}
 					d3.selectAll('#stoplabel').remove();
-					d3.select('#busstoplabels')
-						.attr('transform','translate('+(x+26)+' '+(y-10)+') '+labelscalefactor)					
-						.append('text')
-						.attr('x',6)
-						.attr('y',15)
-						.attr('font-size',8)
-						.attr('fill',textcolor)
-						.text(text)						
-						.attr('id','stoplabel');
+					console.log($('body:active').length);
+					if ($('body:active').length==0){
+						d3.select('#busstoplabels')
+							.attr('transform','translate('+(x+26)+' '+(y-10)+') '+labelscalefactor)					
+							.append('text')
+							.attr('x',6)
+							.attr('y',15)
+							.attr('font-size',8)
+							.attr('fill',textcolor)
+							.text(text)						
+							.attr('id','stoplabel');
 
-					d3.select('#busstoplabels')
-						.append('text')
-						.attr('x',6)
-						.attr('y',25)
-						.attr('font-size',6)
-						.text(subtext)						
-						.attr('id','stoplabel')
-						.attr('class','subtext');
-					
-					//create background rectangle for label
-					d3.select('#busstoplabels')
-						.insert('rect','text')
-						.attr('width',function(){return Math.max($('#stoplabel')[0].getComputedTextLength(), $('.subtext')[0].getComputedTextLength())+12})	
-						.attr('height',32)
-						.attr('id','labelrect');
+						d3.select('#busstoplabels')
+							.append('text')
+							.attr('x',6)
+							.attr('y',25)
+							.attr('font-size',6)
+							.text(subtext)						
+							.attr('id','stoplabel')
+							.attr('class','subtext');
+						
+						//create background rectangle for label
+						d3.select('#busstoplabels')
+							.insert('rect','text')
+							.attr('width',function(){return Math.max($('#stoplabel')[0].getComputedTextLength(), $('.subtext')[0].getComputedTextLength())+12})	
+							.attr('height',32)
+							.attr('id','labelrect');
+					}
 						
 		}
 		
