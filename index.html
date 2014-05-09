@@ -93,7 +93,7 @@
 	<script src="d3.v3.min.js" charset="utf-8"></script>
     <script src="firebase.js"></script>
     <script src="firebus-modified.js"></script>
-	<script src="pep.edited.min.js"></script>
+	<script src="pep.edited.min.j"></script>
 
 
 	   
@@ -102,7 +102,7 @@
 		window.dragreset='no';
 
     	$('#svg').load('sfmap.svg');
-		$('#dragger').pep({});
+		//$('#dragger').pep({});
 
 
 		//defines functionality of moving markers to the front when clicked
@@ -186,7 +186,7 @@
 			if($('.zoomed').length!=0){
 				dragreset='yes';
 			}
-			$('#dragger').pep({cssEaseString:''});
+			//$('#dragger').pep({cssEaseString:''});
 			$('#zoomout').attr('style','');
 			
 				d3.select('#viewport')

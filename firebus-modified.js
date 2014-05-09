@@ -60,7 +60,7 @@ function newBus(bus, firebaseId) {
 		.on('click',function(){
 			var xcoordforlabel=d3.select(this).attr('xcoord');
 			var ycoordforlabel=d3.select(this).attr('ycoord');
-			zoomto(xcoordforlabel,ycoordforlabel);
+			zoom(xcoordforlabel,ycoordforlabel);
 			//console.log('xcoord of '+d3.select(this).attr('xcoord'));
 		})
 		.attr('transform','scale3d(0,0,0)')
@@ -136,7 +136,7 @@ f.on("child_changed", function(s) {
 		.on('click',function(){
 			var xcoordforlabel=d3.select(this).attr('xcoord');
 			var ycoordforlabel=d3.select(this).attr('ycoord');
-			zoomto(xcoordforlabel,ycoordforlabel);
+			zoom(xcoordforlabel,ycoordforlabel);
 			//console.log('xcoord of '+d3.select(this).attr('xcoord'));
 		})			
 	

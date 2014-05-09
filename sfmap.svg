@@ -13653,3 +13653,11 @@
 </g>
 </svg>
 
+<script>
+		d3.select('#viewport')
+		.call(d3.behavior.zoom().scaleExtent([1, 8]).on("zoom", zoom));
+			
+		function zoom() {
+  			d3.select('#viewport').attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+}	
+</script>
