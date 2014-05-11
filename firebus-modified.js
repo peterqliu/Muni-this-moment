@@ -32,12 +32,13 @@ function newBus(bus, firebaseId) {
 		.attr('type',bus.vtype)
 		.attr('route',bus.routeTag)
 		.attr('direction', direction)
-		.attr('onclick','showroutestops("'+bus.routeTag+direction+'"), showbusesonline("'+bus.routeTag+'")')
+		.attr('onclick','showroutestops("'+bus.routeTag+direction+'"), showbusesonline("'+bus.routeTag+'", "'+direction+'")')
 		.on('mouseover',function() {
-			//showroutestops(bus.routeTag+direction);
-			//showbusesonline(bus.routeTag);
+			$('.viewport').attr('highlighting','yes');			
+			var target=d3.select(this);
 			var xcoordforlabel=$(this).attr('xcoord')+500;
 			var ycoordforlabel=$(this).attr('ycoord');	
+			var directionColor=bus.dirTag && bus.dirTag.indexOf('OB') > -1 ? outboundcolor : inboundcolor;	
 
 			d3.json('stops.refactored.v3.json',function(json){
 				var busname=json[bus.routeTag+direction]['Name'];							
@@ -47,14 +48,17 @@ function newBus(bus, firebaseId) {
 					else 
 						{return json[fudge(bus.routeTag+direction)]['Title'];}
 					}
-				var directionColor=bus.dirTag && bus.dirTag.indexOf('OB') > -1 ? outboundcolor : inboundcolor;	
 
 
 				makelabel(xcoordforlabel+'500',ycoordforlabel,busname,directionColor,destination);			
-
 			})
+
+			drawpath(bus.routeTag+direction,directionColor);
+			//d3.select(eval(this)).movetoFront();
 		})
-		.on('mouseleave',function(){removelabel()})
+		.on('mouseleave',function(){removelabel();
+			$('.viewport').attr('highlighting','no');
+		})
 		//.on('mouseout',function(){removelabel()})
 
 		.on('click',function(){

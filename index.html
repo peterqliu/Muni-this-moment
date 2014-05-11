@@ -48,7 +48,6 @@
 	<div id='svg' class='blurred'></div>
 	<div id='maindialog' >
 		<h3>Muni, this moment</h3>
-		<button onclick='drawroute("18")'>drawroute</button>
 		<span id='busquant'></span> buses, <span id='trainquant'></span> trains active
 		<p>
 		This is a live map of San Francisco's Muni system, as reported by NextBus. Click to inspect any line.
@@ -191,7 +190,7 @@
 			$('#zoomout').attr('style','');
 			
 				d3.select('#viewport')
-				.attr('style','-webkit-transform-origin:'+(1.6*x-600)+' '+(1.4*y-400)+'; ')
+				.attr('style','-webkit-transform-origin:'+(1.5*x-500)+' '+(1.7*y-500)+'; ')
 				.attr('class','viewport zoomed');
 			$('#dragger').attr('style','-webkit-transform:translate(0,0); -webkit-transition:all 2s');
 
@@ -233,10 +232,64 @@
 					.enter()
 					.append("path")
 					.attr('d',function(d,i){return data[i]})
-					.attr('stroke-width', 0.5)
+					.attr('stroke-width', 3)
 					.attr('class','routepath')
 					.attr('fill','none')
 					.attr('stroke','purple');
+
+			})
+		}
+
+		//draw bus route based on stops' positions only
+		function drawpath(routedir,color,marker){
+			$('.routepath').remove();
+			console.log(marker);
+			d3.json('stops.refactored.v3.json',function(json){
+			
+				var data=json[routedir]['Stops'];
+				var datalen=data.length;
+				var path;
+
+				for(var i=0;i<datalen;i++){
+
+					if(i==0)
+						{path='M';}
+
+					else
+						{path+=' L'}
+					
+					path+=data[i]['xpos'];
+					path+=' ';
+					path+=data[i]['ypos'];			
+				}
+
+				d3.select('#markers')
+					.append("path")
+					.attr('d',path)
+					.attr('class','routepath')
+					.attr('fill','none')
+					.attr('stroke',color)
+					.attr('stroke-linecap','round')
+					.attr('stroke-linejoin','round');
+				setTimeout(function() { $('.routepath').attr('style','stroke-dashoffset:0;'); }, 0);
+				
+
+				//define the position of both ends of the route for the endcaps
+				var endcaps=[data[0]['xpos'], data[0]['ypos'], data[datalen-1]['xpos'], data[datalen-1]['ypos']];
+				
+				//draw endcap circles for the route
+				for (k=0;k<2;k++){
+					d3.select('#markers')
+						.append("circle")
+						.attr('cx',endcaps[k*2])
+						.attr('cy',endcaps[(k*2)+1])
+						.attr('r',4)
+						.attr('class','routepath')
+						.attr('fill','white')
+						.attr('stroke',color)
+
+
+				}
 
 			})
 		}
@@ -278,7 +331,7 @@
 													else {if (i==0) {return 'Inbound line departs here'}  if (i==data.length-1){return 'Inbound line ends here'} else {return 'Inbound stop'}}};
 
 
-					makelabel(lonx(data[i]['Lon']),laty(data[i]['Lat']),data[i]['Intersection'],color, stopdirection);
+					makelabel(data[i]['xpos'], data[i]['ypos'], data[i]['Intersection'], color, stopdirection);
 					
 			
 				})
@@ -318,6 +371,7 @@
 		//Restore view to full, remove all stop markers and restore all buses to full color
 		function zoombackout() {
 			dragreset='yes';
+			$('.viewport').attr('highlighting','no');						
 			$('#dragger').attr('style','-webkit-transform:translate(0,0); -webkit-transition:all 2s');
 			$('#view').attr('class','');
 			$('#zoomout').attr('style','opacity:0');

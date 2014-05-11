@@ -295,6 +295,7 @@ div[val='_OB']{
 
 .grower path {
 	fill-opacity:0.7;
+	-webkit-transition:all 0.2s;
 }
 
 .grower {
@@ -314,13 +315,6 @@ div[val='_OB']{
 	fill-opacity:1;	
 }
 
-body{
-	width:100%;
-	height:100%;
-}
-
-#dragger {
-}
 
 #dragger:active {
 	cursor:-webkit-grabbing;
@@ -332,9 +326,11 @@ body{
 	margin:10px;
 }
 
+
+
+
 .zoomed .selected .grower path{
 	fill-opacity:0.8;
-
 }
 
 .zoomed .busmarker:not(.selected):not(:hover) g path {
@@ -349,6 +345,27 @@ body{
 
 
 
+
+
+
+/* When zoomed out, grey out unhovered markers*/
+
+g[highlighting='yes']:not(.zoomed) .busmarker:not(:hover) g path{
+	fill:#BAB49D;
+	fill-opacity:.4;
+}
+
+.busmarker:not(.selected):hover .grower path {
+	fill-opacity:0.8;
+	-webkit-transition: all 0.2s;
+}
+
+
+
+
+
+
+
 .busmarkertext {
 	fill:white;
 	text-anchor:middle;
@@ -356,28 +373,26 @@ body{
 }
 
 #viewport:not(.zoomed) .busmarkertext {
-	display:block;
+	display:none;
 }
 
 #busstoplabels {
 	transform:scale(4,4);
 }
 
-
-.routepaths {
-	stroke-dasharray: 1000;
-	stroke-dashoffset: -1000;
-	animation: dash 5s linear forwards;
+.routepath {
+	stroke-dasharray: 3500;
+	stroke-dashoffset: 3500;	
+	stroke-width:3px;
+	pointer-events:none;
+	display:none;
+	-webkit-transition:all 3s ease-out;
 }
 
-@keyframes dash {
-  from {
-    stroke-dashoffset: -1000;
-  }
-  to {
-    stroke-dashoffset: 0;
-  }
+.viewport:not(.zoomed)[highlighting='yes'] .routepath {
+	display:block;
 }
+
 /*Label styling */
 .subtext {
 	fill:#aaa;

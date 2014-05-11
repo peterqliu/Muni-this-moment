@@ -1,7 +1,9 @@
-<svg x="0px" y="0px" width="100%" height="100%" viewBox="200 200 1400 1200" style='	background:#B8C8D3;
+<svg x="0px" y="0px" width="100%" height="100%" viewBox="200 200 1400 1000" style='	background:#B8C8D3;
 '>
 	<style>
-
+		.coast {
+			fill:#eaeaea;
+		}
 		.street {
 			fill:none;
 			stroke:white;
@@ -21,7 +23,7 @@
 
 		.highway {
 			fill:none;
-			stroke:#A09C84;
+			stroke:white;
 			stroke-width:2;
 		}
 		.traintrack {
@@ -67,8 +69,8 @@
 	<g id='viewport' class='viewport' style='-webkit-transform-origin: 50% 50%;' transform="rotate(0)">
 		<g id='dragger'>
 			<g id="Layer_1">
-				<g id="marincoast" class='park'>
-						<path  fill='white' d="M320.487-345.083c0,0,7.096-0.75,8.013-0.736
+				<g id="marincoast" >
+					<path  class='coast' d="M320.487-345.083c0,0,7.096-0.75,8.013-0.736
 					s5.003,1.133,1.833,4.486c-3.73,3.947-2.75,5.75,0.5,6.917s3.333-3.917,2.417-7.917s3.333-4,8.167-2.75s10.083,8.167,10.083,8.167
 					s-6.114,11.355-7.417,10.75c-11.256-5.231-7.212,0.146-10.833,1c-5.529,1.305-6.61,5.214-4.875,8.104
 					c1.893,3.152,6.907,5.213,7.375,4.397c1.625-2.834,4.112-4.226,4.708-3.97c1.479,0.636-1.926,3.783-0.708,4.72
@@ -101,7 +103,7 @@
 							c0.94,0.68,0.06,6.81,8.56,2.5l5.75-1.38C17.56,29.56,21,28.5,14.25,23.88z"/>
 
 								
-				<path id="Coast" fill="#EDE8E2" d="M832.27,296.26l2.49-0.42l2.34,14.68l0.68,0.49l4.87-0.79l0.45-0.64l-3.06-18.68l0.15-0.42l0.38-0.19l2.6-0.49l0.27,0.11
+				<path class="Coast" d="M832.27,296.26l2.49-0.42l2.34,14.68l0.68,0.49l4.87-0.79l0.45-0.64l-3.06-18.68l0.15-0.42l0.38-0.19l2.6-0.49l0.27,0.11
 								l0.26,0.19l3.02,18.88l0.57,0.49l4.87-0.8l0.49-0.68l-2.95-18.68l0.12-0.34l0.3-0.23l3.81-0.57l0.3,0.15l0.19,0.27l2.46,15.29
 								l4.75-0.79l0.23-0.84l0.3-0.45l0.53-0.04l0.72,0.23l0.45,0.23l0.41-0.08l2.19-1.39l1.89-1.06l1.81-0.6l1.59-0.68l0.68,0.04
 								l1.62,0.83l2.08,0.11l2.22,0.72l3.52,0.64l1.51-0.12c0,0-3.29-30.94,19.2-29.52c4.41,1.35,3.26,5.52,0.55,4.38
@@ -1621,20 +1623,20 @@
 									l-0.529,2.567l-0.755,0.377l-6.157-0.869l-0.264-5.854L457.755,350.562"/>
 								<path class='feature' d="M650.463,465.161l6.874,0.113l2.568,0.075l1.171,2.229l0.453,8.914l-8.951,1.284
 									l-1.662-1.89l0.151-0.378L650.463,465.161"/>
-								<path class='sportsvenue' d="M1208.227,632.373l0.037-0.227l0.038-0.189l0.075-0.188l0.113-0.188l0.15-0.228l0.229-0.264
-									l3.397-3.324l-0.112-0.188l2.907-1.964l0.907-1.171l1.021,0.302l4.531,4.532l0.644,6.156l-6.081,2.909l-0.113-0.265l-0.794-0.604
-									l-1.473-0.112l-4.834-3.551l-0.151-0.15l-0.188-0.151l-0.113-0.227l-0.113-0.228l-0.038-0.227l-0.037-0.228L1208.227,632.373"/>
+								<path id="ballpark" class='sportsvenue' d="M1221.109,629.571l-4.528-4.528l-1.021-0.302l-0.907,1.17l-2.905,1.963l0.111,0.188
+									l-3.396,3.317l-0.229,0.269l-0.149,0.229l-0.106,0.188l-0.076,0.187l-0.039,0.19l-0.037,0.226l0.008,0.22l0.037,0.229l0.039,0.227
+									l0.107,0.229l0.112,0.225l0.188,0.152l0.146,0.146l4.832,3.555l1.478,0.105l0.794,0.604l0.108,0.266l6.077-2.908L1221.109,629.571z
+									 M1213.809,632.525v0.229l-0.037,0.229l-0.038,0.229l-0.038,0.226l-0.112,0.229l-0.073,0.188l-0.109,0.229l-0.111,0.146
+									l-0.149,0.188l-0.146,0.146l-0.151,0.151l-0.188,0.151l-0.188,0.107l-0.188,0.11l-0.188,0.077l-0.83-0.687l-2.075-1.691l1.697-2.078
+									l0,0l0.747-0.885l0.229,0.073l0.228,0.076l0.188,0.075l0.228,0.108l0.148,0.111l0.188,0.15l0.153,0.146l0.146,0.15l0.151,0.189
+									l0.109,0.187l0.108,0.188l0.076,0.188l0.074,0.188l0.076,0.229l0.038,0.229l0.037,0.188V632.525z"/>
 								<path class='feature' d="M1140.805,882.983l11.635-0.869l0.794,9.366l0.036,0.719l-6.383,0.642
 									l-5.326,0.228L1140.805,882.983"/>
 								<path class='feature' d="M693.484,643.628l7.101-1.208l3.21,0.831l1.662,2.153l0.68,5.212l-1.057,1.511
 									l-8.877,1.436l-0.604-0.15l-0.905-0.755l-0.303-0.907L693.484,643.628"/>
 								<path class='feature' d="M1374.646,117.934l9.141-4.986l5.022,9.744l-8.648,4.383l-0.982-0.227
 									l-1.586-3.514L1374.646,117.934"/>
-								<path d="M1211.286,630.409l2.077,1.7l-1.699,2.076l0.83,0.681l0.188-0.076l0.188-0.113l0.188-0.112
-									l0.189-0.151l0.15-0.151l0.151-0.15l0.15-0.189l0.112-0.15l0.113-0.228l0.076-0.188l0.113-0.228l0.037-0.227l0.038-0.228
-									l0.038-0.227v-0.228v-0.227l-0.038-0.189l-0.038-0.227l-0.075-0.228l-0.075-0.188l-0.076-0.189l-0.112-0.188l-0.113-0.188
-									l-0.15-0.188l-0.15-0.151l-0.151-0.15l-0.189-0.151l-0.149-0.113l-0.228-0.112l-0.188-0.075l-0.228-0.076l-0.227-0.076
-									L1211.286,630.409 M1209.586,632.486l2.078,1.698l1.699-2.076l-2.077-1.7L1209.586,632.486"/>
+
 								<path class='feature' d="M895.483,600.456l12.917-2.077l1.283,8.007l-12.917,2.04L895.483,600.456"/>
 								<path class='feature' d="M594.26,727.744l0.719-0.038l-0.416-7.629l2.907-0.151l-0.075-1.662l3.664-0.188
 									l0.075,1.662l1.89-0.113l0.452,7.706l-1.396,0.075l0.227,3.626l-7.855,0.453L594.26,727.744"/>
@@ -13520,10 +13522,9 @@
 									s8.4,12.92,17.318,17.002c21.432,9.81,20.974,30.144,20.974,30.144l20.9,236.006"/>	
 
 								<polyline id="baybridge1" class='highway' points="1655.875,165.25 1551.501,184.783 1530.501,193.051 1471.763,237.177 	"/>
-								<polyline class='highway' points="1659.75,159.625 1551.501,179.783 1530.501,188.051 1468.75,234.517 1427.559,277.04 	"/>										
+								<polyline class='highway' points="1659.75,159.625 1551.501,179.783 1530.501,188.051 1468.75,234.517 1427.559,277.04 	"/>										</g>
 
-
-<g id="neighborhoods">
+			<g id="neighborhoods">
 	<text transform="matrix(1 0 0 1 313.3228 555.02)" font-family="'Verdana'" font-size="8" letter-spacing="1">SEACLIFF</text>
 	<text transform="matrix(1 0 0 1 204.3232 658.1279)" font-family="'Verdana'" font-size="8" letter-spacing="12">OUTER RICHMOND </text>
 	<text transform="matrix(1 0 0 1 268.8389 648.1279)" font-family="'Verdana'" font-size="8" letter-spacing="18"> </text>
@@ -13631,25 +13632,26 @@
 		<path fill="none" d="M54.595,109.312C161.643-19.419,352.432-36.967,481.165,70.081"/>
 		<text transform="matrix(0.7514 -0.6598 0.6598 0.7514 85.415 77.251)"><tspan x="0" y="0" font-family="'Verdana'" font-size="8">M</tspan><tspan x="24.211" y="0.707" font-family="'Verdana'" font-size="8" rotate="4.479">A</tspan><tspan x="47.045" y="3.166" font-family="'Verdana'" font-size="8" rotate="8.863">R</tspan><tspan x="69.702" y="7.385" font-family="'Verdana'" font-size="8" rotate="13.046">I</tspan><tspan x="89.89" y="12.675" font-family="'Verdana'" font-size="8" rotate="17.266">N</tspan><tspan x="112.095" y="20.302" font-family="'Verdana'" font-size="8" rotate="21.421"> </tspan><tspan x="130.783" y="28.254" font-family="'Verdana'" font-size="8" rotate="25.526">C</tspan><tspan x="151.311" y="38.789" font-family="'Verdana'" font-size="8" rotate="29.948">O</tspan><tspan x="171.566" y="51.252" font-family="'Verdana'" font-size="8" rotate="34.387">U</tspan><tspan x="190.446" y="64.984" font-family="'Verdana'" font-size="8" rotate="38.795">N</tspan><tspan x="208.306" y="80.212" font-family="'Verdana'" font-size="8" rotate="43.119">T</tspan><tspan x="224.222" y="96.002" font-family="'Verdana'" font-size="8" rotate="47.351">Y</tspan></text>
 	</g>
-	<text id="parklabel" transform="matrix(1 0 0 1 202.249 748.0854)" font-family="'Verdana'" font-size="8" letter-spacing="20">GOLDEN GATE PARK</text>
-</g>
+	<text id="parklabel" transform="matrix(1 0 0 1 202.249 748.0854)" font-family="'Verdana'" font-size="8" letter-spacing="20">GOLDEN GATE PARK</text></g>
 
+			<radialGradient id="gradientcircle_1_" cx="3350" cy="2400" r="2350" gradientTransform="matrix(0.5 0 0 0.4 -1040.6807 -288.8032)" gradientUnits="userSpaceOnUse">
+				<stop  offset="0.92" style="stop-color:#B7C7D2;stop-opacity:0"/>
+				<stop  offset="1" style="stop-color:#B7C7D2"/>
+			</radialGradient>
+			
+			<rect id="gradientcircle" x="-894.829" y="-800" fill="url(#gradientcircle_1_)" width="3295.309" height="2482.464"/>
 
-<radialGradient id="gradientcircle_1_" cx="3350" cy="2400" r="2350" gradientTransform="matrix(0.5 0 0 0.4 -1040.6807 -288.8032)" gradientUnits="userSpaceOnUse">
-	<stop  offset="0.92" style="stop-color:#B7C7D2;stop-opacity:0"/>
+		</g>
 
-	<stop  offset="1" style="stop-color:#B7C7D2"/>
-</radialGradient>
-<rect id="gradientcircle" x="-894.829" y="-800" fill="url(#gradientcircle_1_)" width="3295.309" height="2482.464"/>
-
-
-			</g>
-			<g id="markers">
-				<g id='busstops'></g>
-			</g>
-			<g id='busstoplabels'></g>
+		<g id="markers">
+			<g id='busstops'></g>
+		</g>
+		<g id='busstoplabels'></g>
 		</g>
 	</g>	
-</g>
+
 </svg>
 
+<script>
+	$('#dragger').pep({});
+</script>
