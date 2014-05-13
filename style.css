@@ -57,7 +57,7 @@ body {
 	-webkit-transition:all 2s;	
 }
 .viewport.zoomed{	
-	-webkit-transform: rotateX(38deg) rotateZ(-15deg) scale(3);
+	-webkit-transform: rotateX(38deg) rotateZ(-0deg) scale(3);
 }
 #zoomout {
 	cursor:pointer; 
@@ -383,16 +383,22 @@ g[highlighting='yes']:not(.zoomed) .busmarker:not(:hover) g path{
 .routepath {
 	stroke-dasharray: 3500;
 	stroke-dashoffset: 3500;	
-	stroke-width:3px;
+	stroke-width:2.5px;
 	pointer-events:none;
 	display:none;
 	-webkit-transition:all 3s ease-out;
 }
 
-.viewport:not(.zoomed)[highlighting='yes'] .routepath {
+.viewport[highlighting='yes'] .routepath {
 	display:block;
 }
 
+.zoomed .routepath {
+	stroke-width:2px;
+}
+.viewport[highlighting='yes'] .stopmarker {
+	display:none;
+}
 /*Label styling */
 .subtext {
 	fill:#aaa;

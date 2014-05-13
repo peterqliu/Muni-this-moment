@@ -8,7 +8,7 @@ var buses = { };
 var map;
 
 window.outboundcolor='#41A6B2';
-window.inboundcolor='#942A34';      
+window.inboundcolor='#AA3345';      
 var f = new Firebase("https://publicdata-transit.firebaseio.com/sf-muni/data");
 
 function newBus(bus, firebaseId) {
@@ -34,27 +34,32 @@ function newBus(bus, firebaseId) {
 		.attr('direction', direction)
 		.attr('onclick','showroutestops("'+bus.routeTag+direction+'"), showbusesonline("'+bus.routeTag+'", "'+direction+'")')
 		.on('mouseover',function() {
-			$('.viewport').attr('highlighting','yes');			
-			var target=d3.select(this);
-			var xcoordforlabel=$(this).attr('xcoord')+500;
-			var ycoordforlabel=$(this).attr('ycoord');	
-			var directionColor=bus.dirTag && bus.dirTag.indexOf('OB') > -1 ? outboundcolor : inboundcolor;	
 
-			d3.json('stops.refactored.v3.json',function(json){
-				var busname=json[bus.routeTag+direction]['Name'];							
-				var destination= function() {
-					if ($('.zoomed').length==0)
-						{return 'Click to zoom here'}
-					else 
-						{return json[fudge(bus.routeTag+direction)]['Title'];}
-					}
+			//Fire only when the mouse isn't already held down (i.e. dragging)
+			if ($('body:active').length==0){			
+
+				$('.viewport').attr('highlighting','yes');			
+				var target=d3.select(this);
+				var xcoordforlabel=$(this).attr('xcoord')+500;
+				var ycoordforlabel=$(this).attr('ycoord');	
+				var directionColor=bus.dirTag && bus.dirTag.indexOf('OB') > -1 ? outboundcolor : inboundcolor;	
+
+				d3.json('stops.refactored.v3.json',function(json){
+					var busname=json[bus.routeTag+direction]['Name'];							
+					var destination= function() {
+						if ($('.zoomed').length==0)
+							{return 'Click to zoom here'}
+						else 
+							{return json[fudge(bus.routeTag+direction)]['Title'];}
+						}
 
 
-				makelabel(xcoordforlabel+'500',ycoordforlabel,busname,directionColor,destination);			
-			})
+					makelabel(xcoordforlabel+'500',ycoordforlabel,busname,directionColor,destination);			
+				})
+				
+				drawpath(bus.routeTag+direction,directionColor);
 
-			drawpath(bus.routeTag+direction,directionColor);
-			//d3.select(eval(this)).movetoFront();
+			}
 		})
 		.on('mouseleave',function(){removelabel();
 			$('.viewport').attr('highlighting','no');
@@ -65,7 +70,7 @@ function newBus(bus, firebaseId) {
 			var xcoordforlabel=d3.select(this).attr('xcoord');
 			var ycoordforlabel=d3.select(this).attr('ycoord');
 			zoomto(xcoordforlabel,ycoordforlabel);
-			//console.log('xcoord of '+d3.select(this).attr('xcoord'));
+			$('.routepath').remove();
 		})
 		.attr('transform','scale3d(0,0,0)')
 

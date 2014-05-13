@@ -55,7 +55,7 @@
 	<p class='subhead'>Look nearby (SF only)</p><div id='findme' onclick='gps()'>Find me</div>
 
 	<p class='subhead'>Find a specific line</p>
-	<div class='inputbubble'id='routedirection' val='_OB'>
+	<div class='inputbubble'id='routedirection' val='_OB' onclick='$("#routenumber").focus()'>
 		<div class="onoffswitch">
 		    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch">
 		    <label class="onoffswitch-label" for="myonoffswitch">
@@ -186,7 +186,7 @@
 			if($('.zoomed').length!=0){
 				dragreset='yes';
 			}
-			$('#dragger').pep({cssEaseString:''});
+			$('.viewport').attr('highlighting','no');
 			$('#zoomout').attr('style','');
 			
 				d3.select('#viewport')
@@ -225,7 +225,7 @@
 			d3.json('stops.refactored.v3.json',function(json){
 				//alert('sdfsd');
 				var data=json['RoutePaths'][line]['Subsegments'];
-				//alert(data);
+				//console.log(json['RoutePaths'][22]['Subsegments'])
 				d3.select('#busstops')
 					.selectAll('path')
 					.data(data)
@@ -233,7 +233,7 @@
 					.append("path")
 					.attr('d',function(d,i){return data[i]})
 					.attr('stroke-width', 3)
-					.attr('class','routepath')
+					.attr('class','routepatha')
 					.attr('fill','none')
 					.attr('stroke','purple');
 
@@ -243,55 +243,45 @@
 		//draw bus route based on stops' positions only
 		function drawpath(routedir,color,marker){
 			$('.routepath').remove();
-			console.log(marker);
-			d3.json('stops.refactored.v3.json',function(json){
-			
-				var data=json[routedir]['Stops'];
-				var datalen=data.length;
-				var path;
 
-				for(var i=0;i<datalen;i++){
 
-					if(i==0)
-						{path='M';}
 
-					else
-						{path+=' L'}
-					
-					path+=data[i]['xpos'];
-					path+=' ';
-					path+=data[i]['ypos'];			
-				}
 
-				d3.select('#markers')
-					.append("path")
-					.attr('d',path)
-					.attr('class','routepath')
-					.attr('fill','none')
-					.attr('stroke',color)
-					.attr('stroke-linecap','round')
-					.attr('stroke-linejoin','round');
-				setTimeout(function() { $('.routepath').attr('style','stroke-dashoffset:0;'); }, 0);
+				d3.json('stops.refactored.v3.json',function(json){
 				
+					var data=json[routedir]['Stops'];
+					var datalen=data.length;
+					var pathdata=json[routedir]['Path'];
 
-				//define the position of both ends of the route for the endcaps
-				var endcaps=[data[0]['xpos'], data[0]['ypos'], data[datalen-1]['xpos'], data[datalen-1]['ypos']];
-				
-				//draw endcap circles for the route
-				for (k=0;k<2;k++){
 					d3.select('#markers')
-						.append("circle")
-						.attr('cx',endcaps[k*2])
-						.attr('cy',endcaps[(k*2)+1])
-						.attr('r',4)
+						.append("path")
+						.attr('d',pathdata)
 						.attr('class','routepath')
-						.attr('fill','white')
+						.attr('fill','none')
 						.attr('stroke',color)
+						.attr('stroke-linecap','round')
+						.attr('stroke-linejoin','round');
+					setTimeout(function() { $('.routepath').attr('style','stroke-dashoffset:0;stroke-width:2.5px'); }, 0);
+					
+
+					//define the position of both ends of the route for the endcaps
+					var endcaps=[data[0]['xpos'], data[0]['ypos'], data[datalen-1]['xpos'], data[datalen-1]['ypos']];
+					
+					//draw endcap circles for the route
+					for (k=0;k<2;k++){
+						d3.select('#markers')
+							.append("circle")
+							.attr('cx',endcaps[k*2])
+							.attr('cy',endcaps[(k*2)+1])
+							.attr('r',4)
+							.attr('class','routepath')
+							.attr('fill','white')
+							.attr('stroke',color)
+					}
+				})
 
 
-				}
 
-			})
 		}
 		//Emerge stop markers when a bus is clicked
 		function showroutestops(routedir){
@@ -332,7 +322,6 @@
 
 
 					makelabel(data[i]['xpos'], data[i]['ypos'], data[i]['Intersection'], color, stopdirection);
-					
 			
 				})
 				.on('mouseout', function (){
@@ -349,7 +338,8 @@
 				//.attr('size',function(d,i) {if (i!=0 && i!=data.length-1){return 3} else {return 5}})
 				.attr("r", 3)
 			})
-			
+								d3.select('.busmarker:hover').moveToFront();
+
 		}
 		
 		//When a bus is clicked, grey out all buses that aren't on the same line, reveal stops, and move relevant stops and buses to the top of the stack		
@@ -400,12 +390,12 @@
 		function makelabel(x,y,text,textcolor,subtext) {
 					removelabel();
 					if ($('.zoomed').length==0) {
-						labelscalefactor=' scale(2)';
+						labelscalefactor=' scale(1.8)';
 					}
 					else {labelscalefactor=' scale(1)'}
 					d3.selectAll('#stoplabel').remove();
 
-					//Make label only when the mouse isn't already held down (i.e. dragging)
+					//Fire only when the mouse isn't already held down (i.e. dragging)
 					if ($('body:active').length==0){
 						d3.select('#busstoplabels')
 							.attr('transform','translate('+(x+26)+' '+(y-10)+') '+labelscalefactor)					

@@ -6,8 +6,10 @@
 		}
 		.street {
 			fill:none;
-			stroke:white;
-			stroke-opacity:0.8;
+			stroke:#e0e0e0;
+		}
+		.zoomed .street {
+			stroke:#dadada;
 		}
 
 		.thoroughfare {
@@ -35,6 +37,7 @@
 		}
 		.park {
 			fill:#D2E5D1;
+			fill-opacity:0.4;
 		}
 
 		.thing {
@@ -43,6 +46,7 @@
 
 		.feature {
 			fill:#C3D3C2;
+			fill-opacity:0.4;			
 		}
 
 		.water {
@@ -55,9 +59,10 @@
 		#neighborhoods {
 		fill-opacity:0;
 		-webkit-transition:all 2s;
+		font-size:8;
 		}
 		.zoomed #neighborhoods {
-		fill:#AF8F79;
+		fill:#999;
 		fill-opacity:0.4;
 		font-style:italic;
 		}
@@ -13524,7 +13529,7 @@
 								<polyline id="baybridge1" class='highway' points="1655.875,165.25 1551.501,184.783 1530.501,193.051 1471.763,237.177 	"/>
 								<polyline class='highway' points="1659.75,159.625 1551.501,179.783 1530.501,188.051 1468.75,234.517 1427.559,277.04 	"/>										</g>
 
-			<g id="neighborhoods">
+<g id="neighborhoods">
 	<text transform="matrix(1 0 0 1 313.3228 555.02)" font-family="'Verdana'" font-size="8" letter-spacing="1">SEACLIFF</text>
 	<text transform="matrix(1 0 0 1 204.3232 658.1279)" font-family="'Verdana'" font-size="8" letter-spacing="12">OUTER RICHMOND </text>
 	<text transform="matrix(1 0 0 1 268.8389 648.1279)" font-family="'Verdana'" font-size="8" letter-spacing="18"> </text>
@@ -13609,9 +13614,6 @@
 	<text transform="matrix(1 0 0 1 1338.8125 111.0508)" font-family="'Verdana'" font-size="8" letter-spacing="1">TREASURE</text>
 	<text transform="matrix(1 0 0 1 1338.8125 137.0508)" font-family="'Verdana'" font-size="8" letter-spacing="33"> </text>
 	<text transform="matrix(1 0 0 1 1374.8125 137.0508)" font-family="'Verdana'" font-size="8" letter-spacing="1">ISLAND</text>
-	<text transform="matrix(0.6929 -0.7211 0.7211 0.6929 977.54 643.54)" font-family="'Verdana'" font-size="4">Market</text>
-	<text transform="matrix(0.6929 -0.7211 0.7211 0.6929 1130.5854 490.4717)" font-family="'Verdana'" font-size="4">Market</text>
-	<text transform="matrix(0.6929 -0.7211 0.7211 0.6929 835.1558 785.8896)" font-family="'Verdana'" font-size="4">Market</text>
 	<text transform="matrix(1 0 0 1 691.9097 1151.2207)" enable-background="new    "><tspan x="0" y="0" font-family="'Verdana'" font-size="8" letter-spacing="4">OUTER</tspan><tspan x="-8.496" y="13" font-family="'Verdana'" font-size="8" letter-spacing="4">MISSION</tspan></text>
 	<text transform="matrix(1 0 0 1 818.1631 1075.2207)" font-family="'Verdana'" font-size="8" letter-spacing="4">GLEN</text>
 	<text transform="matrix(1 0 0 1 818.313 1088.2207)" font-family="'Verdana'" font-size="8" letter-spacing="4">PARK</text>
