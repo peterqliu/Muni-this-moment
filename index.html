@@ -23,28 +23,26 @@
 	<div id='loader'>
 
 
-<svg  width="300px" height="300px" style='margin-top:200px'>
+	<svg  width="300px" height="300px" style='margin-top:200px'>
 
-	
+		
 		<radialGradient id="SVGID_1_" cx="141.2695" cy="142.6191" r="136.5" gradientTransform="matrix(1.0989 0 0 1.0989 -5.2419 -6.7253)" gradientUnits="userSpaceOnUse">
-		<stop  offset="0" style="stop-color:#FFFFFF"/>
-		<stop  offset="1" style="stop-color:#FFFFFF;stop-opacity:0"/>
-	</radialGradient>
-	<circle fill="url(#SVGID_1_)" cx="150" cy="150" r="150"/>
-
-			<g transform='scale(3) translate(50, 40)'>
-				<path  id='spinner' d="M-5.392-5.018c-2.977,2.979-2.977,7.807,0,10.783c2.978,2.979,7.805,2.979,10.783,0c2.979-2.977,2.979-7.805,0-10.783l-5.392-5.391L-5.392-5.018z"; fill='#41A6B2' transform='' style='-webkit-transform-origin:50%'/>
-			</g>	
-	<text x='150' y='210' text-anchor='middle' id='loadermessage'>Fetching buses...</text>
-
-</svg>
+			<stop  offset="0" style="stop-color:#FFFFFF"/>
+			<stop  offset="1" style="stop-color:#FFFFFF;stop-opacity:0"/>
+		</radialGradient>
+		<circle fill="url(#SVGID_1_)" cx="150" cy="150" r="150"/>
+				<g transform='scale(3) translate(50, 40)'>
+					<path  id='spinner' d="M-5.392-5.018c-2.977,2.979-2.977,7.807,0,10.783c2.978,2.979,7.805,2.979,10.783,0c2.979-2.977,2.979-7.805,0-10.783l-5.392-5.391L-5.392-5.018z"; fill='#41A6B2' transform='' style='-webkit-transform-origin:50%;fill-opacity:0.5;'/>
+				</g>	
+		<text x='150' y='210' text-anchor='middle' id='loadermessage'>Fetching buses...</text>
+	</svg>
 
 
 
 
 
 
-	</div>
+</div>
 	<div id='svg' class='blurred'></div>
 	<div id='maindialog' >
 		<h3>Muni, this moment</h3>
@@ -183,16 +181,22 @@
 		});    	
 				
 		function zoomto(x,y) {
+
+			//if it's already in a zoomed state
 			if($('.zoomed').length!=0){
 				dragreset='yes';
 			}
+
+
+			$('#viewport').attr('style','-webkit-transform-origin:'+(1.5*x-500)+' '+(1.7*y-400)+'; ');		
+				
+			setTimeout(function() { $('#viewport').attr('class','viewport zoomed'); }, 0);
+
+						
+
 			$('.viewport').attr('highlighting','no');
 			$('#zoomout').attr('style','');
-			
-				d3.select('#viewport')
-				.attr('style','-webkit-transform-origin:'+(1.5*x-500)+' '+(1.7*y-500)+'; ')
-				.attr('class','viewport zoomed');
-			$('#dragger').attr('style','-webkit-transform:translate(0,0); -webkit-transition:all 2s');
+			$('#dragger').attr('style','-webkit-transform:translate(0,0); -webkit-transition:all 1s');
 
 			removelabel();
 		};
@@ -261,7 +265,7 @@
 						.attr('stroke',color)
 						.attr('stroke-linecap','round')
 						.attr('stroke-linejoin','round');
-					setTimeout(function() { $('.routepath').attr('style','stroke-dashoffset:0;stroke-width:2.5px'); }, 0);
+					setTimeout(function() { $('.routepath').attr('style','stroke-dashoffset:0'); }, 0);
 					
 
 					//define the position of both ends of the route for the endcaps
@@ -274,21 +278,28 @@
 							.attr('cx',endcaps[k*2])
 							.attr('cy',endcaps[(k*2)+1])
 							.attr('r',4)
-							.attr('class','routepath')
-							.attr('fill','white')
+							.attr('class','routepath coast')
+							//.attr('fill', 'none')
 							.attr('stroke',color)
 					}
 				})
-
-
-
 		}
 		//Emerge stop markers when a bus is clicked
-		function showroutestops(routedir){
+		function showroutestops(routedir,color){
 		
 			//clears previous stop markers
 			$('.stopmarker').remove();
-			
+
+			if ($('.zoomed').length==1)	
+				{
+				drawpath(routedir,color);	
+
+				setTimeout(function(){
+					d3.select('#busstops').moveToFront();
+					d3.selectAll('.selected').moveToFront();
+				},10);	
+				}
+
 			d3.json('stops.refactored.v3.json',function(json){
 			
 			var data=json[routedir]['Stops'];
@@ -301,45 +312,31 @@
 				.append("circle")
 				.attr("r", 0)
 				.attr('class','stopmarker')
+				.attr('stoptype',function(d,i) {if (i!=0 && i!=data.length-1){return 'stop'} else {return 'terminal'}})
+				.attr('direction',function(d,i) {if (routedir.indexOf('OB')> -1) {return '_OB'} else {return '_IB'}})
 				.attr('cx',function(d,i){return data[i]['xpos']})
 				.attr('cy',function(d,i){return data[i]['ypos']})				
-				.attr('fill',function(d,i) {if (i!=0 && i!=data.length-1){if (routedir.indexOf('OB')> -1) {return outboundcolor} else {return inboundcolor}} else {return 'white'}})
-				.attr('stroke',function(d,i) {if (i!=0 && i!=data.length-1) {return 'white'} 
-												else {if (routedir.indexOf('OB')> -1) {return outboundcolor} 
-													else {return inboundcolor}}})
-				.attr('stroke-width',function(d,i) {if (i!=0 && i!=data.length-1){return 1} else {return 2.5}})
-				//.attr('name',function(d,i){return data[i]['Intersection']})
-
+				.attr('stroke-width',function(d,i) {if (i!=0 && i!=data.length-1){return 1.5} else {return 2.5}})
 				.on('mouseover',function(d,i){
-					d3.select(this)
-						.transition()
-						.duration(200)
-						.attr('r',function(){ return ($(this)[0].getAttribute('r'))*1.5});
 
+					//Generate label
 					var color= function(){if (routedir.indexOf('OB')> -1) {return outboundcolor} else {return inboundcolor}};
 					var stopdirection= function() {if (routedir.indexOf('OB')> -1) {if (i==0) {return 'Outbound line departs here'}  if (i==data.length-1){return 'Outbound line ends here'} else {return ' Outbound stop'}} 
 													else {if (i==0) {return 'Inbound line departs here'}  if (i==data.length-1){return 'Inbound line ends here'} else {return 'Inbound stop'}}};
-
-
 					makelabel(data[i]['xpos'], data[i]['ypos'], data[i]['Intersection'], color, stopdirection);
-			
+
+		
 				})
 				.on('mouseout', function (){
-					d3.select(this)
-						.transition()
-						.duration(200)
-						.attr("r", 3);
-
 					removelabel();
+					$(this).attr('r',2.5);					
 				})
 				.transition()
 				.delay(function(d,i){return 5*i})
 				.duration(500)
-				//.attr('size',function(d,i) {if (i!=0 && i!=data.length-1){return 3} else {return 5}})
-				.attr("r", 3)
+				.attr("r", 2.5)
 			})
-								d3.select('.busmarker:hover').moveToFront();
-
+			d3.select('.busmarker:hover').moveToFront();
 		}
 		
 		//When a bus is clicked, grey out all buses that aren't on the same line, reveal stops, and move relevant stops and buses to the top of the stack		
@@ -362,16 +359,16 @@
 		function zoombackout() {
 			dragreset='yes';
 			$('.viewport').attr('highlighting','no');						
-			$('#dragger').attr('style','-webkit-transform:translate(0,0); -webkit-transition:all 2s');
+			$('#dragger').attr('style','-webkit-transform:translate(0,0); -webkit-transition:all 1s');
 			$('#view').attr('class','');
 			$('#zoomout').attr('style','opacity:0');
 
 			d3.select('.viewport')
-			.attr('style','')
-			.attr('class','viewport');
+				.attr('class','viewport');
 						
 			$('.busmarker').attr('class','busmarker');
 			$('.stopmarker').remove();
+			$('.routepath').remove();
 			removelabel();
 
 
@@ -398,7 +395,7 @@
 					//Fire only when the mouse isn't already held down (i.e. dragging)
 					if ($('body:active').length==0){
 						d3.select('#busstoplabels')
-							.attr('transform','translate('+(x+26)+' '+(y-10)+') '+labelscalefactor)					
+							.attr('transform','translate('+(x+8)+' '+(y-10)+') '+labelscalefactor)					
 							.append('text')
 							.attr('x',6)
 							.attr('y',15)
@@ -443,9 +440,11 @@
 		//Update user position		
 
 		function gps(){
+
 		window.finding=setInterval(function() {
 			if ($('#iamhere').length==0) {
 				$('#loadermessage').text('Finding your position...');
+				$('#spinner').attr('fill','purple');
 				$('#svg').addClass('blurred');
 				$('#loader').show();
 
@@ -462,7 +461,7 @@
 				else 
 					{alert("Whoops, it doesn't look like you're in the area")};
 			}
-		}, 10);
+		}, 0);
 		}
 		
 

@@ -2,25 +2,21 @@
 '>
 	<style>
 		.coast {
-			fill:#eaeaea;
+			fill:#efefef;
 		}
 		.street {
 			fill:none;
 			stroke:#e0e0e0;
 		}
-		.zoomed .street {
-			stroke:#dadada;
-		}
 
 		.thoroughfare {
 			fill:none;
-			stroke:white;
+			stroke:#e0e0e0;
 			stroke-width:2;
-			stroke-opacity:0.8;			
 		}
 
 		.sportsvenue {
-			fill:#aaa;
+			fill:#ccc;
 		}
 
 		.highway {
@@ -37,7 +33,7 @@
 		}
 		.park {
 			fill:#D2E5D1;
-			fill-opacity:0.4;
+			fill-opacity:0.6;
 		}
 
 		.thing {
@@ -58,14 +54,15 @@
 		}
 		#neighborhoods {
 		fill-opacity:0;
-		-webkit-transition:all 2s;
 		font-size:8;
+		letter-spacing:5;
+		font-style:italic;
+		fill:#666;
 		}
 		.zoomed #neighborhoods {
-		fill:#999;
 		fill-opacity:0.4;
-		font-style:italic;
 		}
+
 		#parklabel {
 		fill:#5E7A5F;
 		}
@@ -253,7 +250,7 @@
 								<path class='park' d="M173.491,511.128l0.151,0.076l0.112-0.114l-0.112-0.188h-0.151V511.128"/>
 								<path class='park' d="M164.048,518.946l-0.038,0.15l0.189,0.038l0.037-0.112L164.048,518.946"/>
 									
-								<path class='park' d="M1381.746,231.132l-2.077-7.101l-1.511-5.213l-2.115-4.873l-0.076-1.736
+								<path class='coast' d="M1381.746,231.132l-2.077-7.101l-1.511-5.213l-2.115-4.873l-0.076-1.736
 									l12.654-6.686l18.771-9.935l8.649-4.457l12.843-7.214l1.058,1.964l1.246-0.718l-0.49-1.02l3.928-2.115l0.378-0.189l-0.415-0.831
 									l0.756-0.416l0.377-0.642l5.326-18.583l27.157,8.31l0.98-3.701l-26.778-8.311l5.703-18.395l0.075-0.869l-8.045-15.676
 									l-3.551-7.062l-6.271-11.784l-12.012-22.284L1406.22,58.63l-0.944-1.851l-7.101-13.146l-1.058-0.981l-26.817-8.008l-9.292-2.908
@@ -13527,114 +13524,64 @@
 									s8.4,12.92,17.318,17.002c21.432,9.81,20.974,30.144,20.974,30.144l20.9,236.006"/>	
 
 								<polyline id="baybridge1" class='highway' points="1655.875,165.25 1551.501,184.783 1530.501,193.051 1471.763,237.177 	"/>
-								<polyline class='highway' points="1659.75,159.625 1551.501,179.783 1530.501,188.051 1468.75,234.517 1427.559,277.04 	"/>										</g>
+								<polyline class='highway' points="1659.75,159.625 1551.501,179.783 1530.501,188.051 1468.75,234.517 1427.559,277.04 	"/>										
+				</g>
 
 <g id="neighborhoods">
-	<text transform="matrix(1 0 0 1 313.3228 555.02)" font-family="'Verdana'" font-size="8" letter-spacing="1">SEACLIFF</text>
-	<text transform="matrix(1 0 0 1 204.3232 658.1279)" font-family="'Verdana'" font-size="8" letter-spacing="12">OUTER RICHMOND </text>
-	<text transform="matrix(1 0 0 1 268.8389 648.1279)" font-family="'Verdana'" font-size="8" letter-spacing="18"> </text>
-	<text transform="matrix(1 0 0 1 290.3228 648.1279)" font-family="'Verdana'" font-size="8" letter-spacing="29"> </text>
-	<text transform="matrix(1 0 0 1 502.3228 593.1279)" font-family="'Verdana'" font-size="8" letter-spacing="6">INNER</text>
-	<text transform="matrix(1 0 0 1 502.3228 619.1279)" font-family="'Verdana'" font-size="8" letter-spacing="6">RICHMOND</text>
-	<text transform="matrix(1 0 0 1 628.3228 533.1279)" font-family="'Verdana'" font-size="8" letter-spacing="4">LAUREL</text>
-	<text transform="matrix(1 0 0 1 628.3228 559.1279)" font-family="'Verdana'" font-size="8" letter-spacing="4">HEIGHTS</text>
-	<g id="parklabel">
-		<path fill="none" d="M427.438,494.697c43.914-89.928,205.264-136.743,295.19-92.829"/>
-		<text transform="matrix(0.5456 -0.838 0.838 0.5456 433.8594 483.1084)" font-family="'Verdana'" font-size="7.9997">P</text>
-		<text transform="matrix(0.5456 -0.838 0.838 0.5456 456.875 454.8965)" font-family="'Verdana'" font-size="7.9997">R</text>
-		<text transform="matrix(0.5456 -0.838 0.838 0.5456 485.9326 431.5605)" font-family="'Verdana'" font-size="7.9997">E</text>
-		<text transform="matrix(0.5456 -0.838 0.838 0.5456 517.9971 413.459)" font-family="'Verdana'" font-size="7.9997">S</text>
-		<text transform="matrix(0.5456 -0.838 0.838 0.5456 552.6445 399.7061)" font-family="'Verdana'" font-size="7.9997">I</text>
-		<text transform="matrix(0.5456 -0.838 0.838 0.5456 586.6523 390.7734)" font-family="'Verdana'" font-size="7.9997">D</text>
-		<text transform="matrix(0.5456 -0.838 0.838 0.5456 624.2759 385.7441)" font-family="'Verdana'" font-size="7.9997">I</text>
-		<text transform="matrix(0.5456 -0.838 0.838 0.5456 659.417 385.8242)" font-family="'Verdana'" font-size="7.9997">O</text>
-	</g>
-	<text transform="matrix(1 0 0 1 739.3228 363.1279)" font-family="'Verdana'" font-size="8" letter-spacing="5">MARINA</text>
-	<text transform="matrix(1 0 0 1 756.3228 419.1279)" font-family="'Verdana'" font-size="8" letter-spacing="5">COW</text>
-	<text transform="matrix(1 0 0 1 792.916 419.1279)" font-family="'Verdana'" font-size="8" letter-spacing="2"> </text>
-	<text transform="matrix(1 0 0 1 797.9229 419.1279)" font-family="'Verdana'" font-size="8" letter-spacing="5">HOLLOW</text>
+	<text id="parklabel" transform="matrix(1 0 0 1 162.835 742.085)" enable-background="new    "><tspan font-family="'Verdana'" font-size="8" letter-spacing="12">GOLDEN</tspan><tspan x="106.16" font-family="'Verdana'" font-size="8" letter-spacing="11">	</tspan><tspan x="120" font-family="'Verdana'" font-size="8" letter-spacing="12"> </tspan><tspan x="134.812" font-family="'Verdana'" font-size="8" letter-spacing="6">	</tspan><tspan x="144" font-family="'Verdana'" font-size="8" letter-spacing="33">	</tspan><tspan x="195" font-family="'Verdana'" font-size="8" letter-spacing="12"> G</tspan><tspan x="213.016" font-family="'Verdana'" font-size="8" letter-spacing="11">A</tspan><tspan x="230.016" font-family="'Verdana'" font-size="8" letter-spacing="12">TE </tspan><tspan x="278.816" font-family="'Verdana'" font-size="8" letter-spacing="6">	</tspan><tspan x="288" font-family="'Verdana'" font-size="8" letter-spacing="33">	</tspan><tspan x="324" font-family="'Verdana'" font-size="8" letter-spacing="12">  </tspan><tspan x="353.625" font-family="'Verdana'" font-size="8" letter-spacing="11">P</tspan><tspan x="370.254" font-family="'Verdana'" font-size="8" letter-spacing="12">ARK</tspan></text>
+	<text transform="matrix(1 0 0 1 498.8027 1448.5166)" letter-spacing="4">DALY CITY</text>
+	<path id="SVGID_x5F_1_x5F_" fill="none" d="M-35.57,192.055C72.934-26.564,337.635-115.669,556.254-7.166"/>
+	<text>	<textPath  xlink:href="#SVGID_x5F_1_x5F_" startOffset="2.022%">
+<tspan  font-family="'Verdana'" font-size="8" letter-spacing="3600">MARIN COUNTY</tspan>	</textPath>
+</text>
+	<path fill="none" d="M395.511,546.6c43.846-126.104,181.367-192.666,307.471-148.819"/>
+	<text transform="matrix(0.5596 -0.8287 0.8287 0.5596 422.2124 492.4902)"><tspan>P</tspan><tspan x="36.476" y="2.416" rotate="8.83">R</tspan><tspan x="72.896" y="10.571" rotate="17.659">E</tspan><tspan x="107.152" y="24.008" rotate="26.423">S</tspan><tspan x="139.333" y="42.73" rotate="34.974">I</tspan><tspan x="166.759" y="64.716" rotate="43.635">D</tspan><tspan x="192.389" y="92.62" rotate="52.332">I</tspan><tspan x="211.979" y="121.779" rotate="61.082">O</tspan></text>
+	<path fill="none" d="M166.842,996.498c43.846-126.104,181.367-192.666,307.471-148.819"/>
+	<text transform="matrix(0.7321 -0.6812 0.6812 0.7321 228.0156 901.1318)"><tspan>O</tspan><tspan x="37.97" y="2.509" rotate="8.985">U</tspan><tspan x="74.651" y="10.809" rotate="17.769">T</tspan><tspan x="108.781" y="24.268" rotate="26.462">E</tspan><tspan x="140.577" y="42.793" rotate="35.268">R</tspan></text>
+	<path fill="none" d="M190.842,1037.498c43.846-126.104,181.367-192.666,307.471-148.819"/>
+	<text transform="matrix(0.6766 -0.7364 0.7364 0.6766 239.1914 955.3638)"><tspan>S</tspan><tspan x="37.149" y="2.457" rotate="8.915">U</tspan><tspan x="73.828" y="10.708" rotate="17.836">N</tspan><tspan x="108.93" y="24.602" rotate="26.697">S</tspan><tspan x="141.004" y="43.463" rotate="35.469">E</tspan><tspan x="169.505" y="66.75" rotate="44.227">T</tspan></text>
+	<text transform="matrix(1 0 0 1 505.8877 1303.2207)" letter-spacing="4">INGLESIDE</text>
+	<text transform="matrix(1 0 0 1 1005.2241 1345.7446)"><tspan letter-spacing="4">VISITACION</tspan><tspan x="17.74" y="14" letter-spacing="4">VALLEY</tspan></text>
+	<text transform="matrix(1 0 0 1 998.9604 1165.7446)" letter-spacing="4">PORTOLA</text>
+	<text transform="matrix(1 0 0 1 1183.0366 1205.7446)" letter-spacing="4">BAYVIEW</text>
+	<text transform="matrix(1 0 0 1 756.7104 1235.7446)" letter-spacing="4">EXCELSIOR</text>
 	<g>
-		<path fill="none" d="M218.016,918.689c39.593-91.911,198.536-146.338,290.448-106.744"/>
-		<text transform="matrix(0.51 -0.8602 0.8602 0.51 223.8701 906.7939)" font-family="'Verdana'" font-size="8">O</text>
-		<text transform="matrix(0.51 -0.8602 0.8602 0.51 241.209 882.3428)" font-family="'Verdana'" font-size="8">U</text>
-		<text transform="matrix(0.51 -0.8602 0.8602 0.51 262.3525 861.6006)" font-family="'Verdana'" font-size="8">T</text>
-		<text transform="matrix(0.51 -0.8602 0.8602 0.51 285.4648 844.5303)" font-family="'Verdana'" font-size="8">E</text>
-		<text transform="matrix(0.51 -0.8602 0.8602 0.51 310.5293 830.1748)" font-family="'Verdana'" font-size="8">R</text>
+		<text transform="matrix(1 0 0 1 301.5239 551.0195)">SEACLIFF</text>
 	</g>
+	<text transform="matrix(1 0 0 1 740.5259 363.1279)">MARINA</text>
+	<text transform="matrix(1 0 0 1 755.8091 415.1279)">COW HOLLOW</text>
 	<g>
-		<path fill="none" d="M262.016,948.689c39.593-91.911,198.536-146.338,290.448-106.744"/>
-		<text transform="matrix(0.5074 -0.8617 0.8617 0.5074 267.8799 936.7949)" font-family="'Verdana'" font-size="8">S</text>
-		<text transform="matrix(0.5074 -0.8617 0.8617 0.5074 284.6738 912.9648)" font-family="'Verdana'" font-size="8">U</text>
-		<text transform="matrix(0.5074 -0.8617 0.8617 0.5074 305.7109 892.1357)" font-family="'Verdana'" font-size="8">N</text>
-		<text transform="matrix(0.5074 -0.8617 0.8617 0.5074 329.6445 874.4141)" font-family="'Verdana'" font-size="8">S</text>
-		<text transform="matrix(0.5074 -0.8617 0.8617 0.5074 355.1016 859.8936)" font-family="'Verdana'" font-size="8">E</text>
-		<text transform="matrix(0.5074 -0.8617 0.8617 0.5074 381.5596 848.248)" font-family="'Verdana'" font-size="8">T</text>
+		<text transform="matrix(1 0 0 1 810.7705 643.0635)" letter-spacing="3">HAYES VALLEY</text>
 	</g>
-	<text transform="matrix(1 0 0 1 460.7842 810.1211)" font-family="'Verdana'" font-size="8" letter-spacing="4">INNER SUNSET</text>
-	<text transform="matrix(1 0 0 1 682.248 910.1064)" font-family="'Verdana'" font-size="8" letter-spacing="4">TWIN </text>
-	<text transform="matrix(1 0 0 1 682.248 936.1064)" font-family="'Verdana'" font-size="8" letter-spacing="4">PEAKS</text>
-	<text transform="matrix(1 0 0 1 277.4419 1045.0996)" font-family="'Verdana'" font-size="8" letter-spacing="4">PARKSIDE</text>
-	<text transform="matrix(1 0 0 1 1009.5469 602.9414)" font-family="'Verdana'" font-size="8" letter-spacing="33"> </text>
-	<text transform="matrix(1 0 0 1 1045.5469 602.9414)" font-family="'Verdana'" font-size="8" letter-spacing="16">SOUTH </text>
-	<text transform="matrix(1 0 0 1 1009.5469 628.9414)" font-family="'Verdana'" font-size="8" letter-spacing="33">  </text>
-	<text transform="matrix(1 0 0 1 1081.5469 628.9414)" font-family="'Verdana'" font-size="8" letter-spacing="16">OF </text>
-	<text transform="matrix(1 0 0 1 1009.5469 654.9414)" font-family="'Verdana'" font-size="8" letter-spacing="16">MARKET</text>
-	<text transform="matrix(1 0 0 1 1082.2236 823.6636)" font-family="'Verdana'" font-size="8" letter-spacing="8">POTRERO</text>
-	<text transform="matrix(1 0 0 1 1104.3467 849.6636)" font-family="'Verdana'" font-size="8" letter-spacing="8">HILL</text>
-	<text transform="matrix(1 0 0 1 954.9106 843.6636)" font-family="'Verdana'" font-size="8" letter-spacing="4">INNER</text>
-	<text transform="matrix(1 0 0 1 944.7417 869.6636)" font-family="'Verdana'" font-size="8" letter-spacing="4">MISSION</text>
-	<text transform="matrix(1 0 0 1 803.9243 482.1279)" font-family="'Verdana'" font-size="8" letter-spacing="5">PACIFIC</text>
-	<text transform="matrix(1 0 0 1 801.7974 495.1279)" font-family="'Verdana'" font-size="8" letter-spacing="5">HEIGHTS</text>
-	<text transform="matrix(1 0 0 1 985.8125 342.709)" font-family="'Verdana'" font-size="8" letter-spacing="5">NORTH</text>
-	<text transform="matrix(1 0 0 1 985.8125 368.709)" font-family="'Verdana'" font-size="8" letter-spacing="33"> </text>
-	<text transform="matrix(1 0 0 1 1021.8125 368.709)" font-family="'Verdana'" font-size="8" letter-spacing="5">BEACH</text>
-	<text transform="matrix(1 0 0 1 915.7207 397.458)" font-family="'Verdana'" font-size="8" letter-spacing="3">RUSSIAN</text>
-	<text transform="matrix(1 0 0 1 929.666 410.458)" font-family="'Verdana'" font-size="8" letter-spacing="3">HILL</text>
-	<text transform="matrix(1 0 0 1 813.0195 919.6636)" font-family="'Verdana'" font-size="8" letter-spacing="4">NOE</text>
-	<text transform="matrix(1 0 0 1 799.5776 945.6636)" font-family="'Verdana'" font-size="8" letter-spacing="4">VALLEY</text>
-	<text transform="matrix(1 0 0 1 963.4834 1054.6636)" font-family="'Verdana'" font-size="8" letter-spacing="4">BERNAL</text>
-	<text transform="matrix(1 0 0 1 958.5645 1080.6636)" font-family="'Verdana'" font-size="8" letter-spacing="4">HEIGHTS</text>
-	<text transform="matrix(1 0 0 1 810.0537 751.9717)" font-family="'Verdana'" font-size="8">DUBOCE</text>
-	<text transform="matrix(1 0 0 1 810.0537 763.9717)" font-family="'Verdana'" font-size="8">TRIANGLE</text>
-	<text transform="matrix(1 0 0 1 809.0537 693.9717)" font-family="'Verdana'" font-size="8" letter-spacing="1">LOWER</text>
-	<text transform="matrix(1 0 0 1 809.0537 703.5718)" font-family="'Verdana'" font-size="8" letter-spacing="1">  </text>
-	<text transform="matrix(1 0 0 1 809.0537 713.1719)" font-family="'Verdana'" font-size="8" letter-spacing="1">    HAIGHT</text>
-	<text transform="matrix(1 0 0 1 864.0537 646.0635)" font-family="'Verdana'" font-size="8" letter-spacing="1">HAYES VALLEY</text>
-	<text transform="matrix(1 0 0 1 782.0537 590.0635)" font-family="'Verdana'" font-size="8" letter-spacing="4">WESTERN ADDITION</text>
-	<text transform="matrix(1 0 0 1 1042.5396 494.5298)" font-family="'Verdana'" font-size="8" letter-spacing="3">FINANCIAL</text>
-	<text transform="matrix(1 0 0 1 1046.4907 504.1299)" font-family="'Verdana'" font-size="8" letter-spacing="3">DISTRICT</text>
-	<text transform="matrix(1 0 0 1 792.1738 842.1543)" font-family="'Verdana'" font-size="8" letter-spacing="4">CASTRO</text>
+	<text transform="matrix(1 0 0 1 938.7744 548.1621)">TENDERLOIN</text>
+	<text transform="matrix(1 0 0 1 1030.5654 489.1621)"><tspan>FINANCIAL</tspan><tspan x="4.951" y="12">DISTRICT</tspan></text>
+	<text transform="matrix(1 0 0 1 948.8213 475.1621)"><tspan>NOB</tspan><tspan x="-2.76" y="12">HILL</tspan></text>
+	<text transform="matrix(1 0 0 1 801.3057 482.1621)"><tspan>PACIFIC</tspan><tspan x="-2.127" y="12">HEIGHTS</tspan></text>
+	<text transform="matrix(1 0 0 1 625.8906 541.167)"><tspan>LAUREL</tspan><tspan x="-5.6" y="12">HEIGHTS</tspan></text>
+	<text transform="matrix(1 0 0 1 909.1162 397.1621)"><tspan x="10">RUSSIAN</tspan><tspan x="26.945" y="12">HILL</tspan></text>
+	<text transform="matrix(1 0 0 1 978.3115 334.1621)"><tspan>NORTH</tspan><tspan x="-17.412" y="15" letter-spacing="33">	</tspan><tspan x="18.588" y="15">BEACH</tspan></text>
+	<text transform="matrix(1 0 0 1 765.5176 842.1543)" letter-spacing="4">CASTRO</text>
+	<text transform="matrix(1 0 0 1 711.79 599.0635)" letter-spacing="4">WESTERN ADDITION</text>
 	<g>
-		<text transform="matrix(1 0 0 1 937.7041 548.1621)" font-family="'Verdana'" font-size="8" letter-spacing="5">TENDERLOIN</text>
+		<text transform="matrix(1 0 0 1 241.8018 658.1279)">OUTER RICHMOND </text>
 	</g>
-	<g>
-		<text transform="matrix(1 0 0 1 949.7041 475.1621)" font-family="'Verdana'" font-size="8" letter-spacing="5">NOB</text>
-		<text transform="matrix(1 0 0 1 949.7041 488.1621)" font-family="'Verdana'" font-size="8" letter-spacing="5">HILL</text>
-	</g>
-	<text transform="matrix(1 0 0 1 1338.8125 111.0508)" font-family="'Verdana'" font-size="8" letter-spacing="1">TREASURE</text>
-	<text transform="matrix(1 0 0 1 1338.8125 137.0508)" font-family="'Verdana'" font-size="8" letter-spacing="33"> </text>
-	<text transform="matrix(1 0 0 1 1374.8125 137.0508)" font-family="'Verdana'" font-size="8" letter-spacing="1">ISLAND</text>
-	<text transform="matrix(1 0 0 1 691.9097 1151.2207)" enable-background="new    "><tspan x="0" y="0" font-family="'Verdana'" font-size="8" letter-spacing="4">OUTER</tspan><tspan x="-8.496" y="13" font-family="'Verdana'" font-size="8" letter-spacing="4">MISSION</tspan></text>
-	<text transform="matrix(1 0 0 1 818.1631 1075.2207)" font-family="'Verdana'" font-size="8" letter-spacing="4">GLEN</text>
-	<text transform="matrix(1 0 0 1 818.313 1088.2207)" font-family="'Verdana'" font-size="8" letter-spacing="4">PARK</text>
-	<text transform="matrix(1 0 0 1 673.0591 743.6689)" enable-background="new    "><tspan x="0" y="0" font-family="'Verdana'" font-size="8" letter-spacing="4">COLE</tspan><tspan x="-8.215" y="13" font-family="'Verdana'" font-size="8" letter-spacing="4">VALLEY</tspan></text>
-	<text transform="matrix(1 0 0 1 668.4209 669.0981)" font-family="'Verdana'" font-size="8" letter-spacing="4">NORTH OF </text>
-	<text transform="matrix(1 0 0 1 666.3643 681.0981)" font-family="'Verdana'" font-size="8" letter-spacing="4">PANHANDLE</text>
-	<text transform="matrix(1 0 0 1 472.9961 1040.4189)" font-family="'Verdana'" font-size="8" letter-spacing="4">WEST</text>
-	<text transform="matrix(1 0 0 1 464.9121 1053.4189)" font-family="'Verdana'" font-size="8" letter-spacing="4">PORTAL</text>
-	<text transform="matrix(1 0 0 1 690.5488 1350.2456)" font-family="'Verdana'" font-size="8" letter-spacing="4">CROCKER</text>
-	<text transform="matrix(1 0 0 1 693.8257 1363.2456)" font-family="'Verdana'" font-size="8" letter-spacing="4">AMAZON</text>
-	<text transform="matrix(1 0 0 1 756.1802 1236.2456)" font-family="'Verdana'" font-size="8" letter-spacing="4">EXCELSIOR</text>
-	<text transform="matrix(1 0 0 1 544.4502 1303.2207)" font-family="'Verdana'" font-size="8" letter-spacing="4">INGLESIDE</text>
-	<text transform="matrix(1 0 0 1 1007.5288 1165.7446)" font-family="'Verdana'" font-size="8" letter-spacing="4">PORTOLA</text>
-	<text transform="matrix(1 0 0 1 1176.5288 1205.7446)" font-family="'Verdana'" font-size="8" letter-spacing="4">BAYVIEW</text>
-	<text transform="matrix(1 0 0 1 1347.019 1218.7446)"><tspan x="0" y="0" font-family="'Verdana'" font-size="8" letter-spacing="4">HUNTER’S</tspan><tspan x="13.809" y="19.2" font-family="'Verdana'" font-size="8" letter-spacing="4">POINT</tspan></text>
-	<text transform="matrix(1 0 0 1 1005.8765 1345.7446)"><tspan x="0" y="0" font-family="'Verdana'" font-size="8" letter-spacing="4">VISITACION</tspan><tspan x="17.74" y="14" font-family="'Verdana'" font-size="8" letter-spacing="4">VALLEY</tspan></text>
-	<g>
-		<path fill="none" d="M54.595,109.312C161.643-19.419,352.432-36.967,481.165,70.081"/>
-		<text transform="matrix(0.7514 -0.6598 0.6598 0.7514 85.415 77.251)"><tspan x="0" y="0" font-family="'Verdana'" font-size="8">M</tspan><tspan x="24.211" y="0.707" font-family="'Verdana'" font-size="8" rotate="4.479">A</tspan><tspan x="47.045" y="3.166" font-family="'Verdana'" font-size="8" rotate="8.863">R</tspan><tspan x="69.702" y="7.385" font-family="'Verdana'" font-size="8" rotate="13.046">I</tspan><tspan x="89.89" y="12.675" font-family="'Verdana'" font-size="8" rotate="17.266">N</tspan><tspan x="112.095" y="20.302" font-family="'Verdana'" font-size="8" rotate="21.421"> </tspan><tspan x="130.783" y="28.254" font-family="'Verdana'" font-size="8" rotate="25.526">C</tspan><tspan x="151.311" y="38.789" font-family="'Verdana'" font-size="8" rotate="29.948">O</tspan><tspan x="171.566" y="51.252" font-family="'Verdana'" font-size="8" rotate="34.387">U</tspan><tspan x="190.446" y="64.984" font-family="'Verdana'" font-size="8" rotate="38.795">N</tspan><tspan x="208.306" y="80.212" font-family="'Verdana'" font-size="8" rotate="43.119">T</tspan><tspan x="224.222" y="96.002" font-family="'Verdana'" font-size="8" rotate="47.351">Y</tspan></text>
-	</g>
-	<text id="parklabel" transform="matrix(1 0 0 1 202.249 748.0854)" font-family="'Verdana'" font-size="8" letter-spacing="20">GOLDEN GATE PARK</text></g>
+	<text transform="matrix(1 0 0 1 242.7134 1045.0996)" letter-spacing="4">PARKSIDE</text>
+	<text transform="matrix(1 0 0 1 660.0791 670.6611)"><tspan>NORTH OF</tspan><tspan x="-5.963" y="12">PANHANDLE</tspan></text>
+	<text transform="matrix(1 0 0 1 823.1846 695.6611)"><tspan>LOWER</tspan><tspan x="-3.855" y="12">HAIGHT</tspan></text>
+	<text transform="matrix(1 0 0 1 954.8467 850.6611)"><tspan>INNER</tspan><tspan x="-10.369" y="12">MISSION</tspan></text>
+	<text transform="matrix(1 0 0 1 1093.6572 834.6611)"><tspan letter-spacing="5">P</tspan><tspan x="9.824" font-size="8" letter-spacing="4">O</tspan><tspan x="20.926" font-size="8" letter-spacing="5">TRERO</tspan><tspan x="17.525" y="12" font-size="8" letter-spacing="5">HILL</tspan></text>
+	<text transform="matrix(1 0 0 1 673.6279 737.6611)"><tspan>COLE</tspan><tspan x="-9.215" y="12">VALLEY</tspan></text>
+	<text transform="matrix(1 0 0 1 808.8252 750.6611)"><tspan>DUBOCE</tspan><tspan x='0' y="10">TRIANGLE</tspan></text>
+	<text transform="matrix(1 0 0 1 960.3193 1062.6611)"><tspan>BERNAL</tspan><tspan x="-5.02" y="12">HEIGHTS</tspan></text>
+	<text transform="matrix(1 0 0 1 815.4756 1075.6611)"><tspan>GLEN</tspan><tspan x="0.15" y="12">PARK</tspan></text>
+	<text transform="matrix(1 0 0 1 1346.8154 1221.6611)"><tspan>HUNTER’S</tspan><tspan x="15.309" y="12">POINT</tspan></text>
+	<text transform="matrix(1 0 0 1 689.4907 1153.1221)"><tspan>OUTER</tspan><tspan x="-9.496" y="12">MISSION</tspan></text>
+	<text transform="matrix(1 0 0 1 682.9111 1349.6611)"><tspan>CROCKER-</tspan><tspan x="8.693" y="12">AMAZON</tspan></text>
+	<text transform="matrix(1 0 0 1 472.6416 1040.6611)"><tspan>WEST</tspan><tspan x="-9.084" y="12">PORTAL</tspan></text>
+	<text transform="matrix(1 0 0 1 810.1553 926.6611)"><tspan>NOE</tspan><tspan x="-13.742" y="12">VALLEY</tspan></text>
+	<text transform="matrix(1 0 0 1 526.8467 600.6611)"><tspan>INNER</tspan><tspan x="-17.379" y="12">RICHMOND</tspan></text>
+	<text transform="matrix(1 0 0 1 460.5576 809.6611)">INNER SUNSET</text>
+</g>
 
 			<radialGradient id="gradientcircle_1_" cx="3350" cy="2400" r="2350" gradientTransform="matrix(0.5 0 0 0.4 -1040.6807 -288.8032)" gradientUnits="userSpaceOnUse">
 				<stop  offset="0.92" style="stop-color:#B7C7D2;stop-opacity:0"/>

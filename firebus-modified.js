@@ -32,7 +32,7 @@ function newBus(bus, firebaseId) {
 		.attr('type',bus.vtype)
 		.attr('route',bus.routeTag)
 		.attr('direction', direction)
-		.attr('onclick','showroutestops("'+bus.routeTag+direction+'"), showbusesonline("'+bus.routeTag+'", "'+direction+'")')
+		.attr('onclick','showbusesonline("'+bus.routeTag+'", "'+direction+'"), showroutestops("'+bus.routeTag+direction+'","'+directionColor+'");')
 		.on('mouseover',function() {
 
 			//Fire only when the mouse isn't already held down (i.e. dragging)
@@ -42,7 +42,7 @@ function newBus(bus, firebaseId) {
 				var target=d3.select(this);
 				var xcoordforlabel=$(this).attr('xcoord')+500;
 				var ycoordforlabel=$(this).attr('ycoord');	
-				var directionColor=bus.dirTag && bus.dirTag.indexOf('OB') > -1 ? outboundcolor : inboundcolor;	
+				var directionColor=$(this).attr('direction').indexOf('OB') > -1 ? outboundcolor : inboundcolor;	
 
 				d3.json('stops.refactored.v3.json',function(json){
 					var busname=json[bus.routeTag+direction]['Name'];							
@@ -56,8 +56,11 @@ function newBus(bus, firebaseId) {
 
 					makelabel(xcoordforlabel+'500',ycoordforlabel,busname,directionColor,destination);			
 				})
-				
+
+			if ($('.zoomed').length==0)	
+				{
 				drawpath(bus.routeTag+direction,directionColor);
+				}
 
 			}
 		})
@@ -66,11 +69,10 @@ function newBus(bus, firebaseId) {
 		})
 		//.on('mouseout',function(){removelabel()})
 
-		.on('click',function(){
+		.on('click',function() {
 			var xcoordforlabel=d3.select(this).attr('xcoord');
 			var ycoordforlabel=d3.select(this).attr('ycoord');
 			zoomto(xcoordforlabel,ycoordforlabel);
-			$('.routepath').remove();
 		})
 		.attr('transform','scale3d(0,0,0)')
 
@@ -80,7 +82,6 @@ function newBus(bus, firebaseId) {
 	    .append('path')
 	    .attr('transform','rotate('+bus.heading+')')
 		.attr('d',marker_path)    
-		.attr('fill',directionColor);
 		
 		
 		
@@ -131,17 +132,27 @@ f.on("child_changed", function(s) {
   }
   //existing bus
   else {
+
+
   	var bus=s.val();
   	var xcoord=lonx(s.val().lon);
 	var ycoord=laty(s.val().lat);
+    var direction= bus.dirTag && bus.dirTag.indexOf('OB') > -1 ? "_OB" : "_IB";
+    var route=bus.routeTag;
+
+    //detect if bus changed lines
+    if(route!=d3.select('#bus'+busMarker).attr('route'))
+    	{console.log('a bus just changed their route line!');}
 
 	 d3.select('#bus'+busMarker)
 	    .attr('style','-webkit-transform:translate('+xcoord+'px,'+ycoord+'px)')
 		.attr('xcoord',xcoord+20)
 		.attr('ycoord',ycoord-10)   
-		
+		.attr('direction',direction)		//sometimes a bus gets to its line's end and turns around and goes other way
+		.attr('route',route)
 	    .select('path')
 	    .attr('transform','rotate('+s.val().heading+')')
+		.attr('onclick','showroutestops("'+route+direction+'"), showbusesonline("'+route+'", "'+direction+'")')	    
 		.on('click',function(){
 			var xcoordforlabel=d3.select(this).attr('xcoord');
 			var ycoordforlabel=d3.select(this).attr('ycoord');

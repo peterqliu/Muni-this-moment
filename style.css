@@ -52,12 +52,11 @@ body {
   fill-opacity:0.8;
 }
 #viewport{
-	-webkit-perspective:900px;
-	-webkit-transform-origin:50% 50%;
-	-webkit-transition:all 2s;	
+	-webkit-transition:-webkit-transform 1s;	
 }
-.viewport.zoomed{	
-	-webkit-transform: rotateX(38deg) rotateZ(-0deg) scale(3);
+#viewport.zoomed {	
+	-webkit-transform: rotateX(25deg) rotateZ(0deg) scale(3);
+	-webkit-transition:all 1s;		
 }
 #zoomout {
 	cursor:pointer; 
@@ -192,7 +191,7 @@ h3 {
 }
 #IB {
 	padding-left: 10px;
-	background: #942A34;
+	background: #AA3345;
 }
 #OB {
 	padding-right: 10px;
@@ -231,7 +230,7 @@ h3 {
 	overflow:hidden;
 }
 div[val='_IB']{
-	border:1px solid #942A34;
+	border:1px solid #AA3345;
 }
 div[val='_OB']{
 	border:1px solid #41A6B2;
@@ -277,21 +276,26 @@ div[val='_OB']{
   -webkit-animation-iteration-count: infinite;
   -webkit-transform-origin:50%;	
 	fill:white;
-	stroke:orange;
+	stroke:purple;
 	stroke-width:1;
 	z-index:1;
 }
+
+
 
 .busmarker {
 	-webkit-transition:-webkit-transform 8s;
 	cursor:hand;
 }
 
-.stopmarker {
-	fill-opacity:0.9;
-	cursor:pointer; 
-
+g[direction='_OB'] path{
+	fill:#41A6B2;
 }
+
+g[direction='_IB'] path{
+	fill:#AA3345;
+}
+
 
 .grower path {
 	fill-opacity:0.7;
@@ -318,6 +322,33 @@ div[val='_OB']{
 
 #dragger:active {
 	cursor:-webkit-grabbing;
+}
+
+
+
+
+.stopmarker {
+	cursor:pointer; 
+	fill:#fafafa;
+	-webkit-transition:all 0.3s;
+	stroke-width:1.5;
+	stroke-opacity:0.8;
+}
+
+.stopmarker[stoptype='terminal'] {
+	stroke-width:2;
+}
+
+.stopmarker:hover {
+	stroke-width:3.5px;
+}
+
+.stopmarker[direction='_OB']{
+	stroke:#41A6B2;
+}
+
+.stopmarker[direction='_IB']{
+	stroke:#AA3345;
 }
 
 #stoplabel{
@@ -380,25 +411,30 @@ g[highlighting='yes']:not(.zoomed) .busmarker:not(:hover) g path{
 	transform:scale(4,4);
 }
 
+
+
 .routepath {
 	stroke-dasharray: 3500;
 	stroke-dashoffset: 3500;	
-	stroke-width:2.5px;
+	stroke-width:3px;
 	pointer-events:none;
-	display:none;
 	-webkit-transition:all 3s ease-out;
 }
 
-.viewport[highlighting='yes'] .routepath {
+g[highlighting='no']:not(.zoomed) .routepath {
+	display:none;
+}
+.zoomed .routepath {
+	stroke-width:1.25px;
+	-webkit-transition:all 1s ease-out;
+	stroke-opacity:0.8;
+
+}
+
+#viewport[highlighting='yes'] .routepath {
 	display:block;
 }
 
-.zoomed .routepath {
-	stroke-width:2px;
-}
-.viewport[highlighting='yes'] .stopmarker {
-	display:none;
-}
 /*Label styling */
 .subtext {
 	fill:#aaa;
