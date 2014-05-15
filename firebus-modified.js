@@ -14,7 +14,6 @@ var f = new Firebase("https://publicdata-transit.firebaseio.com/sf-muni/data");
 function newBus(bus, firebaseId) {
 
     var marker_path= "M-5.392-5.018c-2.977,2.979-2.977,7.807,0,10.783c2.978,2.979,7.805,2.979,10.783,0c2.979-2.977,2.979-7.805,0-10.783l-5.392-5.391L-5.392-5.018z";
-    //var busLatLng = console.log('Bus #'+firebaseId+ ' ('+bus.id+') is at lat '+bus.lat+' and lon '+bus.lon);
 
 	//determine bus direction for marker color
     var direction= bus.dirTag && bus.dirTag.indexOf('OB') > -1 ? "_OB" : "_IB";
@@ -22,17 +21,18 @@ function newBus(bus, firebaseId) {
     //Creates a new bus marker
     var newmarker=d3.select('#markers').append('g');
 		
-			var xcoord=lonx(bus.lon);
-			var ycoord=laty(bus.lat);
+	var xcoord=lonx(bus.lon);
+	var ycoord=laty(bus.lat);
 	    newmarker.attr('style','-webkit-transform:translate('+xcoord+'px,'+ycoord+'px)')
 		.attr('class','busmarker '+'route'+bus.routeTag)
+		.attr('transform','scale3d(0,0,0)')		
 		.attr('id','bus'+firebaseId)
 		.attr('xcoord',xcoord+20)
 		.attr('ycoord',ycoord-10)
 		.attr('type',bus.vtype)
 		.attr('route',bus.routeTag)
 		.attr('direction', direction)
-		.attr('onclick','showbusesonline("'+bus.routeTag+'", "'+direction+'"), showroutestops("'+bus.routeTag+direction+'","'+directionColor+'");')
+		//.attr('onclick','showbusesonline("'+bus.routeTag+'", "'+direction+'"), showroutestops("'+bus.routeTag+direction+'","'+directionColor+'");')
 		.on('mouseover',function() {
 
 			//Fire only when the mouse isn't already held down (i.e. dragging)
@@ -48,7 +48,7 @@ function newBus(bus, firebaseId) {
 					var busname=json[bus.routeTag+direction]['Name'];							
 					var destination= function() {
 						if ($('.zoomed').length==0)
-							{return 'Click to zoom here'}
+							{return 'Click to inspect this line'}
 						else 
 							{return json[fudge(bus.routeTag+direction)]['Title'];}
 						}
@@ -73,8 +73,11 @@ function newBus(bus, firebaseId) {
 			var xcoordforlabel=d3.select(this).attr('xcoord');
 			var ycoordforlabel=d3.select(this).attr('ycoord');
 			zoomto(xcoordforlabel,ycoordforlabel);
+
+
+			showbusesonline(bus.routeTag,direction);
+			showroutestops(bus.routeTag+direction,directionColor,bus.vtype);			
 		})
-		.attr('transform','scale3d(0,0,0)')
 
 
 		.append('g')
@@ -92,7 +95,7 @@ function newBus(bus, firebaseId) {
 		.attr('y',5-(bus.routeTag.toString().length)) 
 		.attr('y',function(){if (bus.routeTag.toString().length<3){return 3} else{return 5-(bus.routeTag.toString().length)}})
 		
-		//fudge factor to position route number in the middle of the circle
+		//fudge font-size to position route number in the middle of the marker
 		.attr('font-size',function(){if (bus.routeTag.toString().length<3){return 8} else{return 10-(bus.routeTag.toString().length*1.5)}})
 		.attr('class','busmarkertext')
 		.text(bus.routeTag);
@@ -133,7 +136,6 @@ f.on("child_changed", function(s) {
   //existing bus
   else {
 
-
   	var bus=s.val();
   	var xcoord=lonx(s.val().lon);
 	var ycoord=laty(s.val().lat);
@@ -148,16 +150,21 @@ f.on("child_changed", function(s) {
 	    .attr('style','-webkit-transform:translate('+xcoord+'px,'+ycoord+'px)')
 		.attr('xcoord',xcoord+20)
 		.attr('ycoord',ycoord-10)   
-		.attr('direction',direction)		//sometimes a bus gets to its line's end and turns around and goes other way
+		.attr('direction',direction)		
 		.attr('route',route)
 	    .select('path')
 	    .attr('transform','rotate('+s.val().heading+')')
-		.attr('onclick','showroutestops("'+route+direction+'"), showbusesonline("'+route+'", "'+direction+'")')	    
+	    .attr('onclick','')
+		//.attr('onclick','showroutestops("'+route+direction+'"), showbusesonline("'+route+'", "'+direction+'")')	    
 		.on('click',function(){
 			var xcoordforlabel=d3.select(this).attr('xcoord');
 			var ycoordforlabel=d3.select(this).attr('ycoord');
 			zoomto(xcoordforlabel,ycoordforlabel);
-			//console.log('xcoord of '+d3.select(this).attr('xcoord'));
+
+			showbusesonline(bus.routeTag,direction);
+
+    		var directionColor = direction.indexOf('OB') > -1 ? outboundcolor : inboundcolor;			
+			showroutestops(bus.routeTag+direction,directionColor,bus.vtype);	
 		})			
 	
 	countbuses();

@@ -52,11 +52,11 @@ body {
   fill-opacity:0.8;
 }
 #viewport{
-	-webkit-transition:-webkit-transform 1s;	
+	-webkit-transition:-webkit-transform 0.5s;	
 }
 #viewport.zoomed {	
-	-webkit-transform: rotateX(25deg) rotateZ(0deg) scale(3);
-	-webkit-transition:all 1s;		
+	-webkit-transform: scale(3);
+	-webkit-transition:all 1.5s;		
 }
 #zoomout {
 	cursor:pointer; 
@@ -336,7 +336,7 @@ g[direction='_IB'] path{
 }
 
 .stopmarker[stoptype='terminal'] {
-	stroke-width:2;
+	stroke-width:3;
 }
 
 .stopmarker:hover {
@@ -430,7 +430,9 @@ g[highlighting='no']:not(.zoomed) .routepath {
 	stroke-opacity:0.8;
 
 }
-
+.zoomed circle[class='routepath'] {
+	display:none;
+}
 #viewport[highlighting='yes'] .routepath {
 	display:block;
 }
@@ -441,7 +443,7 @@ g[highlighting='no']:not(.zoomed) .routepath {
 }
 
 #labelrect {
-	fill-opacity:0.8;
+	fill-opacity:0.9;
 	fill:white;
 }
 /* Map features */

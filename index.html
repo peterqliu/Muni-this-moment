@@ -183,9 +183,8 @@
 		function zoomto(x,y) {
 
 			//if it's already in a zoomed state
-			if($('.zoomed').length!=0){
 				dragreset='yes';
-			}
+			
 
 
 			$('#viewport').attr('style','-webkit-transform-origin:'+(1.5*x-500)+' '+(1.7*y-400)+'; ');		
@@ -196,7 +195,7 @@
 
 			$('.viewport').attr('highlighting','no');
 			$('#zoomout').attr('style','');
-			$('#dragger').attr('style','-webkit-transform:translate(0,0); -webkit-transition:all 1s');
+			$('#dragger').attr('style','-webkit-transform:translate(0,0); -webkit-transition:all 1.5s');
 
 			removelabel();
 		};
@@ -210,13 +209,17 @@
 				if (targetbuses.length==0) {$('#searchreply').html('No results')}
 
 				else {
-					var horiz= targetbuses[0].getAttribute('xcoord');
-					var vert= targetbuses[0].getAttribute('ycoord');
+
+					//zoom in on the center bus in the DOM (more likely to be near center of map)
+					var middlebus= Math.ceil((targetbuses.length)*0.5);
+					var horiz= targetbuses[middlebus].getAttribute('xcoord');
+					var vert= targetbuses[middlebus].getAttribute('ycoord');
 
 					$('#searchreply').html(targetbuses.length+' found')
 					zoomto(horiz, vert);
 					showbusesonline(number,direction);
 					showroutestops(number+direction);
+					drawpath(number+direction);
 					$('input').blur();
 					//console.log(number+direction);
 				}
@@ -245,11 +248,10 @@
 		}
 
 		//draw bus route based on stops' positions only
-		function drawpath(routedir,color,marker){
+		function drawpath(routedir,marker){
 			$('.routepath').remove();
 
-
-
+				var directionColor = routedir.indexOf('OB') > -1 ? outboundcolor : inboundcolor;
 
 				d3.json('stops.refactored.v3.json',function(json){
 				
@@ -262,7 +264,7 @@
 						.attr('d',pathdata)
 						.attr('class','routepath')
 						.attr('fill','none')
-						.attr('stroke',color)
+						.attr('stroke',directionColor)
 						.attr('stroke-linecap','round')
 						.attr('stroke-linejoin','round');
 					setTimeout(function() { $('.routepath').attr('style','stroke-dashoffset:0'); }, 0);
@@ -280,22 +282,22 @@
 							.attr('r',4)
 							.attr('class','routepath coast')
 							//.attr('fill', 'none')
-							.attr('stroke',color)
+							.attr('stroke',directionColor)
 					}
 				})
 		}
 		//Emerge stop markers when a bus is clicked
-		function showroutestops(routedir,color){
+		function showroutestops(routedir,color,vtype){
 		
 			//clears previous stop markers
 			$('.stopmarker').remove();
 
 			if ($('.zoomed').length==1)	
 				{
-				drawpath(routedir,color);	
+				drawpath(routedir);	
 
 				setTimeout(function(){
-					d3.select('#busstops').moveToFront();
+					d3.selectAll('#busstops').moveToFront();
 					d3.selectAll('.selected').moveToFront();
 				},10);	
 				}
@@ -312,6 +314,7 @@
 				.append("circle")
 				.attr("r", 0)
 				.attr('class','stopmarker')
+				.attr('tag',function(d,i){return data[i]['Tag']})
 				.attr('stoptype',function(d,i) {if (i!=0 && i!=data.length-1){return 'stop'} else {return 'terminal'}})
 				.attr('direction',function(d,i) {if (routedir.indexOf('OB')> -1) {return '_OB'} else {return '_IB'}})
 				.attr('cx',function(d,i){return data[i]['xpos']})
@@ -325,7 +328,11 @@
 													else {if (i==0) {return 'Inbound line departs here'}  if (i==data.length-1){return 'Inbound line ends here'} else {return 'Inbound stop'}}};
 					makelabel(data[i]['xpos'], data[i]['ypos'], data[i]['Intersection'], color, stopdirection);
 
-		
+					//get bus prediction
+					var stoptag=$(this)[0].getAttribute('tag');
+					var justtheroute=routedir.substr(0,routedir.lastIndexOf("_"));
+					
+					getprediction(justtheroute,stoptag, vtype);		
 				})
 				.on('mouseout', function (){
 					removelabel();
@@ -359,7 +366,7 @@
 		function zoombackout() {
 			dragreset='yes';
 			$('.viewport').attr('highlighting','no');						
-			$('#dragger').attr('style','-webkit-transform:translate(0,0); -webkit-transition:all 1s');
+			$('#dragger').attr('style','-webkit-transform:translate(0,0); -webkit-transition:-webkit-transform 1s');
 			$('#view').attr('class','');
 			$('#zoomout').attr('style','opacity:0');
 
@@ -465,6 +472,78 @@
 		}
 		
 
+
+		function getprediction(route, stoptag, vtype) {
+			var targeturl='http://webservices.nextbus.com/service/publicXMLFeed?command=predictions&a=sf-muni&r='+route+'&s='+stoptag;
+			console.log(targeturl);
+			
+			$.ajax({
+		      	dataType: "xml",
+		      	url: targeturl,
+		      	success: function(response) {		  
+		      		var result=response;
+		      		
+			  		var path="//prediction/@seconds";
+
+			  		var nodes=result.evaluate(path, result, null, XPathResult.ANY_TYPE, null);
+					var result=nodes.iterateNext();
+					window.predictionlist=[];
+					while (result)
+						{
+							predictionlist.push(result.childNodes[0].nodeValue);  
+							result=nodes.iterateNext();
+						}
+				
+					console.log(predictionlist);
+					
+					function timeconverter(seconds){
+						var minutes=Math.round(seconds/60);
+						if(seconds<60){ return seconds+' seconds'}
+						
+						else {
+							if(minutes>1){return minutes+' minutes'}
+							else {return minutes+' minute'}
+						}
+					}
+					
+					$('.subtext').text('Next '+vtype+' in '+timeconverter(predictionlist[0]));
+					
+					//resize background rectangle
+					$('#labelrect').attr('width',function(){return Math.max($('#stoplabel')[0].getComputedTextLength(), $('.subtext')[0].getComputedTextLength())+12})	
+
+		      	}
+		    });
+		}
+		
+		function w3schools(route, stoptag, vtype) {
+		
+		
+			function loadXMLDoc(dname)
+				{
+				xhttp=new XMLHttpRequest();
+				xhttp.open("GET",dname,false);
+				xhttp.send("");
+				return xhttp;
+				}
+		
+		
+			var targeturl='http://webservices.nextbus.com/service/publicXMLFeed?command=predictions&a=sf-muni&r='+route+'&s='+stoptag;
+			var x=loadXMLDoc(targeturl);
+			var xml=x.responseXML;
+			var path="/body/predictions/direction/@seconds";
+			
+			var nodes=xml.evaluate(path, xml, null, XPathResult.ANY_TYPE, null);
+			var result=nodes.iterateNext();
+			window.predictionlist=[];
+
+			while (result)
+			  {
+				  predictionlist.push(result.childNodes[0].nodeValue);
+				  console.log(result.childNodes[0].nodeValue);
+				  result=nodes.iterateNext();  
+			  }
+			console.log(xml);
+		}		
     </script>
 
 
