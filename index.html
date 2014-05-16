@@ -11,7 +11,7 @@
 	<link rel="stylesheet" href="style.css">
 	<title>Muni, this moment</title>
 </head>
-<body>
+<body class='water'>
 	<div style='display:none'>
 		<img src='teaser.png'>
 		<img src='teaser2.png'>
@@ -19,6 +19,7 @@
 		<img src='teaser4.png'>		
 	</div>
 	<div style="opacity:0" onclick='zoombackout()' id='zoomout'><br>Zoom<br>out</div>
+	
 	<div id='satellite' style='display:none'>Finding your location...</div>
 	<div id='loader'>
 
@@ -143,7 +144,7 @@
 	    		.attr('r',4)	
 	    		.on('mouseover',function(){
 	    			var position= Math.round(lat*1000)/1000+' latitude, '+Math.round(lon*1000)/1000+' longitude';
-	    			makelabel(lonx(lon),laty(lat),"That's you!",'orange','(Location based on IP address)')})
+	    			makelabel(lonx(lon),laty(lat),"That's you!",'purple','(Location based on IP address)')})
 	    		.on('click', function(){
 	    			var myx= $(this)[0].getAttribute('cx');
 	    			var myy= $(this)[0].getAttribute('cy');
@@ -280,10 +281,14 @@
 							.attr('cx',endcaps[k*2])
 							.attr('cy',endcaps[(k*2)+1])
 							.attr('r',4)
+							.attr('id','endcap')
 							.attr('class','routepath coast')
 							//.attr('fill', 'none')
 							.attr('stroke',directionColor)
 					}
+
+					d3.selectAll('#busstops').moveToFront();
+					d3.selectAll('.selected').moveToFront();
 				})
 		}
 		//Emerge stop markers when a bus is clicked
@@ -408,7 +413,8 @@
 							.attr('y',15)
 							.attr('font-size',8)
 							.attr('fill',textcolor)
-							.text(text)						
+							.text(text)
+							.attr('font-weight','500')						
 							.attr('id','stoplabel');
 
 						d3.select('#busstoplabels')
@@ -475,8 +481,10 @@
 
 		function getprediction(route, stoptag, vtype) {
 			var targeturl='http://webservices.nextbus.com/service/publicXMLFeed?command=predictions&a=sf-muni&r='+route+'&s='+stoptag;
-			console.log(targeturl);
-			
+
+			//set default vehicle type to 'bus' (in case the data provides an 'undefined')
+			function vehicle(input) {if (input=='train'){return 'train'} else {return 'bus'}};
+
 			$.ajax({
 		      	dataType: "xml",
 		      	url: targeturl,
@@ -487,15 +495,16 @@
 
 			  		var nodes=result.evaluate(path, result, null, XPathResult.ANY_TYPE, null);
 					var result=nodes.iterateNext();
-					window.predictionlist=[];
+					var predictionlist=[];
 					while (result)
 						{
+							//grabs all available predictions for that route and stop
 							predictionlist.push(result.childNodes[0].nodeValue);  
 							result=nodes.iterateNext();
 						}
-				
-					console.log(predictionlist);
-					
+
+
+					//converts seconds to minutes, if necessary				
 					function timeconverter(seconds){
 						var minutes=Math.round(seconds/60);
 						if(seconds<60){ return seconds+' seconds'}
@@ -506,44 +515,17 @@
 						}
 					}
 					
-					$('.subtext').text('Next '+vtype+' in '+timeconverter(predictionlist[0]));
-					
-					//resize background rectangle
-					$('#labelrect').attr('width',function(){return Math.max($('#stoplabel')[0].getComputedTextLength(), $('.subtext')[0].getComputedTextLength())+12})	
+					// if the prediction actually returns a number (instead of NaN)
+					if (predictionlist[0]>0){
+						$('.subtext').text('Next '+vehicle(vtype)+' in '+timeconverter(predictionlist[0]));
 
+						//resize background rectangle
+						$('#labelrect').attr('width',function(){return Math.max($('#stoplabel')[0].getComputedTextLength(), $('.subtext')[0].getComputedTextLength())+12})	
+					}
 		      	}
 		    });
 		}
-		
-		function w3schools(route, stoptag, vtype) {
-		
-		
-			function loadXMLDoc(dname)
-				{
-				xhttp=new XMLHttpRequest();
-				xhttp.open("GET",dname,false);
-				xhttp.send("");
-				return xhttp;
-				}
-		
-		
-			var targeturl='http://webservices.nextbus.com/service/publicXMLFeed?command=predictions&a=sf-muni&r='+route+'&s='+stoptag;
-			var x=loadXMLDoc(targeturl);
-			var xml=x.responseXML;
-			var path="/body/predictions/direction/@seconds";
 			
-			var nodes=xml.evaluate(path, xml, null, XPathResult.ANY_TYPE, null);
-			var result=nodes.iterateNext();
-			window.predictionlist=[];
-
-			while (result)
-			  {
-				  predictionlist.push(result.childNodes[0].nodeValue);
-				  console.log(result.childNodes[0].nodeValue);
-				  result=nodes.iterateNext();  
-			  }
-			console.log(xml);
-		}		
     </script>
 
 

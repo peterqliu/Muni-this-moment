@@ -1,8 +1,10 @@
 <svg x="0px" y="0px" width="100%" height="100%" viewBox="200 200 1400 1000" style='	background:#B8C8D3;
 '>
 	<style>
+
+
 		.coast {
-			fill:#FaF9F4;
+			fill:#FdFcF7;
 		}
 		.street {
 			fill:none;
@@ -33,7 +35,7 @@
 			display:none;
 		}
 		.park {
-			fill:#E6FCEA;
+			fill:#E9F4EA;
 			fill-opacity:0.6;
 		}
 
@@ -42,7 +44,7 @@
 		}
 
 		.feature {
-			fill:#C3D3C2;
+			fill:#d6e6d5;
 			fill-opacity:0.4;			
 		}
 
@@ -67,7 +69,7 @@
 		}
 
 		#parklabel {
-		fill:#5E7A5F;
+		fill:#b3c3b2;
 		}
 
 	</style>
@@ -13538,7 +13540,7 @@
 <tspan  font-family="'Verdana'" font-size="8" letter-spacing="3600">MARIN COUNTY</tspan>	</textPath>
 </text>
 	<path fill="none" d="M395.511,546.6c43.846-126.104,181.367-192.666,307.471-148.819"/>
-	<text transform="matrix(0.5596 -0.8287 0.8287 0.5596 422.2124 492.4902)"><tspan>P</tspan><tspan x="36.476" y="2.416" rotate="8.83">R</tspan><tspan x="72.896" y="10.571" rotate="17.659">E</tspan><tspan x="107.152" y="24.008" rotate="26.423">S</tspan><tspan x="139.333" y="42.73" rotate="34.974">I</tspan><tspan x="166.759" y="64.716" rotate="43.635">D</tspan><tspan x="192.389" y="92.62" rotate="52.332">I</tspan><tspan x="211.979" y="121.779" rotate="61.082">O</tspan></text>
+	<text id='parklabel' transform="matrix(0.5596 -0.8287 0.8287 0.5596 422.2124 492.4902)"><tspan>P</tspan><tspan x="36.476" y="2.416" rotate="8.83">R</tspan><tspan x="72.896" y="10.571" rotate="17.659">E</tspan><tspan x="107.152" y="24.008" rotate="26.423">S</tspan><tspan x="139.333" y="42.73" rotate="34.974">I</tspan><tspan x="166.759" y="64.716" rotate="43.635">D</tspan><tspan x="192.389" y="92.62" rotate="52.332">I</tspan><tspan x="211.979" y="121.779" rotate="61.082">O</tspan></text>
 	<path fill="none" d="M166.842,996.498c43.846-126.104,181.367-192.666,307.471-148.819"/>
 	<text transform="matrix(0.7321 -0.6812 0.6812 0.7321 228.0156 901.1318)"><tspan>O</tspan><tspan x="37.97" y="2.509" rotate="8.985">U</tspan><tspan x="74.651" y="10.809" rotate="17.769">T</tspan><tspan x="108.781" y="24.268" rotate="26.462">E</tspan><tspan x="140.577" y="42.793" rotate="35.268">R</tspan></text>
 	<path fill="none" d="M190.842,1037.498c43.846-126.104,181.367-192.666,307.471-148.819"/>
@@ -13587,8 +13589,8 @@
 </g>
 
 			<radialGradient id="gradientcircle_1_" cx="3350" cy="2400" r="2350" gradientTransform="matrix(0.5 0 0 0.4 -1040.6807 -288.8032)" gradientUnits="userSpaceOnUse">
-				<stop  offset="0.92" style="stop-color:#B7C7D2;stop-opacity:0"/>
-				<stop  offset="1" style="stop-color:#B7C7D2"/>
+				<stop class='water' offset="0.92" style="stop-opacity:0"/>
+				<stop class='water' offset="1" />
 			</radialGradient>
 			
 			<rect id="gradientcircle" x="-894.829" y="-800" fill="url(#gradientcircle_1_)" width="3295.309" height="2482.464"/>

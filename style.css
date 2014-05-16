@@ -7,7 +7,11 @@ body {
 	-ms-user-select: none;      
 	user-select: none;		
 }
-
+.water {
+	fill:#B8C8D3;
+	background:#B8C8D3;
+	stop-color:#B7C7D2;
+}
 #svg {
 	-webkit-transition:all 0.5s;
 	-webkit-transform-style: preserve-3d;
@@ -100,13 +104,14 @@ body {
 	top:10px; 
 	padding:20px; 
 	background:white;
-	opacity:0.9;
+	opacity:0.95;
 	width:15%;
 	min-width:265px;
 	-webkit-perspective:600px;
 	font-size: 0.8em;
 	border-radius:3px;
 	color:#666;
+	border:1px solid #ddd;
 
 }
 
@@ -429,6 +434,10 @@ g[highlighting='no']:not(.zoomed) .routepath {
 	-webkit-transition:all 1s ease-out;
 	stroke-opacity:0.8;
 
+}
+
+.zoomed circle[id='endcap'] {
+	display:none;
 }
 .zoomed circle[class='routepath'] {
 	display:none;
