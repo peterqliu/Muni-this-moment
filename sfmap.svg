@@ -61,7 +61,7 @@
 		font-size:8;
 		letter-spacing:5;
 		font-style:italic;
-		fill:#CDC9BA;
+		fill:#ddd;
 		}
 
 		.zoomed #neighborhoods {

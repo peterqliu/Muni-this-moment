@@ -19,7 +19,7 @@
 		<img src='teaser4.png'>		
 	</div>
 	<div style="opacity:0" onclick='zoombackout()' id='zoomout'><br>Zoom<br>out</div>
-	
+
 	<div id='satellite' style='display:none'>Finding your location...</div>
 	<div id='loader'>
 
@@ -396,10 +396,10 @@
 		window.labelscalefactor;
 
 		//make label
-		function makelabel(x,y,text,textcolor,subtext) {
+		function makelabel(x,y,text,textcolor,subtext,directiontag) {
 					removelabel();
 					if ($('.zoomed').length==0) {
-						labelscalefactor=' scale(1.8)';
+						labelscalefactor=' scale(2)';
 					}
 					else {labelscalefactor=' scale(1)'}
 					d3.selectAll('#stoplabel').remove();
@@ -410,27 +410,36 @@
 							.attr('transform','translate('+(x+8)+' '+(y-10)+') '+labelscalefactor)					
 							.append('text')
 							.attr('x',6)
-							.attr('y',15)
+							.attr('y',13)
 							.attr('font-size',8)
-							.attr('fill',textcolor)
+							.attr('fill','#666')
 							.text(text)
 							.attr('font-weight','500')						
-							.attr('id','stoplabel');
+							.attr('id','stoplabel')
+							.attr('class','heading');
 
 						d3.select('#busstoplabels')
 							.append('text')
 							.attr('x',6)
-							.attr('y',25)
+							.attr('y',22)
 							.attr('font-size',6)
 							.text(subtext)						
 							.attr('id','stoplabel')
+							.attr('class','subtext')
+							.append('tspan')
+							.attr('class','directionspecifier')
+							.attr('fill',textcolor)
+							.attr('font-weight','bold')
+							.text(directiontag)
+							.append('tspan')
+							.text(' line')
 							.attr('class','subtext');
 						
 						//create background rectangle for label
 						d3.select('#busstoplabels')
 							.insert('rect','text')
 							.attr('width',function(){return Math.max($('#stoplabel')[0].getComputedTextLength(), $('.subtext')[0].getComputedTextLength())+12})	
-							.attr('height',32)
+							.attr('height',28)
 							.attr('id','labelrect');
 					}
 						
@@ -522,6 +531,8 @@
 						//resize background rectangle
 						$('#labelrect').attr('width',function(){return Math.max($('#stoplabel')[0].getComputedTextLength(), $('.subtext')[0].getComputedTextLength())+12})	
 					}
+
+					else {$('.subtext').append(' (no current prediction)')}
 		      	}
 		    });
 		}

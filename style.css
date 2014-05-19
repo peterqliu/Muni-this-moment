@@ -412,9 +412,7 @@ g[highlighting='yes']:not(.zoomed) .busmarker:not(:hover) g path{
 	display:none;
 }
 
-#busstoplabels {
-	transform:scale(4,4);
-}
+
 
 
 
@@ -435,20 +433,29 @@ g[highlighting='no']:not(.zoomed) .routepath {
 	stroke-opacity:0.8;
 
 }
+#endcap {
+	display:none;
+}
 
-.zoomed circle[id='endcap'] {
-	display:none;
-}
-.zoomed circle[class='routepath'] {
-	display:none;
-}
-#viewport[highlighting='yes'] .routepath {
+g:not(.zoomed)[highlighting='yes'] #endcap {
 	display:block;
 }
 
+
+
 /*Label styling */
+g[highlighting='no']:not(.zoomed) #busstoplabels {
+	display:none;
+}
+.heading {
+}
 .subtext {
 	fill:#aaa;
+	font-weight: normal;
+}
+
+.zoomed .directionspecifier {
+	display:none;
 }
 
 #labelrect {
