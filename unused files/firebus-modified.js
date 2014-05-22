@@ -137,10 +137,12 @@ f.on("child_changed", function(s) {
     var direction= bus.dirTag && bus.dirTag.indexOf('OB') > -1 ? "_OB" : "_IB";
     var route=bus.routeTag;
 
-    //detect if bus changed direction
+    //if bus changed direction, update the routes they bring up
     if(direction!=d3.select('#bus'+busMarker).attr('direction'))
-    	{console.log('a bus just changed their direction!');
+    	{
     	d3.select('#bus'+busMarker)
+		.attr('direction',direction)		
+		.attr('route',route)    	
     	.on('click',null)
     	.on('mouseover',null)
     	.on('mouseleave',null)
@@ -191,13 +193,11 @@ f.on("child_changed", function(s) {
 			$('.viewport').attr('highlighting','no');
 		})
 		}
-		
+
 	$('#bus'+busMarker)
 	    .attr('style','-webkit-transform:translate('+xcoord+'px,'+ycoord+'px)')
 		.attr('xcoord',xcoord+20)
 		.attr('ycoord',ycoord-10)   
-		.attr('direction',direction)		
-		.attr('route',route)
 	    .select('path')
 	    .attr('transform','rotate('+s.val().heading+')')
 	    .attr('onclick','')

@@ -1,11 +1,13 @@
 <html>
 <head>
+	<link rel="shortcut icon" type="image/png" href="favicon.png"/>
     <meta charset="utf-8">	
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="http://www.peterma.de/munithismoment" />
 	<meta property="og:title" content="Muni, this moment" />
 	<meta property="og:image" content="http://peterma.de/munithismoment/teaser.png" />
-
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
 
 
 	<link rel="stylesheet" href="style.css">
@@ -18,15 +20,24 @@
 		<img src='teaser3.png'>
 		<img src='teaser4.png'>		
 	</div>
-	<div style="opacity:0" onclick='zoombackout()' id='zoomout'><br>Zoom<br>out</div>
+	<div style="display:none;pointer-events:none;" onclick='zoombackout()' id='zoomout'>
+<svg width="60px" height="60px" viewBox="20 20 60 60" enable-background="new 20 20 60 60">
+<g fill='#333'>
+	<path d="M49.128,40.498c-2.854,2.858-2.854,7.492,0,10.35c2.854,2.858,7.479,2.858,10.334,0c2.853-2.858,2.853-7.491,0-10.35
+		C56.607,37.64,51.982,37.64,49.128,40.498z M57.965,46.439c0,0.362-0.297,0.657-0.656,0.657h-5.98
+		c-0.361,0-0.656-0.295-0.656-0.657v-1.32c0-0.361,0.295-0.657,0.656-0.657h5.98c0.359,0,0.656,0.296,0.656,0.657V46.439z"/>
+	<path d="M50,20c-16.568,0-30,13.432-30,30s13.432,30,30,30s30-13.432,30-30S66.568,20,50,20z M62.288,53.678
+		c-5.379,5.369-11.554,2.7-11.554,2.7c-1.161-0.501-2.841-0.18-3.734,0.716l-7.823,7.836c-0.894,0.894-2.355,0.894-3.249,0
+		l-0.859-0.861c-0.894-0.895-0.894-2.359,0-3.252l7.823-7.837c0.893-0.894,1.256-2.594,0.806-3.776c0,0-2.541-6.672,2.604-11.536
+		c4.54-4.292,11.57-4.421,15.985,0C66.699,42.088,66.709,49.263,62.288,53.678z"/>
+</g>
+</svg>
+	</div>
 
-	<div id='satellite' style='display:none'>Finding your location...</div>
 	<div id='loader'>
 
 
-	<svg  width="300px" height="300px" style='margin-top:200px'>
-
-		
+	<svg width="300px" height="300px" style='margin-top:200px'>		
 		<radialGradient id="SVGID_1_" cx="141.2695" cy="142.6191" r="136.5" gradientTransform="matrix(1.0989 0 0 1.0989 -5.2419 -6.7253)" gradientUnits="userSpaceOnUse">
 			<stop  offset="0" style="stop-color:#FFFFFF"/>
 			<stop  offset="1" style="stop-color:#FFFFFF;stop-opacity:0"/>
@@ -38,60 +49,46 @@
 		<text x='150' y='210' text-anchor='middle' id='loadermessage'>Fetching buses...</text>
 	</svg>
 
-
-
-
-
-
 </div>
-	<div id='svg' class='blurred'></div>
+<div id='svg' class='blurred'></div>
 	<div id='maindialog' >
-		<h3>Muni, this moment</h3>
-		<span id='busquant'></span> buses, <span id='trainquant'></span> trains active
-		<p>
-		This is a live map of San Francisco's Muni system, as reported by NextBus. Click to inspect any line.
-	</p>
-	<p class='subhead'>Look nearby (SF only)</p><div id='findme' onclick='gps()'>Find me</div>
-
-	<p class='subhead'>Find a specific line</p>
-	<div class='inputbubble'id='routedirection' val='_OB' onclick='$("#routenumber").focus()'>
-		<div class="onoffswitch">
-		    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch">
-		    <label class="onoffswitch-label" for="myonoffswitch">
-		        <div class="onoffswitch-inner">
-		        	<span id='IB' onclick='$("#routedirection").attr("val","_OB");lookup()'>Inbound</span>
-		        	<span id='OB' onclick='$("#routedirection").attr("val","_IB");lookup()'>Outbound</span>		        	
-
-		        </div>
-		        <div class="onoffswitch-switch" ></div>
-		    </label>
+		<div class='title'>Muni, this moment</div>
+		<div><img src='assets/bus.svg'>
+			<span id='busquant'></span> <img src='assets/train.svg'><span id='trainquant'></span>
+			<span id='findme' onclick='gps()'>
+				<img src='assets/location.svg'>
+				Look nearby
+			</span>
 		</div>
-			<input type='text' placeholder='Line #' id='routenumber' onkeydown="$('#searchreply').html(''); if (event.keyCode == 13) {lookup()}"/>
-			<span id='searchreply' style='float:right;margin: 6px; opacity: 0.8;'></span>
-	</div>
+		<div class='inputbubble'id='routedirection' val='_OB' onclick='$("#routenumber").focus()'>
+			<div class="onoffswitch">
+			    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch">
+			    <label class="onoffswitch-label" for="myonoffswitch">
+			        <div class="onoffswitch-inner">
+			        	<span id='IB' onclick='$("#routedirection").attr("val","_OB");lookup()'>Inbound</span>
+			        	<span id='OB' onclick='$("#routedirection").attr("val","_IB");lookup()'>Outbound</span>		        	
 
-
-
-	
-
-
-
-		<div class='flipper' style='display:none' onclick='$(this).toggleClass("flipped")' direction='_IB'>
-			<div class='side' id='out' onclick="$('.flipper').attr('direction','_IB')">
-				Outbound &#x25BC;
+			        </div>
+					<svg class="onoffswitch-switch" width="18px" height="13px">
+						<polygon points="10,11 17,7 10,3 "/>
+						<polygon points="7,3 0,7 7,11 "/>
+					</svg>
+			    </label>
 			</div>
-			<div class='side' id='in' onclick="$('.flipper').attr('direction','_OB')">
-				Inbound &#x25BC;
-			</div>			
+				<input type='text' placeholder='Search by line #' id='routenumber' onkeydown="$('#searchreply').html(''); if (event.keyCode == 13) {lookup()}"/>
+				<span id='searchreply' style='position:absolute;right:125px;padding: 5px; opacity: 0.8;'></span>
 		</div>
 
+		<p id='byline'>
+			Produced by Peter Liu
+		<a class='right' href="https://github.com/peterqliu/Muni-this-moment">View on Github</a>
+		</p>
 
 	</div>
 
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<script src="d3.v3.min.js" charset="utf-8"></script>
     <script src="firebase.js"></script>
-    <script src="firebus-modified.js"></script>
+    <script src="everybus.js"></script>
 	<script src="pep.edited.min.js"></script>
 
 
@@ -207,12 +204,12 @@
 			var targetbuses=$('g[route='+number+'][direction="'+direction+'"]');
 
 			if (number.length!=0){
-				if (targetbuses.length==0) {$('#searchreply').html('No results')}
+				if (targetbuses.length==0) {$('#searchreply').html('No results'); console.log('nonereturned')}
 
 				else {
 
 					//zoom in on the center bus in the DOM (more likely to be near center of map)
-					var middlebus= Math.ceil((targetbuses.length)*0.5);
+					var middlebus= Math.ceil((targetbuses.length)*0.5)-1;
 					var horiz= targetbuses[middlebus].getAttribute('xcoord');
 					var vert= targetbuses[middlebus].getAttribute('ycoord');
 
@@ -335,9 +332,8 @@
 
 					//get bus prediction
 					var stoptag=$(this)[0].getAttribute('tag');
-					var justtheroute=routedir.substr(0,routedir.lastIndexOf("_"));
 					
-					getprediction(justtheroute,stoptag, vtype);		
+					getprediction(routedir,stoptag, vtype);		
 				})
 				.on('mouseout', function (){
 					removelabel();
@@ -399,7 +395,7 @@
 		function makelabel(x,y,text,textcolor,subtext,directiontag) {
 					removelabel();
 					if ($('.zoomed').length==0) {
-						labelscalefactor=' scale(2)';
+						labelscalefactor=' scale(2.2)';
 					}
 					else {labelscalefactor=' scale(1)'}
 					d3.selectAll('#stoplabel').remove();
@@ -429,7 +425,7 @@
 							.append('tspan')
 							.attr('class','directionspecifier')
 							.attr('fill',textcolor)
-							.attr('font-weight','bold')
+							.attr('font-weight','400')
 							.text(directiontag)
 							.append('tspan')
 							.text(' line')
@@ -456,7 +452,7 @@
 			  var busquant=$('[type="bus"]').length;
 			  var trainquant=$('[type="train"]').length;
 
-			  $('#busquant').text(busquant);
+			  $('#busquant').text(busquant+' ');
 			  $('#trainquant').text(trainquant);
 		}		
 		//Update user position		
@@ -465,10 +461,12 @@
 
 		window.finding=setInterval(function() {
 			if ($('#iamhere').length==0) {
-				$('#loadermessage').text('Finding your position...');
+				$('#loadermessage').text('Getting your position...');
 				$('#spinner').attr('fill','purple');
 				$('#svg').addClass('blurred');
 				$('#loader').show();
+				$('.routepath').remove();
+				$('.stopmarker').remove();
 
 				geoPosition.getCurrentPosition(get_latlon, show_map_error);
 				current_location(lat,lon); console.log('poll'); 
@@ -488,21 +486,28 @@
 		
 
 
-		function getprediction(route, stoptag, vtype) {
-			var targeturl='http://webservices.nextbus.com/service/publicXMLFeed?command=predictions&a=sf-muni&r='+route+'&s='+stoptag;
+		function getprediction(routedir, stoptag, vtype) {
+			
+			//strips direction from routedir
+			var justtheroute=routedir.substr(0,routedir.lastIndexOf("_"));
+			var targeturl='http://webservices.nextbus.com/service/publicXMLFeed?command=predictions&a=sf-muni&r='+justtheroute+'&s='+stoptag;
+
+			var directionColor = routedir.indexOf('OB') > -1 ? outboundcolor : inboundcolor;
+			var heading = routedir.indexOf('OB') > -1 ? 'outbound' : 'inbound';			
 
 			//set default vehicle type to 'bus' (in case the data provides an 'undefined')
 			function vehicle(input) {if (input=='train'){return 'train'} else {return 'bus'}};
+
+			//retrieve data via asynchronous call
 
 			$.ajax({
 		      	dataType: "xml",
 		      	url: targeturl,
 		      	success: function(response) {		  
-		      		var result=response;
 		      		
 			  		var path="//prediction/@seconds";
 
-			  		var nodes=result.evaluate(path, result, null, XPathResult.ANY_TYPE, null);
+			  		var nodes=response.evaluate(path, response, null, XPathResult.ANY_TYPE, null);
 					var result=nodes.iterateNext();
 					var predictionlist=[];
 					while (result)
@@ -526,13 +531,19 @@
 					
 					// if the prediction actually returns a number (instead of NaN)
 					if (predictionlist[0]>0){
-						$('.subtext').text('Next '+vehicle(vtype)+' in '+timeconverter(predictionlist[0]));
-
-						//resize background rectangle
-						$('#labelrect').attr('width',function(){return Math.max($('#stoplabel')[0].getComputedTextLength(), $('.subtext')[0].getComputedTextLength())+12})	
+						d3.select('.subtext')
+							.text('Next '+heading+' '+vehicle(vtype)+' in ')
+							.append('tspan')
+							.attr('fill',directionColor)
+							.attr('font-weight','400')
+							.text(timeconverter(predictionlist[0]));
 					}
 
+					//if not, just say that there's no available prediction
 					else {$('.subtext').append(' (no current prediction)')}
+
+					//resize background rectangle to fit new text
+					$('#labelrect').attr('width',function(){return Math.max($('#stoplabel')[0].getComputedTextLength(), $('.subtext')[0].getComputedTextLength())+12})							
 		      	}
 		    });
 		}

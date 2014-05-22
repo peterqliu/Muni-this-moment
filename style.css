@@ -1,16 +1,18 @@
+
 body {
 	margin:0px;
 	-webkit-perspective:900px;
-	font-family:Verdana, sans-serif;	
+	font-family: 'Open Sans', Verdana, sans-serif;
+	font-weight:400;	
 	-webkit-user-select: none;  
 	-moz-user-select: none;    
 	-ms-user-select: none;      
 	user-select: none;		
 }
 .water {
-	fill:#B8C8D3;
-	background:#B8C8D3;
-	stop-color:#B7C7D2;
+	fill:#BACAD5;
+	background:#BACAD5;
+	stop-color:#B9C9D4;
 }
 #svg {
 	-webkit-transition:all 0.5s;
@@ -33,7 +35,7 @@ body {
 }
 
 #loadermessage {
-	fill:#999;
+	fill:#aaa;
 }
 /*Loading spinner */
 @-webkit-keyframes spinner {
@@ -63,19 +65,15 @@ body {
 	-webkit-transition:all 1.5s;		
 }
 #zoomout {
+	display:block;
 	cursor:pointer; 
 	position:absolute;
 	left:20px; 
 	top:20px; 
-	background:#333;
-	color:white; 
-	width:80px;
-	height:80px;
-	text-align:center;
-	border-radius:50%; 
-	opacity:0.7;
+	color:#666; 
+	opacity:0.5;
 	z-index: 1;
-	-webkit-transition:all 0.5s;
+	-webkit-transition:opacity 0.5s;
 }
 
 #zoomout:hover {
@@ -85,42 +83,45 @@ body {
 
 /* Interface elements */
 #findme {
-	cursor:pointer; 
-	background:#666;
-	color:white; 
 	text-align:center;
-	opacity:0.7;
 	-webkit-transition:all 0.5s;
-	display: inline;
-	float: right;
-	padding: 7px;
-	border-radius: 3px;	
-	margin-top:-35px;
+	display: inline-block;
+	font-weight:300;
+	cursor:hand;
+	fill:purple;
+	color:purple;
+	font-size:1.2em;
 }
 
 #maindialog {
 	position:absolute; 
-	right:10px; 
-	top:10px; 
-	padding:20px; 
+	bottom:20px;
+	right:20px; 
+	padding:18px; 
 	background:white;
 	opacity:0.95;
-	width:15%;
-	min-width:265px;
-	-webkit-perspective:600px;
+	width:280px;
 	font-size: 0.8em;
-	border-radius:3px;
 	color:#666;
 	border:1px solid #ddd;
+	letter-spacing: 0.05em;
+	border-radius:3px;
 
 }
 
 .blurred ~ #maindialog {
 	display:none;
 }
-
+.title {
+	font-size:2em;
+	font-weight: 300;
+	margin-top:6px;
+	color:#333;
+	letter-spacing: 0.05em;
+}
 input,form {
 	margin:0;
+	font-family: inherit;
 }
 
 input:focus {
@@ -157,18 +158,23 @@ h3 {
 	text-transform: uppercase;
 	fill-opacity:0.6;
 	margin-top:20px;
+}
 
+#byline {
+	color:#aaa;
+	font-size:0.9em;
+	margin-bottom:0px;
 }
 /*Slider switch */
 
 .onoffswitch {
 	display:inline-block;
 	position: relative; 
-	width: 100px;
+	width: 105px;
 	-webkit-user-select:none; 
 	-moz-user-select:none; 
 	-ms-user-select: none;
-	float:left;
+	float:right;
 }
 
 .onoffswitch-checkbox {
@@ -181,40 +187,40 @@ h3 {
 	cursor: pointer;
 }
 .onoffswitch-inner {
-	width: 200%; margin-left: -100%;
+	width: 200%; 
+	margin-left: -100%;
 	-moz-transition: margin 0.3s ease-in 0s; -webkit-transition: margin 0.3s ease-in 0s;
 	-o-transition: margin 0.3s ease-in 0s; transition: margin 0.3s ease-in 0s;
 }
+
 #IB, #OB {
 	float: left; 
 	width: 50%; 
-	color: white; 
-	line-height: 30px;
+	line-height: 28px;
+	background:#fafafa;
+	font-weight:600;
 	-moz-box-sizing: border-box; 
 	-webkit-box-sizing: border-box; 
 	box-sizing: border-box;
 }
 #IB {
 	padding-left: 10px;
-	background: #AA3345;
+	color: #AA3345;
 }
 #OB {
 	padding-right: 10px;
-	background: #41A6B2;
+	color: #41A6B2;
 	text-align: right;
 }
 .onoffswitch-switch {
-	width: 12px; 
-	height:12px;
 	margin: 7px;
-	background: #FFFFFF;
-	border: 2px solid #ccc; 
-	border-radius: 50%;
+	font-size: 0.05em;
 	position: absolute;
-	right: 70px;
+	right: 72px;
 	-moz-transition: all 0.3s ease-in 0s; -webkit-transition: all 0.3s ease-in 0s;
 	-o-transition: all 0.3s ease-in 0s; transition: all 0.3s ease-in 0s; 
 	pointer-events:none;
+	fill-opacity:0.8;
 }
 .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
 	margin-left: 0;
@@ -226,24 +232,48 @@ h3 {
 
 .switch div{
 	background:#eee;
-	padding:4px 0px;
+	padding:2px 0px;
 }
 
 .inputbubble {
-	height:30px;
+	height:28px;
 	border-radius:3px;
 	overflow:hidden;
+	width:100%;
+	display:inline-block;
+	margin-top:15px;
 }
-div[val='_IB']{
+div[val='_IB'] {
 	border:1px solid #AA3345;
 }
-div[val='_OB']{
+
+div[val='_IB'] .onoffswitch
+{
+	border-left:1px solid #AA3345;
+}
+
+div[val='_IB'] .onoffswitch-switch
+{
+	fill:#AA3345;
+}
+
+div[val='_OB']	{
 	border:1px solid #41A6B2;
 }
+
+div[val='_OB'] .onoffswitch {
+	border-left:1px solid #41A6B2;
+}
+
+div[val='_OB'] .onoffswitch-switch
+{
+	fill:#41A6B2;
+}
+
 #routenumber {
-	width:70px;
+	width:120px;
 	font-size:1em;
-	padding:7px;
+	padding:5px 7px;
 	border:none;
 }
 .half {
@@ -253,13 +283,25 @@ div[val='_OB']{
 }
 
 #busquant, #trainquant {
-	font-size: 2.5em;
-	color:#CF4B62;
+	color:#aaa;
 	letter-spacing: -0.05em;
+	font-size:1.3em;
+	margin:0px 4px 0px 2px;
+	font-weight:300;
 }
 
+.button {
+	padding: 5px;
+	border-radius: 3px;	
+	cursor:pointer; 
+	text-decoration: none;
+	border:1px solid #ccc;	
+}
 
-
+.right {
+	float:right;
+	margin-right:-2px;
+}
 
 /* Markers */
 
@@ -284,6 +326,7 @@ div[val='_OB']{
 	stroke:purple;
 	stroke-width:1;
 	z-index:1;
+	stroke-opacity:0.6;
 }
 
 
@@ -448,10 +491,15 @@ g[highlighting='no']:not(.zoomed) #busstoplabels {
 	display:none;
 }
 .heading {
+	font-weight:100;
+	letter-spacing: 0.1em;	
+	fill:black;
 }
 .subtext {
 	fill:#aaa;
 	font-weight: normal;
+	letter-spacing: 0.1em;
+
 }
 
 .zoomed .directionspecifier {
@@ -462,4 +510,10 @@ g[highlighting='no']:not(.zoomed) #busstoplabels {
 	fill-opacity:0.9;
 	fill:white;
 }
-/* Map features */
+
+@media only screen and (min-width:1500px) {
+
+	#maindialog{
+		zoom:1.2;
+	}
+}

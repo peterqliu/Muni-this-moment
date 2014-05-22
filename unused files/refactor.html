@@ -163,7 +163,9 @@
 					.replace(/St. /g, 'St ')
 					.replace(/St." /g, 'St" ')
 					.replace(/"0/g,'"')
-					.replace(/'S/,"'s");			
+					.replace(/'S/,"'s")
+					.replace(/sfsu/,"SFSU")
+					.replace(/Sf/,"SF");			
 		$('#output').text(edited);
 		})	
 	
