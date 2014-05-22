@@ -52,8 +52,8 @@
 						
 						//array[routedir]["Stops"][k]["Lat"]=json['route'][i]['stop'][stopindex]['-lat'];
 						//array[routedir]["Stops"][k]["Lon"]=json['route'][i]['stop'][stopindex]['-lon'];
-						array[routedir]["Stops"][k]["xpos"]=lonx(json['route'][i]['stop'][stopindex]['-lon']);		
-						array[routedir]["Stops"][k]["ypos"]=laty(json['route'][i]['stop'][stopindex]['-lat']);		
+						array[routedir]["Stops"][k]["xpos"]=Math.round(lonx(json['route'][i]['stop'][stopindex]['-lon'])*1000)/1000;		
+						array[routedir]["Stops"][k]["ypos"]=Math.round(laty(json['route'][i]['stop'][stopindex]['-lat'])*1000)/1000;		
 
 						array[routedir]["Stops"][k]["ID"]=json['route'][i]['stop'][stopindex]['-stopId'];			
 						array[routedir]["Stops"][k]["Intersection"]=json['route'][i]['stop'][stopindex]['-title'];
@@ -117,14 +117,15 @@
 			array['38AX_OB']['Path']="M1140.916,473.967l-41.732,6.363l-389.712,63.414l-8.117,9.824l-0.794,2.456l4.146,24.116l-0.176,3.572l-1.147,3.684l-6.705-1.005l-322.393,25.12l-28.234,2.345l-19.058,0.558l-30.616,1.787l-26.116,1.451l-37.762,2.232l-0.971,1.34l-18.175-3.348l-19.058-2.123l-20.117-1.562l-1.323-0.67l-17.47,2.232l0.088,9.155";
 			array['38AX_IB']['Path']="M155.476,624.909l27.792-0.224l30.792-1.228l25.94-1.563l28.322-1.675l28.41-1.451l11.734-0.892l16.587-0.895l18.881-1.451l28.498-1.34l328.833-25.565l2.823-3.351l0.617-5.135l-3.44-20.878l9.882-5.247l401.27-63.638l1.765-1.116l-0.971-9.49l-2.382-11.609l11.117-0.895l19.939-4.019l0.706,9.936";
 
-			//create branch for route paths
-			array["RoutePaths"]={};
+			//create branch for route paths (UNCOMMENT TO RECOVER NATURAL PATH)
+			//array["RoutePaths"]={};
 			
 								
 			for(var i=0;i<json['route'].length; i++) {
 						var line=json['route'][i]['-tag'];
-						//array["RoutePaths"][i]=line;
-						array['RoutePaths'][line]={"Subsegments":[]};
+
+						//UNCOMMENT TO RECOVER NATURAL PATH
+						//array['RoutePaths'][line]={"Subsegments":[]};
 
 						//within "path," iterate through all the segments and provide a variable to store the path data
 						for(var j=0;j<json['route'][i]['path'].length;j++) {
@@ -139,11 +140,12 @@
 								}
 
 								else	{pathdata+=' L'}
-								pathdata+=lonx(segment[k]['-lon']);
+								pathdata+=Math.round(lonx(segment[k]['-lon'])*1000)/1000;
 								pathdata+=' ';
-								pathdata+=laty(segment[k]['-lat']);
+								pathdata+=Math.round(laty(segment[k]['-lat'])*1000)/1000;
 							}
-							array['RoutePaths'][line]['Subsegments'][j]=pathdata;
+							//UNCOMMENT TO RECOVER NATURAL PATH
+							//array['RoutePaths'][line]['Subsegments'][j]=pathdata;
 						}
 
 			}
@@ -165,7 +167,9 @@
 					.replace(/"0/g,'"')
 					.replace(/'S/,"'s")
 					.replace(/sfsu/,"SFSU")
-					.replace(/Sf/,"SF");			
+					.replace(/Sf/,"SF")
+					.replace(/Av./,'Ave')
+					.replace(/Av"/,'Ave"');			
 		$('#output').text(edited);
 		})	
 	
