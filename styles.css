@@ -86,11 +86,16 @@ body {
 	text-align:center;
 	-webkit-transition:all 0.5s;
 	display: inline-block;
-	font-weight:300;
 	cursor:hand;
 	fill:purple;
 	color:purple;
-	font-size:1.2em;
+	opacity:0.5;
+	border:1px solid purple;
+	font-size:0.8em;
+	padding:2px 5px;
+	margin:2px -2px;
+	float:right;
+	display:none;
 }
 
 #maindialog {
@@ -104,7 +109,6 @@ body {
 	font-size: 0.8em;
 	color:#666;
 	border:1px solid #ddd;
-	letter-spacing: 0.05em;
 	border-radius:3px;
 
 }
@@ -117,7 +121,6 @@ body {
 	font-weight: 300;
 	margin-top:6px;
 	color:#333;
-	letter-spacing: 0.05em;
 }
 input,form {
 	margin:0;
@@ -164,6 +167,11 @@ h3 {
 	color:#aaa;
 	font-size:0.9em;
 	margin-bottom:0px;
+}
+
+a {
+	text-decoration: underline;
+	color:inherit;
 }
 /*Slider switch */
 
@@ -241,7 +249,7 @@ h3 {
 	overflow:hidden;
 	width:100%;
 	display:inline-block;
-	margin-top:15px;
+	margin-top:12px;
 }
 div[val='_IB'] {
 	border:1px solid #AA3345;
@@ -492,14 +500,11 @@ g[highlighting='no']:not(.zoomed) #busstoplabels {
 }
 .heading {
 	font-weight:100;
-	letter-spacing: 0.1em;	
 	fill:black;
 }
 .subtext {
 	fill:#aaa;
 	font-weight: normal;
-	letter-spacing: 0.1em;
-
 }
 
 .zoomed .directionspecifier {
@@ -511,7 +516,7 @@ g[highlighting='no']:not(.zoomed) #busstoplabels {
 	fill:white;
 }
 
-@media only screen and (min-width:1500px) {
+@media only screen and (min-width:1800px) {
 
 	#maindialog{
 		zoom:1.2;

@@ -31,7 +31,10 @@
 		}
 
 		.bigrail {
-			fill:none;stroke:#AAAAAA;stroke-width:2;stroke-dasharray:5,2;
+			fill:none;
+			stroke:#AAAAAA;
+			stroke-width:2;
+			stroke-dasharray:5,2;
 			display:none;
 		}
 		.park {
@@ -55,7 +58,7 @@
 		fill-opacity:0;
 		font-size:8;
 		letter-spacing:5;
-		fill:#ddd;
+		fill:#ccc;
 		}
 
 		.zoomed #neighborhoods {
@@ -13570,7 +13573,7 @@
 	<text transform="matrix(1 0 0 1 954.8467 850.6611)"><tspan>INNER</tspan><tspan x="-10.369" y="12">MISSION</tspan></text>
 	<text transform="matrix(1 0 0 1 1093.6572 834.6611)"><tspan letter-spacing="5">P</tspan><tspan x="9.824" font-size="8" letter-spacing="4">O</tspan><tspan x="20.926" font-size="8" letter-spacing="5">TRERO</tspan><tspan x="17.525" y="12" font-size="8" letter-spacing="5">HILL</tspan></text>
 	<text transform="matrix(1 0 0 1 673.6279 737.6611)"><tspan>COLE</tspan><tspan x="-9.215" y="12">VALLEY</tspan></text>
-	<text transform="matrix(1 0 0 1 808.8252 750.6611)"><tspan>DUBOCE</tspan><tspan x='0' y="10">TRIANGLE</tspan></text>
+	<text transform="matrix(1 0 0 1 808.8252 750.6611)" letter-spacing='2'><tspan>DUBOCE</tspan><tspan x='0' y="10">TRIANGLE</tspan></text>
 	<text transform="matrix(1 0 0 1 960.3193 1062.6611)"><tspan>BERNAL</tspan><tspan x="-5.02" y="12">HEIGHTS</tspan></text>
 	<text transform="matrix(1 0 0 1 815.4756 1075.6611)"><tspan>GLEN</tspan><tspan x="0.15" y="12">PARK</tspan></text>
 	<text transform="matrix(1 0 0 1 1346.8154 1221.6611)"><tspan>HUNTER’S</tspan><tspan x="15.309" y="12">POINT</tspan></text>
