@@ -175,7 +175,7 @@ function newBus(bus, firebaseId) {
 //On page load, create all new bus markers
 f.once("value", function(s) {
 
-while ($('.busmarker').length==0){
+while (document.getElementsByClassName('busmarker').length==0){
   s.forEach(function(b) {
     newBus(b.val(), b.name());
   });
@@ -296,8 +296,9 @@ f.on("child_removed", function(s) {
 ////// PREVIOUSLY IN INDEX.HTML
 
 		window.dragreset='no';
-
-    	$('#svg').load('sfmap.svg');
+		$( document ).ready(function() {
+		    //$('#svg').load('sfmap.svg');
+		});
 		$('#dragger').pep();
 
 		
@@ -430,14 +431,7 @@ f.on("child_removed", function(s) {
 			$('.stopmarker').remove();
 
 			if ($('.zoomed').length==1)	
-				{
-				drawpath(routedir);	
-
-				setTimeout(function(){
-					d3.selectAll('#busstops').moveToFront();
-					d3.selectAll('.selected').moveToFront();
-				},10);	
-				}
+				{drawpath(routedir);}
 
 			d3.json('stops.refactored.v3.json',function(json){
 			
@@ -594,10 +588,9 @@ f.on("child_removed", function(s) {
 		}		
 		//Update user position		
 
-		function gps(){
+		function gps() {
 
 		window.finding=setInterval(function() {
-			if ($('#iamhere').length==0) {
 				$('#loadermessage').text('Getting your position...');
 				$('#spinner').attr('fill','purple');
 				$('#svg').addClass('blurred');
@@ -605,22 +598,26 @@ f.on("child_removed", function(s) {
 				$('.routepath').remove();
 				$('.stopmarker').remove();
 
+			if ($('#iamhere').length==0) {
 				geoPosition.getCurrentPosition(get_latlon, show_map_error);
 				current_location(lat,lon); console.log('poll'); 
-
 			}
+
 			if ($('#iamhere').length!=0) {
-				clearInterval(finding); 
-				$('#loader').hide();
-				$('#svg').removeClass('blurred');
+				removegpsloader();
 				if((lon>= -122.516613) && (lon<=-122.358685) && (lat<=37.841898) && (lat>=37.702273))
 					{zoomto(lonx(lon),laty(lat));}
 				else 
-					{alert("Whoops, it doesn't look like you're in the area")};
+					{alert("Whoops, it doesn't look like you're in the area. This feature is limited to San Francisco.")};
 			}
 		}, 0);
 		}
 
+		function removegpsloader() {
+				clearInterval(finding); 
+				$('#loader').hide();
+				$('#svg').removeClass('blurred');
+		}
 
 
 

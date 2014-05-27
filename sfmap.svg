@@ -13530,59 +13530,66 @@
 				</g>
 
 <g id="neighborhoods">
-	<text id="parklabel" transform="matrix(1 0 0 1 162.835 742.085)" enable-background="new    "><tspan font-family="'Verdana'" font-size="8" letter-spacing="12">GOLDEN</tspan><tspan x="106.16" font-family="'Verdana'" font-size="8" letter-spacing="11">	</tspan><tspan x="120" font-family="'Verdana'" font-size="8" letter-spacing="12"> </tspan><tspan x="134.812" font-family="'Verdana'" font-size="8" letter-spacing="6">	</tspan><tspan x="144" font-family="'Verdana'" font-size="8" letter-spacing="33">	</tspan><tspan x="195" font-family="'Verdana'" font-size="8" letter-spacing="12"> G</tspan><tspan x="213.016" font-family="'Verdana'" font-size="8" letter-spacing="11">A</tspan><tspan x="230.016" font-family="'Verdana'" font-size="8" letter-spacing="12">TE </tspan><tspan x="278.816" font-family="'Verdana'" font-size="8" letter-spacing="6">	</tspan><tspan x="288" font-family="'Verdana'" font-size="8" letter-spacing="33">	</tspan><tspan x="324" font-family="'Verdana'" font-size="8" letter-spacing="12">  </tspan><tspan x="353.625" font-family="'Verdana'" font-size="8" letter-spacing="11">P</tspan><tspan x="370.254" font-family="'Verdana'" font-size="8" letter-spacing="12">ARK</tspan></text>
-	<text transform="matrix(1 0 0 1 498.8027 1448.5166)" letter-spacing="4">DALY CITY</text>
+	<text id="parklabel" transform="matrix(1 0 0 1 160 742.085)" enable-background="new    "><tspan letter-spacing="12">GOLDEN</tspan><tspan x="106.16" letter-spacing="11">	</tspan><tspan x="120" letter-spacing="12"> </tspan><tspan x="134.812" letter-spacing="6">	</tspan><tspan x="144" letter-spacing="33">	</tspan><tspan x="195" letter-spacing="12"> G</tspan><tspan x="213.016" letter-spacing="11">A</tspan><tspan x="230.016" letter-spacing="12">TE </tspan><tspan x="278.816" letter-spacing="6">	</tspan><tspan x="288" letter-spacing="33">	</tspan><tspan x="324" letter-spacing="12">  </tspan><tspan x="353.625" letter-spacing="11">P</tspan><tspan x="370.254" letter-spacing="12">ARK</tspan></text>
+	<text transform="matrix(1 0 0 1 530 1448.5166)">DALY CITY</text>
 	<path id="SVGID_x5F_1_x5F_" fill="none" d="M-35.57,192.055C72.934-26.564,337.635-115.669,556.254-7.166"/>
 	<text>	<textPath  xlink:href="#SVGID_x5F_1_x5F_" startOffset="2.022%">
-<tspan  font-family="'Verdana'" font-size="8" letter-spacing="3600">MARIN COUNTY</tspan>	</textPath>
+<tspan  letter-spacing="3600">MARIN COUNTY</tspan>	</textPath>
 </text>
 	<path fill="none" d="M395.511,546.6c43.846-126.104,181.367-192.666,307.471-148.819"/>
-	<text id='parklabel' transform="matrix(0.5596 -0.8287 0.8287 0.5596 422.2124 492.4902)"><tspan>P</tspan><tspan x="36.476" y="2.416" rotate="8.83">R</tspan><tspan x="72.896" y="10.571" rotate="17.659">E</tspan><tspan x="107.152" y="24.008" rotate="26.423">S</tspan><tspan x="139.333" y="42.73" rotate="34.974">I</tspan><tspan x="166.759" y="64.716" rotate="43.635">D</tspan><tspan x="192.389" y="92.62" rotate="52.332">I</tspan><tspan x="211.979" y="121.779" rotate="61.082">O</tspan></text>
+	<text id='parklabel' transform="matrix(0.5596 -0.8287 0.8287 0.5596 415 492.4902)"><tspan>P</tspan><tspan x="36.476" y="2.416" rotate="8.83">R</tspan><tspan x="72.896" y="10.571" rotate="17.659">E</tspan><tspan x="107.152" y="24.008" rotate="26.423">S</tspan><tspan x="139.333" y="42.73" rotate="34.974">I</tspan><tspan x="166.759" y="64.716" rotate="43.635">D</tspan><tspan x="192.389" y="92.62" rotate="52.332">I</tspan><tspan x="211.979" y="121.779" rotate="61.082">O</tspan></text>
 	<path fill="none" d="M166.842,996.498c43.846-126.104,181.367-192.666,307.471-148.819"/>
 	<text transform="matrix(0.7321 -0.6812 0.6812 0.7321 228.0156 901.1318)"><tspan>O</tspan><tspan x="37.97" y="2.509" rotate="8.985">U</tspan><tspan x="74.651" y="10.809" rotate="17.769">T</tspan><tspan x="108.781" y="24.268" rotate="26.462">E</tspan><tspan x="140.577" y="42.793" rotate="35.268">R</tspan></text>
 	<path fill="none" d="M190.842,1037.498c43.846-126.104,181.367-192.666,307.471-148.819"/>
 	<text transform="matrix(0.6766 -0.7364 0.7364 0.6766 239.1914 955.3638)"><tspan>S</tspan><tspan x="37.149" y="2.457" rotate="8.915">U</tspan><tspan x="73.828" y="10.708" rotate="17.836">N</tspan><tspan x="108.93" y="24.602" rotate="26.697">S</tspan><tspan x="141.004" y="43.463" rotate="35.469">E</tspan><tspan x="169.505" y="66.75" rotate="44.227">T</tspan></text>
-	<text transform="matrix(1 0 0 1 505.8877 1303.2207)" letter-spacing="4">INGLESIDE</text>
-	<text transform="matrix(1 0 0 1 1005.2241 1345.7446)"><tspan letter-spacing="4">VISITACION</tspan><tspan x="17.74" y="14" letter-spacing="4">VALLEY</tspan></text>
-	<text transform="matrix(1 0 0 1 998.9604 1165.7446)" letter-spacing="4">PORTOLA</text>
-	<text transform="matrix(1 0 0 1 1183.0366 1205.7446)" letter-spacing="4">BAYVIEW</text>
-	<text transform="matrix(1 0 0 1 756.7104 1235.7446)" letter-spacing="4">EXCELSIOR</text>
+
+
+	<text transform="matrix(1 0 0 1 505.8877 1303.2207)">INGLESIDE</text>
+	<text transform="matrix(1 0 0 1 1005.2241 1345.7446)"><tspan>VISITACION</tspan><tspan x="17.74" y="14">VALLEY</tspan></text>
+	<text transform="matrix(1 0 0 1 998.9604 1165.7446)">PORTOLA</text>
+	<text transform="matrix(1 0 0 1 1200 1205.7446)">BAYVIEW</text>
+	<text transform="matrix(1 0 0 1 756.7104 1235.7446)">EXCELSIOR</text>
 	<g>
-		<text transform="matrix(1 0 0 1 301.5239 551.0195)">SEACLIFF</text>
+		<text transform="matrix(1 0 0 1 310 555)">SEACLIFF</text>
 	</g>
 	<text transform="matrix(1 0 0 1 740.5259 363.1279)">MARINA</text>
-	<text transform="matrix(1 0 0 1 755.8091 415.1279)">COW HOLLOW</text>
+	<text transform="matrix(1 0 0 1 770 415.1279)">COW HOLLOW</text>
 	<g>
-		<text transform="matrix(1 0 0 1 810.7705 643.0635)" letter-spacing="3">HAYES VALLEY</text>
+		<text transform="matrix(1 0 0 1 820 643.0635)">HAYES VALLEY</text>
 	</g>
-	<text transform="matrix(1 0 0 1 938.7744 548.1621)">TENDERLOIN</text>
+	<text transform="matrix(1 0 0 1 945 548.1621)">TENDERLOIN</text>
 	<text transform="matrix(1 0 0 1 1030.5654 489.1621)"><tspan>FINANCIAL</tspan><tspan x="4.951" y="12">DISTRICT</tspan></text>
 	<text transform="matrix(1 0 0 1 948.8213 475.1621)"><tspan>NOB</tspan><tspan x="-2.76" y="12">HILL</tspan></text>
 	<text transform="matrix(1 0 0 1 801.3057 482.1621)"><tspan>PACIFIC</tspan><tspan x="-2.127" y="12">HEIGHTS</tspan></text>
 	<text transform="matrix(1 0 0 1 625.8906 541.167)"><tspan>LAUREL</tspan><tspan x="-5.6" y="12">HEIGHTS</tspan></text>
 	<text transform="matrix(1 0 0 1 909.1162 397.1621)"><tspan x="10">RUSSIAN</tspan><tspan x="26.945" y="12">HILL</tspan></text>
-	<text transform="matrix(1 0 0 1 978.3115 334.1621)"><tspan>NORTH</tspan><tspan x="-17.412" y="15" letter-spacing="33">	</tspan><tspan x="18.588" y="15">BEACH</tspan></text>
-	<text transform="matrix(1 0 0 1 765.5176 842.1543)" letter-spacing="4">CASTRO</text>
-	<text transform="matrix(1 0 0 1 711.79 599.0635)" letter-spacing="4">WESTERN ADDITION</text>
+	<text transform="matrix(1 0 0 1 978.3115 334.1621)"><tspan>NORTH</tspan><tspan x="-17.412" y="15">	</tspan><tspan x="18.588" y="15">BEACH</tspan></text>
+	<text transform="matrix(1 0 0 1 765.5176 850)">CASTRO</text>
+	<text transform="matrix(1 0 0 1 715 605)">WESTERN ADDITION</text>
 	<g>
-		<text transform="matrix(1 0 0 1 241.8018 658.1279)">OUTER RICHMOND </text>
+		<text x='241' y='658'>OUTER RICHMOND </text>
 	</g>
-	<text transform="matrix(1 0 0 1 242.7134 1045.0996)" letter-spacing="4">PARKSIDE</text>
+	<text transform="matrix(1 0 0 1 242.7134 1045.0996)">PARKSIDE</text>
 	<text transform="matrix(1 0 0 1 660.0791 670.6611)"><tspan>NORTH OF</tspan><tspan x="-5.963" y="12">PANHANDLE</tspan></text>
 	<text transform="matrix(1 0 0 1 823.1846 695.6611)"><tspan>LOWER</tspan><tspan x="-3.855" y="12">HAIGHT</tspan></text>
 	<text transform="matrix(1 0 0 1 954.8467 850.6611)"><tspan>INNER</tspan><tspan x="-10.369" y="12">MISSION</tspan></text>
-	<text transform="matrix(1 0 0 1 1093.6572 834.6611)"><tspan letter-spacing="5">P</tspan><tspan x="9.824" font-size="8" letter-spacing="4">O</tspan><tspan x="20.926" font-size="8" letter-spacing="5">TRERO</tspan><tspan x="17.525" y="12" font-size="8" letter-spacing="5">HILL</tspan></text>
+	<text transform="matrix(1 0 0 1 1093.6572 834.6611)"><tspan >P</tspan><tspan x="9.824">O</tspan><tspan x="20.926" >TRERO</tspan><tspan x="17.525" y="12" >HILL</tspan></text>
 	<text transform="matrix(1 0 0 1 673.6279 737.6611)"><tspan>COLE</tspan><tspan x="-9.215" y="12">VALLEY</tspan></text>
-	<text transform="matrix(1 0 0 1 808.8252 750.6611)" letter-spacing='2'><tspan>DUBOCE</tspan><tspan x='0' y="10">TRIANGLE</tspan></text>
+	<text transform="matrix(1 0 0 1 808.8252 748)" letter-spacing='2'><tspan>DUBOCE</tspan><tspan x='0' y="12">TRIANGLE</tspan></text>
 	<text transform="matrix(1 0 0 1 960.3193 1062.6611)"><tspan>BERNAL</tspan><tspan x="-5.02" y="12">HEIGHTS</tspan></text>
 	<text transform="matrix(1 0 0 1 815.4756 1075.6611)"><tspan>GLEN</tspan><tspan x="0.15" y="12">PARK</tspan></text>
+	<text transform="matrix(1 0 0 1 650 890)"><tspan>TWIN</tspan><tspan x="-4" y="12">PEAKS</tspan></text>
+
 	<text transform="matrix(1 0 0 1 1346.8154 1221.6611)"><tspan>HUNTER’S</tspan><tspan x="15.309" y="12">POINT</tspan></text>
 	<text transform="matrix(1 0 0 1 689.4907 1153.1221)"><tspan>OUTER</tspan><tspan x="-9.496" y="12">MISSION</tspan></text>
 	<text transform="matrix(1 0 0 1 682.9111 1349.6611)"><tspan>CROCKER-</tspan><tspan x="8.693" y="12">AMAZON</tspan></text>
 	<text transform="matrix(1 0 0 1 472.6416 1040.6611)"><tspan>WEST</tspan><tspan x="-9.084" y="12">PORTAL</tspan></text>
 	<text transform="matrix(1 0 0 1 810.1553 926.6611)"><tspan>NOE</tspan><tspan x="-13.742" y="12">VALLEY</tspan></text>
-	<text transform="matrix(1 0 0 1 526.8467 600.6611)"><tspan>INNER</tspan><tspan x="-17.379" y="12">RICHMOND</tspan></text>
+	<text transform="matrix(1 0 0 1 526.8467 598)"><tspan>INNER</tspan><tspan x="-17.379" y="17">RICHMOND</tspan></text>
 	<text transform="matrix(1 0 0 1 460.5576 809.6611)">INNER SUNSET</text>
+	<text x='1085' y='600'>SOMA</text>
+	<text x='1335' y='110'><tspan>TREASURE</tspan><tspan x='1350' y='130'>ISLAND</tspan></text>	
+
 </g>
 
 			<radialGradient id="gradientcircle_1_" cx="3350" cy="2400" r="2350" gradientTransform="matrix(0.5 0 0 0.4 -1040.6807 -288.8032)" gradientUnits="userSpaceOnUse">
@@ -13604,5 +13611,5 @@
 </svg>
 
 <script>
-	$('#dragger').pep({});
+	$('#dragger').pep();
 </script>

@@ -37,6 +37,12 @@ body {
 #loadermessage {
 	fill:#aaa;
 }
+
+#gpscancel {
+	display:none;
+	width:100%;
+	margin:0 auto;
+}
 /*Loading spinner */
 @-webkit-keyframes spinner {
   0% {
@@ -70,7 +76,7 @@ body {
 	position:absolute;
 	left:20px; 
 	top:20px; 
-	color:#666; 
+	fill:#666; 
 	opacity:0.5;
 	z-index: 1;
 	-webkit-transition:opacity 0.5s;
@@ -82,20 +88,27 @@ body {
 
 
 /* Interface elements */
+
 #findme {
-	text-align:center;
-	-webkit-transition:all 0.5s;
-	display: inline-block;
+	display: inline;
 	cursor:hand;
+	fill:#666;
+	color:#666;
+	opacity:0.8;
+	font-size:1em;
+	margin:-12px -2px;
+	-webkit-transition:all 1s;
+	max-width:2222px;
+	height:25px;
+	white-space: nowrap;
+	overflow:hidden;
+	text-decoration: underline;
+}
+
+#findme:hover  {
+	max-width:100%;
 	fill:purple;
-	color:purple;
-	opacity:0.5;
-	border:1px solid purple;
-	font-size:0.8em;
-	padding:2px 5px;
-	margin:2px -2px;
-	float:right;
-	display:none;
+	color:purple;	
 }
 
 #maindialog {
@@ -105,9 +118,9 @@ body {
 	padding:18px; 
 	background:white;
 	opacity:0.95;
-	width:280px;
+	width:260px;
 	font-size: 0.8em;
-	color:#666;
+	color:#333;
 	border:1px solid #ddd;
 	border-radius:3px;
 
@@ -119,7 +132,7 @@ body {
 .title {
 	font-size:2em;
 	font-weight: 300;
-	margin-top:6px;
+	margin-top:10px;
 	color:#333;
 }
 input,form {
@@ -291,10 +304,10 @@ div[val='_OB'] .onoffswitch-switch
 }
 
 #busquant, #trainquant {
-	color:#aaa;
+	color:orange;
 	letter-spacing: -0.05em;
 	font-size:1.3em;
-	margin:0px 4px 0px 2px;
+	margin:0px 3px 0px 2px;
 	font-weight:300;
 }
 
@@ -482,7 +495,11 @@ g[highlighting='no']:not(.zoomed) .routepath {
 	stroke-width:1.25px;
 	-webkit-transition:all 1s ease-out;
 	stroke-opacity:0.8;
+}
 
+.routepath:nth-of-type(2),.routepath:nth-of-type(3),.routepath:nth-of-type(4)
+{
+	display:none;
 }
 #endcap {
 	display:none;
@@ -516,9 +533,27 @@ g[highlighting='no']:not(.zoomed) #busstoplabels {
 	fill:white;
 }
 
+#mobileblocker {
+	position:absolute; 
+	height:100%; 
+	width:auto; 
+	z-index:2; 
+	display:none;
+	background:white;
+	padding:10%;
+	color:#999;
+}
+
 @media only screen and (min-width:1800px) {
 
 	#maindialog{
 		zoom:1.2;
+	}
+}
+
+@media only screen and (max-device-width:800px) {
+
+	#mobileblocker {
+		display:block;
 	}
 }
