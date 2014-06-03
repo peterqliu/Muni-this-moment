@@ -93,7 +93,7 @@ body {
 	display: inline;
 	cursor:hand;
 	fill:#666;
-	color:#666;
+	color:#999;
 	opacity:0.8;
 	font-size:1em;
 	margin:-12px -2px;
@@ -353,7 +353,7 @@ div[val='_OB'] .onoffswitch-switch
 
 
 .busmarker {
-	-webkit-transition:-webkit-transform 8s;
+	-webkit-transition:-webkit-transform 15s ease-out;
 	cursor:hand;
 }
 

@@ -567,6 +567,8 @@ f.on("child_removed", function(s) {
 							.insert('rect','text')
 							.attr('width',function(){return Math.max($('#stoplabel')[0].getComputedTextLength(), $('.subtext')[0].getComputedTextLength())+12})	
 							.attr('height',28)
+							.attr('stroke','#eee')
+							.attr('stroke-width',0.5)
 							.attr('id','labelrect');
 					}
 						
