@@ -95,16 +95,17 @@ body {
 	fill:#666;
 	color:#999;
 	opacity:0.8;
-	font-size:1em;
-	margin:-12px -2px;
 	-webkit-transition:all 1s;
-	max-width:2222px;
 	height:25px;
 	white-space: nowrap;
 	overflow:hidden;
-	text-decoration: underline;
+	margin-left:2px;
 }
 
+#findme span {
+	position:relative;
+	top:-1px;
+}
 #findme:hover  {
 	max-width:100%;
 	fill:purple;
@@ -305,7 +306,6 @@ div[val='_OB'] .onoffswitch-switch
 
 #busquant, #trainquant {
 	color:orange;
-	letter-spacing: -0.05em;
 	font-size:1.3em;
 	margin:0px 3px 0px 2px;
 	font-weight:300;
