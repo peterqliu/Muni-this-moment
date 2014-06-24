@@ -81,7 +81,7 @@ var map;
 
 window.outboundcolor='#41A6B2';
 window.inboundcolor='#AA3345';      
-var f = new Firebase("https://publicdata-transit.firebaseio.com/sf-muni/data");
+var f = new Firebase("https://publicdata-transit.firebaseio.com/sf-muni/vehicles");
 
 function newBus(bus, firebaseId) {
 
