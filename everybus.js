@@ -52,9 +52,9 @@ function current_location(lat,lon) {
 }
 
 		
-		//Contingencies    
-		function show_map_error() {};
-		function supports(bool, suffix) {
+//Contingencies    
+function show_map_error() {};
+function supports(bool, suffix) {
   var s = "Your browser ";
   if (bool) {
     s += "supports " + suffix + ".";
@@ -84,7 +84,6 @@ window.inboundcolor='#AA3345';
 var f = new Firebase("https://publicdata-transit.firebaseio.com/sf-muni/vehicles");
 
 function newBus(bus, firebaseId) {
-
     var marker_path= "M-5.392-5.018c-2.977,2.979-2.977,7.807,0,10.783c2.978,2.979,7.805,2.979,10.783,0c2.979-2.977,2.979-7.805,0-10.783l-5.392-5.391L-5.392-5.018z";
 
 	//determine bus direction for marker color
@@ -97,14 +96,12 @@ function newBus(bus, firebaseId) {
 	var ycoord=laty(bus.lat);
 	    newmarker.attr('style','-webkit-transform:translate('+xcoord+'px,'+ycoord+'px)')
 		.attr('class','busmarker '+'route'+bus.routeTag)
-		.attr('transform','scale3d(0,0,0)')		
 		.attr('id','bus'+firebaseId)
 		.attr('xcoord',xcoord+20)
 		.attr('ycoord',ycoord-10)
 		.attr('type',bus.vtype)
 		.attr('route',bus.routeTag)
 		.attr('direction', direction)
-		//.attr('onclick','showbusesonline("'+bus.routeTag+'", "'+direction+'"), showroutestops("'+bus.routeTag+direction+'","'+directionColor+'");')
 		.on('mouseover',function() {
 
 			//Fire only when the mouse isn't already held down (i.e. dragging)
@@ -175,11 +172,11 @@ function newBus(bus, firebaseId) {
 //On page load, create all new bus markers
 f.once("value", function(s) {
 
-while (document.getElementsByClassName('busmarker').length==0){
-  s.forEach(function(b) {
-    newBus(b.val(), b.name());
-  });
-}
+	while (document.getElementsByClassName('busmarker').length==0){
+	  s.forEach(function(b) {
+	    newBus(b.val(), b.name());
+	  });
+	}
   countbuses();
   $('#loader').fadeOut(600);
   $('.blurred').attr('class','')
@@ -190,7 +187,6 @@ while (document.getElementsByClassName('busmarker').length==0){
 //Whenever a child has changed, either make a new marker (if not on list) or move it (if it is on the list)
 f.on("child_changed", function(s) {
 	console.log('update');
-
 	var busMarker = buses[s.name()];
 
 	//new bus  
