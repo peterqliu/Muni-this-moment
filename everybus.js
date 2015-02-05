@@ -95,7 +95,7 @@ function newBus(bus, firebaseId) {
   var marker_path = "M-5.392-5.018c-2.977,2.979-2.977,7.807,0,10.783c2.978,2.979,7.805,2.979,10.783,0c2.979-2.977,2.979-7.805,0-10.783l-5.392-5.391L-5.392-5.018z";
 
   //determine bus direction for marker color
-  var direction = bus.dirTag && bus.dirTag.indexOf('OB') > -1 ? "_OB" : "_IB";
+  var direction = bus.dirTag && bus.dirTag.indexOf('__O_') > -1 ? "_OB" : "_IB";
   var directionColor = direction.indexOf('OB') > -1 ? outboundcolor : inboundcolor;
   //Creates a new bus marker
   var newmarker = d3.select('#markers').append('g');
@@ -221,7 +221,7 @@ f.on("child_changed", function(s) {
     var bus = s.val();
     var xcoord = lonx(s.val().lon);
     var ycoord = laty(s.val().lat);
-    var direction = bus.dirTag && bus.dirTag.indexOf('OB') > -1 ? "_OB" : "_IB";
+    var direction = bus.dirTag && bus.dirTag.indexOf('__O_') > -1 ? "_OB" : "_IB";
     var route = bus.routeTag;
 
     //if bus changed direction, update the routes they bring up
