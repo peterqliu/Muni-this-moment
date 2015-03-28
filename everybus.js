@@ -30,6 +30,8 @@ function current_location(lat, lon) {
 				removelabel()
 			});
 
+		d3.select('#findme')
+			//.on('click',function(){zoomto(lonx(lon),laty(lat));
 		$('.busmarker').attr('class', 'busmarker selected');
 	};
 
@@ -338,7 +340,7 @@ function zoomto(x, y) {
 	//if it's already in a zoomed state
 	dragreset = 'yes';
 
-	$('#viewport').attr('style', 'transform-origin:' + '50%' + ' ' + '50%' + ' ');
+	$('#viewport').attr('style', 'transform-origin:' + (1.5 * x - 500) + ' ' + (1.7 * y - 400) + '; ');
 
 	setTimeout(function() {
 		$('#viewport').attr('class', 'viewport zoomed');
