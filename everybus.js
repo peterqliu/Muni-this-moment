@@ -476,15 +476,8 @@ function getprediction(routedir, stoptag, vtype) {
     dataType: "xml",
     url: targeturl,
     success: function(response) {
-      var path = "//prediction/@seconds";
-      var nodes = response.evaluate(path, response, null, XPathResult.ANY_TYPE, null);
-      var result = nodes.iterateNext();
-      var predictionlist = [];
-      while (result) {
-        //grabs all available predictions for that route and stop
-        predictionlist.push(result.childNodes[0].nodeValue);
-        result = nodes.iterateNext();
-      }
+      var predictionlist = [response.querySelectorAll('prediction')[0].getAttribute('seconds')];
+
       //converts seconds to minutes, if necessary				
       function timeconverter(seconds) {
           var minutes = Math.round(seconds / 60);
