@@ -1,0 +1,914 @@
+<html>
+<head>
+    <meta charset='utf-8' />
+    <title></title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.11.3/mapbox-gl.js'></script>
+    <script src='d3.v3.min.js'></script>
+    <script src='three.min.js'></script>
+    <script src='munirouteconfig.js'></script>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,300' rel='stylesheet' type='text/css'>
+    <script src='helvetiker_regular.typeface.js'></script>
+
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.11.2/mapbox-gl.css' rel='stylesheet' />
+    <style>
+        body { 
+            margin:0;
+            padding:0;
+            font-family:'Open Sans',
+            Verdana, sans-serif;
+        }
+
+        #map {
+            position:absolute;
+            top:0;
+            bottom:0;
+            width:100%;
+            background:#FfFef9;
+        }
+
+        .mapboxgl-canvas-container.mapboxgl-interactive, .mapboxgl-ctrl-nav-compass {
+            cursor:default;
+        }
+
+        #overlay {
+            position:absolute;
+            z-index:99;
+        }
+
+        .busmarker {
+            position:absolute;
+            -webkit-transition:transform 3s;
+            width:30px;
+            height:45px;
+            text-align:center;
+            outline:0px solid blue;
+            margin:-15px -22px;
+        }
+
+        .updated{
+            color:red;
+        }
+
+        .busmarker.disabletrans {
+            -webkit-transition:all 0s;
+        }
+
+        .pointer {
+            -webkit-transform-origin:center center;
+        }
+
+        .label{
+            position:absolute;
+        }
+
+        #threejs {
+            z-index:99;
+            pointer-events:none;
+            position:absolute;
+        }
+
+        .zoomout {
+            padding:20px; 
+            position:absolute; 
+            opacity:0.9; 
+            cursor:pointer;
+            display:none;
+            fill:#bab49d;
+        }
+
+        .zoomout:hover{
+            opacity:1;
+        }
+
+        .routeview.zoomout {
+            display:block;
+            z-index:99;
+        }
+
+        .tooltip {
+            border:1px solid #cccccc;
+            border-radius:5px;
+            padding:10px 15px;
+            position:absolute;
+            z-index:99;
+            background:rgba(255,255,255,0.9);
+            display:none;
+            margin:15px;
+        }
+
+        .title {
+            font-size: 1.25em;
+            font-weight: 300;
+            color: #666;
+        }
+
+        .subtitle {
+            color:#bbb;
+        }
+
+        .highlight {
+            color:#41a6b2;
+        }
+
+        .modal {
+            position:absolute;
+            right:20px;
+            bottom:20px;
+            z-index:99;
+            padding:20px;
+            background:white;
+            border:1px solid #ccc;
+            border-radius:6px;
+            font-size:1.5em;
+        }
+
+        .stats{
+            font-size:0.75em;
+            color:orange;
+        }
+
+        .highlight.ib {
+            color:#aa3345;
+        }
+    </style>
+</head>
+<body>
+
+<div id='threejs'>
+
+</div>
+
+<div id='map'></div>
+<svg width="60px" height="60px" viewBox="20 20 60 60" class='zoomout' onclick='zoomOut()'>
+    <path d="M49.128,40.498c-2.854,2.858-2.854,7.492,0,10.35c2.854,2.858,7.479,2.858,10.334,0c2.853-2.858,2.853-7.491,0-10.35
+        C56.607,37.64,51.982,37.64,49.128,40.498z M57.965,46.439c0,0.362-0.297,0.657-0.656,0.657h-5.98
+        c-0.361,0-0.656-0.295-0.656-0.657v-1.32c0-0.361,0.295-0.657,0.656-0.657h5.98c0.359,0,0.656,0.296,0.656,0.657V46.439z"/>
+    <path d="M50,20c-16.568,0-30,13.432-30,30s13.432,30,30,30s30-13.432,30-30S66.568,20,50,20z M62.288,53.678
+        c-5.379,5.369-11.554,2.7-11.554,2.7c-1.161-0.501-2.841-0.18-3.734,0.716l-7.823,7.836c-0.894,0.894-2.355,0.894-3.249,0
+        l-0.859-0.861c-0.894-0.895-0.894-2.359,0-3.252l7.823-7.837c0.893-0.894,1.256-2.594,0.806-3.776c0,0-2.541-6.672,2.604-11.536
+        c4.54-4.292,11.57-4.421,15.985,0C66.699,42.088,66.709,49.263,62.288,53.678z"/>
+</svg>
+<div class='tooltip'>
+    <div class='title'>sdfsdf</div>
+    <div>
+        <span class='subtitle'></span>
+        <span class='highlight'></span>
+    </div>
+</div>
+<div class='modal'>
+    <div class='title'>Muni, this moment</div>
+    <div class='stats'>
+        <img src='bus.svg'>
+        <span class='buscount'></span>
+        <img src='train.svg'>
+        <span class='traincount'></span>
+    </div>
+
+</div>
+<script>
+
+var origin=[-122.437, 37.782];
+mapboxgl.accessToken = 'pk.eyJ1IjoicGV0ZXJxbGl1IiwiYSI6ImpvZmV0UEEifQ._D4bRmVcGfJvo1wjuOpA1g';
+
+
+var outboundColor = '41a6b2'
+var inboundColor = 'aa3345'
+
+var map = new mapboxgl.Map({
+    container: 'map', // container id
+    style: 'mapbox://styles/peterqliu/cigcm7rg000079ilysislkqxv', //stylesheet location
+    center: origin, // starting position
+    minZoom: 12,
+    zoom: 13 // starting zoom
+});
+
+function poll(){
+    console.log('polling')
+    d3.json('http://restbus.info/api/agencies/sf-muni/vehicles', function(err, response){
+        response=response.filter(function(item){return typeof item.directionId === 'string'})
+        try {
+            updateMarkers(response)
+        }
+        catch(error) {
+            console.log('invalid data:')
+            console.log(error)
+        }
+        
+    })
+}
+map.on('load', function(){
+    poll()
+    setInterval(function(){poll()}, 10000)
+})
+
+
+
+//assemble geoJSON line with lnglat's
+var emptyGeojson=
+{
+  "type": "FeatureCollection",
+  "features": []
+}
+
+map.on('load', function(){
+    map.addSource("newRoute", {
+        "type": "geojson",
+        "data": emptyGeojson
+    });
+
+    map.addLayer({
+        "id": "newline",
+        "type": "line",
+        "source": "newRoute",
+        "layout": {
+        },
+        "paint": {
+            "line-width": {
+                "base": 1.5,
+                "stops": [[10,2],[20,20]]
+            },
+            "line-color":'#41A6B2'
+        }
+    });
+})
+
+var trackToMap;
+var buses = [];
+var stops = [];
+var intersect = false;
+var activeRoute = false;
+var routeLine=[];
+var busesOnThisLine = [];
+
+var busesMoving = false;
+
+map.on('move', function(){
+    mapTrack()
+})
+.on('zoom', function(){
+    var zoom=map.getZoom();
+    camera.zoom=Math.pow(2,zoom-12)
+    camera.updateProjectionMatrix();
+})
+
+function mapTrack(){
+    var center = map.project(origin)
+    var zoom = map.getZoom()
+    camera.position.x = (window.innerWidth/2-center.x)*Math.pow(0.5,zoom-12);
+    camera.position.y = (center.y-window.innerHeight/2)*Math.pow(0.5,zoom-12);
+    trackToMap=requestAnimationFrame(mapTrack);
+
+}
+
+var scene = new THREE.Scene();
+scene.add(new THREE.AmbientLight(0xffffff));
+
+var ratio=window.innerWidth/window.innerHeight;
+var camera = new THREE.OrthographicCamera(
+    -window.innerWidth/2, 
+    window.innerWidth/2, 
+    window.innerHeight/2, 
+    -window.innerHeight/2, -10000000, 1000000);
+
+camera.zoom = 2
+camera.updateProjectionMatrix();
+
+
+var renderer = new THREE.WebGLRenderer({alpha:true, antialias:true});
+renderer.setSize( window.innerWidth, window.innerHeight );
+//renderer.setPixelRatio(window.devicePixelRatio ? 0.25/window.devicePixelRatio : 1);
+
+document.querySelector('#threejs').appendChild( renderer.domElement );
+
+
+function projectMarkers(lnglat){
+    var result = [lnglat[0]-origin[0], origin[1]-lnglat[1]].map(function(coord,index){
+            return coord*(7350+(index-1)*1550)*1.004
+        });
+
+    return result
+}
+
+function updateMarkers(payload){
+    var extantBusIds= buses.map(function(bus){return bus.busData.id})
+
+    window.busMovingStore = {};
+
+    for (var d=0; d<payload.length; d++){
+
+        var data=payload[d]
+        var currentBusIndex = extantBusIds.indexOf(data.id)
+        var newPosition = [data.lon, data.lat]
+
+        //update: move existing buses
+
+        if (currentBusIndex>0) {
+            var busToMove = buses[currentBusIndex]
+            if (busToMove.busData.lat !== newPosition[1]){
+                busToMove.busData.lat = newPosition[1];
+                busToMove.busData.lon = newPosition[0];
+
+                //make the minimum turn necessary (avoid the long way around)
+                var angleDifferential = toRadians(data.heading)-busToMove.children[1].rotation.z
+
+                var minTurn = function(angleDifferential){
+                    if (Math.abs(angleDifferential)>Math.PI){
+                        if (angleDifferential > Math.PI) return angleDifferential-2*Math.PI
+                        else return angleDifferential+2*Math.PI
+                    }
+                    else return angleDifferential
+                }
+                busMovingStore[data.id]={
+                    newX: projectMarkers(newPosition)[0],
+                    newY: -projectMarkers(newPosition)[1],
+                    newHeading: busToMove.children[1].rotation.z+minTurn(angleDifferential),
+                    oldX: busToMove.position.x,
+                    oldY:busToMove.position.y,
+                    oldHeading: busToMove.children[1].rotation.z
+                }
+            }
+            if (d==payload.length-1) {busesMoving = Date.now();}
+        }
+        // enter(): new markers
+
+        if (currentBusIndex===-1){
+
+            //convert latlng to pixel coordinates
+            var pixelCoords= projectMarkers([data.lon, data.lat])
+            var group = new THREE.Group()
+            var randomZIndex = Math.round(Math.random()*10000)
+
+            var textSize
+            switch (data.routeId.length) {
+                case 3 :
+                    textSize = 1.2;
+                    break;
+                case 4 :
+                    textSize = 0.8;
+                    break;
+                case 5 :
+                    textSize = 0.6;
+                    break;
+                case 6 :
+                    textSize = 0.4;
+                    break;
+                default:
+                    textSize = 1.6;
+                    break;
+            }
+
+            //create marker label text
+            var markerLabel = new THREE.TextGeometry(data.routeId, {
+                size:textSize,
+                height:0,
+                style:'normal'
+            })
+
+            markerLabel.center()
+
+            var labelMaterial = new THREE.MeshBasicMaterial({color:'#FfFef9'})
+            var labelMesh = new THREE.Mesh(markerLabel, labelMaterial)
+            labelMesh.scale.x = setMarkerState().labelScale
+            labelMesh.position.z = randomZIndex+1
+
+            group.add(labelMesh)
+
+            //create marker shape
+            var radius=2
+
+            var markerGeometry = new THREE.Shape();
+            markerGeometry.moveTo(0, radius)
+            markerGeometry.arc(0,-radius, radius, 0, -1.5*Math.PI, false)
+            markerGeometry.lineTo(radius, radius)
+            markerGeometry.lineTo(0, radius)
+
+            markerGeometry = new THREE.ShapeGeometry(markerGeometry);
+
+            var markerMesh= new THREE.Mesh(markerGeometry, new THREE.MeshBasicMaterial({
+                color: '#'+getColor(data.directionId),
+                transparent: true,
+                opacity: 0.7
+            }))
+
+            markerMesh.position.z= randomZIndex
+            markerMesh.rotation.z= toRadians(data.heading)
+
+            group.add(markerMesh)
+            group.position.set(pixelCoords[0],-pixelCoords[1],0)
+            group.busData=data
+
+            group.scale.x=setMarkerState().groupScale;
+            group.scale.y=setMarkerState().groupScale;
+            buses.push(group)
+            scene.add(group);
+        }
+    }
+
+
+    // exit(): remove existing bus markers no longer in service
+    var payloadIds= payload.map(function(payloadBus){return payloadBus.id})
+
+    extantBusIds.forEach(function(id){
+        if (payloadIds.indexOf(id)===-1) {
+            var busToRemove = buses.filter(function(bus){
+                return bus.busData.id === id
+            })
+            scene.remove(busToRemove)
+        }
+    })
+
+    var totalVehicles = payload.length;
+    var trainQuantity = payload.filter(function(bus){return bus.routeId.match(/\d+/g)===null}).length;
+
+    d3.select('.buscount').text(totalVehicles-trainQuantity)
+    d3.select('.traincount').text(trainQuantity)
+}
+
+var lastTick = Date.now();
+
+var render = function () {
+    requestAnimationFrame(render);
+    renderer.render(scene, camera);
+
+    if (busesMoving){
+
+        //check all extant buses
+        for (var j=0; j<buses.length; j++){
+
+            //during the first second, animate
+            var currentBus = busMovingStore[buses[j].busData.id];
+
+            //if this bus actually gets moved
+            if (currentBus) {
+                var sincePoll = Date.now()-busesMoving;
+                if (sincePoll <= 2000) {
+                    buses[j].position.x=currentBus.oldX+(currentBus.newX-currentBus.oldX)*easeInOut(sincePoll/2000);
+                    buses[j].position.y=currentBus.oldY+(currentBus.newY-currentBus.oldY)*easeInOut(sincePoll/2000);
+                    buses[j].children[1].rotation.z=currentBus.oldHeading+(currentBus.newHeading-currentBus.oldHeading)*easeInOut(sincePoll/2000);
+
+                }
+                //once past the first second, no more moving
+                else {
+                    buses[j].position.x=currentBus.newX;
+                    buses[j].position.y=currentBus.newY;
+                    buses[j].children[1].rotation.z= currentBus.newHeading;
+                    busesMoving = false
+                }
+            }
+        }
+        lastTick = Date.now()
+    }
+};
+
+function easeInOut(domain){
+    return Math.sin(0.5*Math.PI*domain)
+}
+render();
+
+raycaster = new THREE.Raycaster();
+mouse = new THREE.Vector2();
+document.addEventListener('mousemove', move, false)
+document.addEventListener('mousedown', clickEvent, false)
+
+var routeView = false;
+
+//click functionality
+function clickEvent(event) {
+
+    event.preventDefault();
+    mouse.x = ( event.clientX / renderer.domElement.clientWidth ) * 2 - 1;
+    mouse.y = - ( event.clientY / renderer.domElement.clientHeight ) * 2 + 1;
+    raycaster.setFromCamera(mouse,camera);
+
+    intersect = raycaster.intersectObjects(buses,true)[0].object.parent;
+
+    if (intersect) {
+
+        if (routeView) {
+            drawRouteLine(intersect)
+            popDown(busesOnThisLine)
+        }
+
+        buses.forEach(function(bus){
+            if (!routeView) bus.children[0].scale.x =1
+            bus.scale.x = 1
+            bus.scale.y = 1
+        })
+
+        routeView = true
+
+        d3.select('.zoomout')
+            .classed('routeview', true);
+
+
+        activeRoute = intersect.busData.directionId;
+
+        busesOnThisLine = []
+        busesOnThisLine = buses.filter(function(bus){
+            return bus.busData.directionId == activeRoute
+        })
+
+        highlightMarker(busesOnThisLine, true)
+        var data = intersect.busData;
+        map.easeTo({center: [data.lon, data.lat], zoom:16, duration: 1000});
+
+        toggleTooltip()
+    }
+}
+
+function move(){
+
+    event.preventDefault();
+    mouse.x = ( event.clientX / renderer.domElement.clientWidth ) * 2 - 1;
+    mouse.y = - ( event.clientY / renderer.domElement.clientHeight ) * 2 + 1;
+    raycaster.setFromCamera(mouse,camera);
+    var cursorElem = document.querySelector('.mapboxgl-canvas-container.mapboxgl-interactive')
+    var intersectionExists = raycaster.intersectObjects(stops.concat(buses),true)[0];
+
+    //mousing over: must be intersecting, and not intersecting what was already intersected (to avoid flicker)
+    if (intersectionExists) {
+
+        if (intersect!==intersectionExists.object.parent){
+            cursorElem.style.cursor='pointer'
+            shrinkBack(intersect)
+
+            //update intersect to the currently hovered marker
+            intersect = intersectionExists.object.parent;
+            toggleTooltip(intersect)
+
+            //general
+            if (!routeView){
+                highlightMarker([intersect], true) //fade all markers, color selected markers, bring selected markers up
+                drawRouteLine(intersect)
+            }
+
+            //routeView
+            else {
+                highlightMarker(busesOnThisLine.concat(intersect), true)
+            }
+
+            //scale marker up on hover
+
+            var cycle=1;
+            var count = 0;
+            var maxCount = 5;
+
+            var scaleDelta= intersect.scale.x/6
+
+            function grower(){
+
+                intersect.scale.x += scaleDelta/maxCount
+                intersect.scale.y += scaleDelta/maxCount
+                count++
+                repeater = requestAnimationFrame(grower);
+
+                if (count==maxCount) {
+                    cancelAnimationFrame(repeater);
+                }
+            }
+
+            requestAnimationFrame(grower);
+        }
+
+        d3.select('.tooltip')
+            .style('transform', 'translateX('+event.clientX+'px) translateY('+event.clientY+'px)')
+    }
+
+    //mouseout: must have intersected, but not currently intersecting
+    if ((intersect && !intersectionExists) || (intersect && intersectionExists.object.parent.uuid !== intersect.uuid)) {
+        console.log('mousing out')
+        cursorElem.style.cursor='default'
+
+        toggleTooltip()
+
+        //pop markers back down
+        popDown([intersect])
+
+        //general
+
+        if (!routeView) {
+            clearRouteLine()
+            highlightMarker(buses)
+        }
+
+        // routeView
+        else {
+            highlightMarker(busesOnThisLine)
+        }
+
+        shrinkBack(intersect)
+
+        intersect = false
+    }
+
+}
+
+function clearRouteLine(){
+    var routeOrStops = scene.children.filter(function(child){return child.type==='routeorstops'})
+
+    routeOrStops.forEach(function(item){
+        scene.remove(item)
+    })
+}
+
+function popDown(markers){
+    markers.forEach(function(marker){
+        marker.children.forEach(function(element){
+            element.position.z -= 12345
+        })
+    })
+}
+
+function shrinkBack(marker){
+    if (marker){
+        var shrinkBack = routeView ? 1 : 3;
+        marker.scale.x = shrinkBack;
+        marker.scale.y = shrinkBack;
+    }
+}
+
+function highlightMarker(markers, popUp){
+    //fade out all buses to start
+    buses.forEach(function(bus) {
+        bus.children[1].material.color.setHex('0xcac4ad')
+    })
+
+    markers.forEach(function(marker){
+        //color selected markers
+        marker.children[1].material.color.setHex('0x'+getColor(marker.busData.directionId))
+
+        //pop markers up
+        if (popUp){
+            marker.children.forEach(function(element){
+                element.position.z += 12345
+            })
+        }
+    })
+}
+
+function zoomOut() {
+    routeView = false
+    activeRoute = false
+    //map.style.sources.newRoute.setData(emptyGeojson)
+
+    clearRouteLine()
+
+    d3.select('.zoomout').classed('routeview', false)
+    map.flyTo({center: origin, zoom:13, speed: 3});
+
+    map.options.minZoom=12;
+    map.options.maxZoom=14;
+
+    buses.forEach(function(bus){
+        bus.scale.x = 3;
+        bus.scale.y = 3;
+        bus.children[0].scale.x = 0.001
+
+        bus.children[1].material.color.setHex('0x'+getColor(bus.busData.directionId))
+    })
+
+    //return highlighted buses to the original z position
+    busesOnThisLine.forEach(function(bus){
+        bus.children.forEach(function(child){child.position.z-=10000})
+    })
+}
+window.addEventListener( 'resize', onWindowResize, false );
+
+function drawRouteLine(intersect){
+
+    //clear old line
+    clearRouteLine()
+
+    var desiredDirection = lookupDirection(lookupRoute(intersect))
+
+    var stopList = desiredDirection.stop.map(function(id){
+        return lookupRoute(intersect).stop.filter(function(stop){
+            return stop['_tag']===id['_tag']
+        })[0]
+    })
+
+
+    //draw route line
+
+    //assemble geoJSON line with lnglat's
+    var newLine=
+    {
+      "type": "FeatureCollection",
+      "features": []
+    }
+
+    //add stop markers
+
+    stops = [];
+    var material = new THREE.MeshBasicMaterial({
+        color: '#'+getColor(intersect.busData.directionId)
+    });
+
+    var radius = 0.8;
+    var segments = 32;
+
+    var stopGeometry = new THREE.CircleGeometry( radius, segments );
+
+    // convert stop latlngs to pixels
+    var stopPixels = stopList.map(function(stop){
+        var pixels = projectMarkers([stop['_lon'], stop['_lat']])
+        return ([pixels[0], -pixels[1]])
+    })
+
+    stopPixels.forEach(function(stop, index){
+        var stopMesh = new THREE.Mesh( stopGeometry, material );
+
+        var group = new THREE.Group()
+        group.add(stopMesh)
+
+        //pack stop data into mesh
+        group.stopData = stopList[index]
+        group.stopData.directionText = desiredDirection['_title']
+
+        //position mesh and add
+        group.type='routeorstops'
+        group.position.set(stop[0], stop[1], 10001)
+        scene.add(group);
+        stops.push(group)
+    })
+
+    //divvy into 100
+    function divideAndAnimate(array, steps){
+        //first calculate interval distance
+        var totalPixelDistance= 0
+
+        //distance between each pair of stops
+        var chunkDistances = [];
+
+        for (var a = 0; a<array.length-1; a++){
+            var second = array[a+1]
+            var first = array[a]
+            var deltaX = (second[0]-first[0]);
+            var deltaY = (second[1]-first[1]);
+            var chunkDistance = Math.pow((Math.pow(deltaX,2) + Math.pow(deltaY,2)), 0.5)
+            chunkDistances.push([deltaX, deltaY, chunkDistance])
+            totalPixelDistance+=chunkDistance
+        }
+
+        //distance per step
+        var intervalDistance = totalPixelDistance/steps;
+
+        var intervals = [array[0]]
+
+        //iterate through all the chunk distances
+        for (var c = 0; c<chunkDistances.length; c++){
+
+            var intervalsPerChunk = chunkDistances[c][2]/intervalDistance;
+            var first = array[c]
+            //console.log(intervalsPerChunk)
+            //iterate through each interval in the chunk
+            for (var i = 0; i<intervalsPerChunk; i++){
+                var stepCoord = [first[0]+i*chunkDistances[c][0]/intervalsPerChunk,first[1]+i*chunkDistances[c][1]/intervalsPerChunk]
+                intervals.push(stepCoord)
+            }
+            intervals.push(array[c+1])
+        }
+
+        var lineMaterial = new THREE.LineDashedMaterial( { color: '#'+getColor(intersect.busData.directionId), dashSize: 1, gapSize: 5, linewidth:3 } )
+        var lineGeom = new THREE.BufferGeometry();
+
+        // attributes
+        var positions = new Float32Array( intervals.length * 3 ); // 3 vertices per point
+        lineGeom.addAttribute( 'position', new THREE.BufferAttribute( positions, 3 ) );
+
+        // drawcalls
+        drawCount = 2; // draw the first 2 points, only
+        lineGeom.setDrawRange( 0, drawCount );
+
+        line = new THREE.Line(lineGeom, lineMaterial);
+        routeLine = line
+        line.type = 'routeorstops'
+        scene.add(line);
+
+        // update positions
+        updatePositions();
+        animate()
+
+        // update positions
+        function updatePositions() {
+
+            var positions = line.geometry.attributes.position.array;
+            line.geometry.attributes.position.needsUpdate = true;
+
+            for ( var i = 0; i < intervals.length; i ++ ) {
+                x = intervals[i][0]
+                y = intervals[i][1]
+                z  = 10000
+                positions[i*3] = x;
+                positions[i*3+1] = y;
+                positions[i*3+2] = z;
+            }
+        }
+
+        // animate
+        function animate() {
+            requestAnimationFrame( animate );
+            drawCount++
+            line.geometry.setDrawRange( 0, drawCount );
+            if (drawCount >= intervals.length) cancelAnimationFrame(animate)
+        }
+    }
+
+    divideAndAnimate(stopPixels,50)
+}
+
+function getColor(id){
+    return id.indexOf('_I_') === -1 ? outboundColor : inboundColor
+}
+
+function lookupRoute(intersect){
+    return muniRoutes.filter(
+        function(route){
+            return route['_tag'] === intersect.busData.routeId
+    })[0];
+}
+
+function lookupDirection(route) {
+    var direction = intersect.busData.directionId.indexOf('_I_')===-1 ? 'Outbound' : 'Inbound'
+
+    return route.direction.filter(function(dir){
+        return dir['_name'] === direction
+    })[0]
+}
+
+function toRadians(degrees){
+    return -2*Math.PI*(degrees-45)/360
+}
+
+function toggleTooltip(intersect) {
+    var tooltip = d3.select('.tooltip');
+    if (intersect) {
+        if (intersect.busData){
+            tooltip
+                .style('display','block')
+                .select('.title')
+                .text(lookupRoute(intersect)['_title'])
+
+            d3.select('.subtitle')
+                .text(lookupDirection(lookupRoute(intersect))['_title'])
+        }
+
+        if (intersect.stopData) {
+            tooltip
+                .style('display','block')
+                .style('transform', 'translateX('+event.clientX+'px) translateY('+event.clientY+'px)')
+                .select('.title')
+                .text(intersect.stopData['_title'])
+
+            var queryURL = 'http://restbus.info/api/agencies/sf-muni/routes/'+busesOnThisLine[0].busData.routeId+'/stops/'+intersect.stopData['_tag']+'/predictions'
+            console.log(intersect)
+            d3.json(queryURL, function(err, resp){
+                var route = resp[0].values[0].seconds;
+                var time = route>89 ? Math.round(route/60)+ ' minutes' : route +' seconds'
+
+                console.log(time)
+                d3.select('.subtitle')
+                    .text('Next bus in ')
+                d3.select('.highlight')
+                    .classed('ib', function(){
+                        if (intersect.stopData.directionText.indexOf('Inbound') >-1) {return true}
+                        else return false
+                    })
+                    .text(time)
+            })
+        }
+
+        //clear
+        else d3.select('.highlight').text('')
+    }
+
+    else {
+        tooltip
+            .style('display','none')
+    }
+}
+
+function setMarkerState(busData) {
+    var bundle = {};
+    bundle.labelScale = routeView ? 1 : 0.001
+    bundle.groupScale = routeView ? 1 : 3
+    //bundle.markerColor = getColor()
+    return bundle
+}
+function onWindowResize() {
+
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+
+    //renderer.setSize( window.innerWidth, window.innerHeight );
+
+    render();
+
+}
+
+
+</script>
+
+</body>
+</html>
